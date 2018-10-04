@@ -4,10 +4,10 @@
   "description": "Team developed shopping cart application for wd-6 international",
   "main": "bin/www",
   "scripts": {
-    "client-install": "npm install --prefix ../client",
+    "client-install": "npm install --prefix ./client",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon bin/www",
-    "client": "npm start --prefix ../client",
+    "client": "npm start --prefix ./client",
     "dev": "concurrently \"npm run server\" \"npm run client\" "
   },
   "author": "Trace Larson, Daniel Hughes, Chris Feidor",
