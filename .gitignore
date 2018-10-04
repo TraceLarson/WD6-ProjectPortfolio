@@ -1,6 +1,7 @@
 # MacOS
 .DS_Store
 
+# Vendor
 vendor/
 node_modules/
 npm-debug.log
@@ -27,7 +28,6 @@ logs
 *.log
 npm-debug.log*
 var
-
 
 # PHPStorm IDE files
 .idea*
