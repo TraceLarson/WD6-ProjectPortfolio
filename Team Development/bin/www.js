@@ -1,9 +1,12 @@
 // Set Environment Variables
 var NODE_ENV = process.env.NODE_ENV || 'development'
 
-NODE_ENV === 'developement' ? require('dotenv').load() : ''
+if(NODE_ENV === 'development') {
+	require('dotenv').config()
+}
 
-const app = require('../app')
+
+const app = require('../server/app')
 const http = require('http')
 const port = process.env.PORT || 5000
 
