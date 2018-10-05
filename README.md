@@ -9,7 +9,7 @@ npm i concurrently -g
 ```
 
 
-This is for the Team Development project, so make sure you are in Team Development folder:
+This is for the Team Development project, so make sure you are in **Team Development** folder:
 ````
 cd Team\ Development
 ````
