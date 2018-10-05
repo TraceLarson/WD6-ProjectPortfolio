@@ -4,18 +4,22 @@
 
 {% block body %}
     <header>
-    <h1>Student Grades</h1>
+        <h1>Student Grades</h1>
     </header>
 
     <article>
         <section class="container">
             <h2>Input Student's name and final grade percentage (%)</h2>
-            <form class="form">
-                <label class="d-none" for="name">Student Name</label>
-                <input type="text" name="name" id="name">
-                <label class="d-none" for="grade">Grade Percentage</label>
-                <input type="text" name="grade" id="grade">
-                <button class="btn btn-success">Submit</button>
+            <form class="form" action="" method="POST">
+                <div class="form-group">
+                    <label class="d-none" for="name">Student Name</label>
+                    <input class="form-control" type="text" name="name" id="name">
+                </div>
+                <div class="form-group">
+                    <label class="d-none" for="grade">Grade Percentage</label>
+                    <input class="form-control" type="text" name="grade" id="grade">
+                </div>
+                <button type="submit" name="submit" class="btn btn-success">Submit</button>
             </form>
         </section>
         <section>
