@@ -1,7 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello Teacher!{% endblock %}
+{% block title %}Student Grades Report{% endblock %}
 
 {% block body %}
+    <header>
+    <h1>Student Grades</h1>
+    </header>
+
+    <article>
+        <section class="container">
+            <h2>Input Student's name and final grade percentage (%)</h2>
+            <form class="form">
+                <label class="d-none">Student Name</label>
+                <input type="text">
+                <label class="d-none">Grade Percentage</label>
+                <input type="text">
+                <button class="btn btn-success">Submit</button>
+            </form>
+        </section>
+        <section>
+            Student Grades
+        </section>
+    </article>
+
 
 {% endblock %}
