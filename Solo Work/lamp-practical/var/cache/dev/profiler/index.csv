@@ -15,3 +15,9 @@ f04922,127.0.0.1,GET,http://localhost:8000/,1538775823,,200
 5b8567,127.0.0.1,GET,http://localhost:8000/,1538775969,,200
 780f32,127.0.0.1,GET,http://localhost:8000/,1538776278,,200
 65cf1d,127.0.0.1,GET,http://localhost:8000/,1538776339,,200
+6e4683,127.0.0.1,GET,http://localhost:8000/,1538780727,,200
+e8b5bb,127.0.0.1,GET,http://localhost:8000/favicon.ico,1538780727,43f461,200
+43f461,127.0.0.1,GET,http://localhost:8000/favicon.ico,1538780727,,404
+c10af1,127.0.0.1,GET,http://localhost:8000/phpmyadmin,1538780817,397691,200
+397691,127.0.0.1,GET,http://localhost:8000/phpmyadmin,1538780817,,404
+ad6516,127.0.0.1,GET,http://localhost:8000/,1538781410,,200

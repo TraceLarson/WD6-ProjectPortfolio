@@ -169,6 +169,6 @@ class __TwigTemplate_c56bfb5535de570b619612eafce0d994f7731339db6330a7225b93b3aed
 
     </body>
 </html>
-", "base.html.twig", "/Users/tracelarson/Remote/Wd6-ProjectPortfolio/Solo Work/lamp-practical/templates/base.html.twig");
+", "base.html.twig", "/Users/tracelarson/Documents/FullSail/ProjectPortfolio6/repo/WD6-ProjectPortfolio/Solo Work/lamp-practical/templates/base.html.twig");
     }
 }
