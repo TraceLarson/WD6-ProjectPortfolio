@@ -33,7 +33,7 @@ class Grades
 
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->studentid;
     }
 
     public function getStudentname(): ?string

@@ -5,25 +5,45 @@
 {% block body %}
     <header>
         <h1>Student Grades</h1>
+        {% if error is defined %}
+        <p>{{ error }}</p>
+        {% endif %}
     </header>
 
     <article>
         <section class="container">
             <h2>Input Student's name and final grade percentage (%)</h2>
-            <form class="form" action="" method="POST">
+            <form class="form" action="/add" method="POST">
                 <div class="form-group">
                     <label class="d-none" for="name">Student Name</label>
-                    <input class="form-control" type="text" name="name" id="name">
+                    <input class="form-control" type="text" name="name" id="name" placeholder="Student Name">
                 </div>
                 <div class="form-group">
                     <label class="d-none" for="grade">Grade Percentage</label>
-                    <input class="form-control" type="text" name="grade" id="grade">
+                    <input class="form-control" type="text" name="grade" id="grade" placeholder="Grade Percentage">
                 </div>
                 <button type="submit" name="submit" class="btn btn-success">Submit</button>
             </form>
         </section>
         <section>
-            Student Grades
+            <ul class="list-group">
+
+                {% for grade in grades %}
+                    <li class="list-group-item">
+                        <strong>StudentID:</strong> {{ grade.getId() }}
+                        <br/>
+                        <strong>StudentName:</strong>{{ grade.getStudentname() }}
+                        <br/>
+                        <strong>StudentPercent:</strong> {{ grade.getStudentpercent() }}
+                        <br/>
+                        <strong>Letter Grade:</strong> {{ grade.getStudentlettergrade() }}
+                        <br/>
+                        <a class="btn btn-danger" >DELETE</a>
+                        <a class="btn btn-info">Update</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
         </section>
     </article>
 
