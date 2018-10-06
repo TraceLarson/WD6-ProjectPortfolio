@@ -6,7 +6,10 @@
     <header>
         <h1>Student Grades</h1>
         {% if error is defined %}
-        <p>{{ error }}</p>
+        <p class="text-danger">{{ error }}</p>
+        {% endif %}
+        {% if message is defined %}
+            <p class="text-success">{{ message }}</p>
         {% endif %}
     </header>
 
@@ -38,8 +41,8 @@
                         <br/>
                         <strong>Letter Grade:</strong> {{ grade.getStudentlettergrade() }}
                         <br/>
-                        <a class="btn btn-danger" >DELETE</a>
-                        <a class="btn btn-info">Update</a>
+                        <a class="btn btn-danger" href="{{ path('delete', {'studentid' : grade.getId()}) }}">DELETE</a>
+                        <a class="btn btn-info" href="{{ path('updatePage', {'studentid' : grade.getId()}) }}">Update</a>
                     </li>
                 {% endfor %}
             </ul>

@@ -22,6 +22,9 @@ class srcDevDebugProjectContainerUrlGenerator extends Symfony\Component\Routing\
             self::$declaredRoutes = array(
         'index' => array(array(), array('_controller' => 'App\\Controller\\DefaultController::index'), array(), array(array('text', '/')), array(), array()),
         'add' => array(array(), array('_controller' => 'App\\Controller\\DefaultController::add'), array(), array(array('text', '/add')), array(), array()),
+        'updatePage' => array(array('studentid'), array('_controller' => 'App\\Controller\\DefaultController::updatePage'), array(), array(array('text', '/updatePage'), array('variable', '/', '[^/]++', 'studentid')), array(), array()),
+        'update' => array(array(), array('_controller' => 'App\\Controller\\DefaultController::update'), array(), array(array('text', '/update')), array(), array()),
+        'delete' => array(array('studentid'), array('_controller' => 'App\\Controller\\DefaultController::delete'), array(), array(array('text', '/delete'), array('variable', '/', '[^/]++', 'studentid')), array(), array()),
         '_twig_error_test' => array(array('code', '_format'), array('_controller' => 'twig.controller.preview_error::previewErrorPageAction', '_format' => 'html'), array('code' => '\\d+'), array(array('variable', '.', '[^/]++', '_format'), array('variable', '/', '\\d+', 'code'), array('text', '/_error')), array(), array()),
         '_wdt' => array(array('token'), array('_controller' => 'web_profiler.controller.profiler::toolbarAction'), array(), array(array('variable', '/', '[^/]++', 'token'), array('text', '/_wdt')), array(), array()),
         '_profiler_home' => array(array(), array('_controller' => 'web_profiler.controller.profiler::homeAction'), array(), array(array('text', '/_profiler/')), array(), array()),

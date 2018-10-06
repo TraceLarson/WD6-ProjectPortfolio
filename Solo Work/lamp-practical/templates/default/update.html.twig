@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Student Grades Report{% endblock %}
+
+{% block body %}
+
+<section class="container">
+    <h2>Update Student's name or final grade percentage (%)</h2>
+    <form class="form" action="/update" method="POST">
+        <div class=" d-none form-group">
+            <label class="d-none" for="id">Student Name</label>
+            <input class="form-control" type="text" name="id" id="id" value="{{student.getId()}}">
+        </div>
+        <div class="form-group">
+            <label class="d-none" for="name">Student Name</label>
+            <input class="form-control" type="text" name="name" id="name" value="{{student.getStudentname()}}">
+        </div>
+        <div class="form-group">
+            <label class="d-none" for="grade">Grade Percentage</label>
+            <input class="form-control" type="text" name="grade" id="grade" value="{{student.getStudentpercent()}}">
+        </div>
+        <button type="submit" name="submit" class="btn btn-success">Submit</button>
+    </form>
+</section>
+
+{% endblock %}
