@@ -21,3 +21,8 @@ e8b5bb,127.0.0.1,GET,http://localhost:8000/favicon.ico,1538780727,43f461,200
 c10af1,127.0.0.1,GET,http://localhost:8000/phpmyadmin,1538780817,397691,200
 397691,127.0.0.1,GET,http://localhost:8000/phpmyadmin,1538780817,,404
 ad6516,127.0.0.1,GET,http://localhost:8000/,1538781410,,200
+07fc37,127.0.0.1,GET,http://localhost:8000/grades/,1538783739,f69f8c,200
+f69f8c,127.0.0.1,GET,http://localhost:8000/grades/,1538783739,,404
+035aba,127.0.0.1,GET,http://localhost:8000/,1538783746,,200
+a0ad1d,127.0.0.1,GET,http://localhost:8000/add,1538783751,1e6929,200
+1e6929,127.0.0.1,GET,http://localhost:8000/add,1538783751,,404
