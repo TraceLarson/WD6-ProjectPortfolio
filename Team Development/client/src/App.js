@@ -49,6 +49,10 @@ class App extends Component {
       </div>
 
       <div class="wrapper">
+        <h1 class="section-header">New Releases</h1>
+        {/*
+          PLACEHOLDER: Static content. Update dynamically after database has been seeded.
+        */}
         <div class="thumbnail">
           <img src="https://upload.wikimedia.org/wikipedia/en/4/4a/Assassin%27s_Creed_Origins_Cover_Art.png" alt="..." class="img-responsive"/>
           <div class="caption">
