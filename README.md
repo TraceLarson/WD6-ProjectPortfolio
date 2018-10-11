@@ -34,3 +34,10 @@ To seed local DB for dev environment:
 cd seed
 node item-seeder.js
 ````
+
+Start mongo shell / view local DB:
+````
+sudo mongo
+use gamedrop
+show collections
+````
