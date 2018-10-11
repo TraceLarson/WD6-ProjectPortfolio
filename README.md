@@ -28,3 +28,9 @@ To start the development server run:
 ````
 npm run dev
 ````
+
+To seed local DB for dev environment:
+````
+cd seed
+node item-seeder.js
+````
