@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const CONNECTION_URI = process.env.MONGODB_URI || 'mongodb://localhost/gamedrop';
+
 
 
 // Configure Body Parser
@@ -9,7 +11,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
 // Connect to MongoDB Database
-mongoose.connect(`mongodb://${process.env.MONGO_HOST}/${process.env.MONGO_DATABASE}`)
+mongoose.connect(CONNECTION_URI, { useNewUrlParser: true })
 
 // Get default connection
 var db = mongoose.connection
