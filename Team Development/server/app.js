@@ -12,6 +12,8 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 // Connect to MongoDB Database
 mongoose.connect(CONNECTION_URI, { useNewUrlParser: true })
+  .then(() =>  console.log('connection succesful'))
+  .catch((err) => console.error(err));
 
 // Get default connection
 var db = mongoose.connection
