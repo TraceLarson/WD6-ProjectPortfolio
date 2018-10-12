@@ -1,30 +1,55 @@
 # WD6-ProjectPorfolio
 Portfolio Repo For Project &amp; Porfolio 6 at Full Sail University Online
 
-To run application make sure you have mongoDB installed and it is running.
-Also install concurrently globally:
-```
-mongod
-npm i concurrently -g
-```
 
+## Getting Started
+This section will help you get a local copy of the project up and running on your machine.
 
-This is for the Team Development project, so make sure you are in **Team Development** folder:
-````
-cd Team\ Development
-````
+### Clone the Repo
+Start by cloning a copy of the repo onto your machine.
 
-Install dependencies:
-````
-npm install
-npm run client-install
-````
+*Change to an easily accessible location*
 
+`cd desktop`
 
-Application uses two servers to run; backend and client.
-The backend server runs on port 5000, client runs on port 3000
+*Clone repo*
 
-To start the development server run:
+`git clone https://github.com/TraceLarson/WD6-ProjectPortfolio.git`
+
+*Change directories into project*
+
+`cd WD6-ProjectPortfolio/`
+
+### Install Dependencies
+Install package dependencies so it can run properly.
+
+`npm install`
+
+Also install client dependencies so the front-end can run properly.
+
+`npm run client-install`
+
+### Ensure MongoDB is running
+
+`mongod`
+
+### Install *concurrently* package
+
+`npm install concurrently -g`
+
+### Change into App Directory
+
+`cd "Team Development"`
+
+### Start Servers
+
+Application uses two servers to run: *backend* and *client*
+
+The *backend* server runs on port 5000
+
+The *client* server runs on port 3000
+
+Start the development server (this will use concurrently to run both the *backend* and *client* servers)
 ````
 npm run dev
 ````
@@ -35,9 +60,10 @@ cd seed
 node item-seeder.js
 ````
 
-Start mongo shell / view local DB:
-````
-sudo mongo
-use gamedrop
-show collections
-````
+### Done!
+
+You can now use the application and make any necessary changes.
+
+The server uses *nodemon* so you won't have to restart the server everytime you make changes to it.
+
+Have fun!

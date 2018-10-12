@@ -1,7 +1,12 @@
 {
   "name": "drop-shop-server",
   "version": "1.0.0",
-  "description": "Team developed shopping cart application for wd-6 international",
+  "description": "A shopping cart application built with NodeJS, Express, Bootstrap, and MongoDB",
+  "homepage": "https://github.com/TraceLarson/WD6-ProjectPortfolio#readme",
+  "bugs": {
+    "url": "https://github.com/TraceLarson/WD6-ProjectPortfolio/issues",
+    "email": "dshughes@student.fullsail.edu"
+  },
   "main": "bin/www",
   "scripts": {
     "client-install": "npm install --prefix ./client",
@@ -12,6 +17,15 @@
   },
   "author": "Trace Larson, Daniel Hughes, Chris Fiedor",
   "license": "MIT",
+  "contributors": [
+    {"name": "Trace Larson", "email": "talarson@student.fullsail.edu", "url": "https://larsonportfolio.wordpress.com/"},
+    {"name": "Daniel Hughes", "email": "dshughes@student.fullsail.edu", "url": "https://hughesdanielwdd469.wordpress.com/"},
+    {"name": "Chris Feidor", "email": "csfiedor@student.fullsail.edu", "url": "https://csfiedor.github.io/Portfolio/"}
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TraceLarson/WD6-ProjectPortfolio.git"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
