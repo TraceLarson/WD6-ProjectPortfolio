@@ -27,7 +27,9 @@ db.once('open', () => console.log('DATABASE CONNECTED SUCCESSFULLY'))
 // ROUTES
 // TODO: add routes
 const index = require('./routes/index')
+const item = require('./routes/item')
 
+app.use('/api/item', item);
 app.use('/', index)
 
 
