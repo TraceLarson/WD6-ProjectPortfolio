@@ -152,6 +152,10 @@ clear: both;}
   clear: both;
 }
 
+.addBtn:hover {
+  cursor: pointer;
+}
+
 .details {
 padding: 50px;}
 @media (min-width: 980px) {
@@ -207,6 +211,10 @@ padding: 50px;}
   color: white;
   background-color: #f7ab03;
   border-radius: 5px;
+}
+
+.addBtn-details:hover {
+  cursor: pointer;
 }
 
 .details:after{
