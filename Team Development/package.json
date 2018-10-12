@@ -1,7 +1,7 @@
 {
   "name": "drop-shop-server",
   "version": "1.0.0",
-  "description": "Team developed shopping cart application for wd-6 international",
+  "description": "A shopping cart application built with NodeJS, Express, Bootstrap, and MongoDB",
   "main": "bin/www",
   "scripts": {
     "client-install": "npm install --prefix ./client",
