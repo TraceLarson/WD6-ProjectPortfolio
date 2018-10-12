@@ -9,13 +9,11 @@ body {
   margin-left: 55px;
   margin-top: 10px;
   float:left;
-
 }
 
 #logo2 {
   width:40%;
   margin-top: 10px;
-  /* margin-left: 50px; */
   float:left;
 }
 
@@ -78,45 +76,61 @@ clear: both;}
   border-bottom: .5px solid #a5a5a5;
 }
 
-.thumbnail img {
-    max-height: 300px;
+.game img {
+    height: 300px;
     margin: 0;
     width: 100%;
 }
 
-.thumbnail {
-  width: 100%;
+.game {
+  width: calc(100% - 50px);
   padding: 0;
-  margin: 10px;
+  margin: 25px;
   border-radius: 0;
-  border: none;
-  float: left;}
+  border: none;}
   @media (min-width: 400px) {
-    .thumbnail {
-      width: calc(50% - 20px);}}
+    .game {
+      float: left;
+      width: calc(50% - 20px);
+      margin: 10px;}}
       @media (min-width: 750px) {
-        .thumbnail {
+        .game {
+          float: left;
           width: calc(33.3% - 20px);}}
       @media (min-width: 1100px) {
-        .thumbnail {
+        .game {
+          float: left;
           width: calc(25% - 20px);}}
 
-.thumbnail img:hover {
+.game img:hover {
   opacity: 0.5;
   cursor: pointer;
 }
 
 .caption {
   background-color: #a5a5a5;
+  height: 200px;
+  padding: 10px;
 }
 
 .caption h3{
+  font-size: 16px;
   margin-top: 0;
   font-weight: bold;
 }
 
-.thumbnail .description {
+.game .description {
     color: white;
+}
+
+.description {
+  font-size: 12px;
+  max-height: 75px;
+  overflow-x: hidden;
+}
+
+.releaseDate {
+  font-size: 10px;
 }
 
 .price {
@@ -124,17 +138,94 @@ clear: both;}
     font-size: 16px;
 }
 
-.btn {
+.addBtn {
   width:100%;
+  height: 35px;
   color: white;
   background-color: #f7ab03;
   text-decoration: none;
+  text-align: center;
+  font-size: 16px;
   font-weight: bold;
+  padding: 5px;
   border-radius: 0;
+  clear: both;
+}
+
+.addBtn:hover {
+  cursor: pointer;
+}
+
+.details {
+padding: 50px;}
+@media (min-width: 980px) {
+  .details {
+  padding: 150px;}}
+
+.imgFrame {
+  width: 50%;
+  float: left;}
+  @media (min-width: 980px) {
+    .imgFrame {
+      width: 25%;}}
+
+.imgFrame img {
+  width: 100%;
+  max-width: 300px;
+}
+
+.caption-details {
+  width: 100%;
+  float: left;}
+  @media (min-width: 980px) {
+    .caption-details {
+      width: calc(75% - 20px);
+      margin: 10px;}}
+
+
+.title-details {
+  color: #f7ab03;
+  font-size: 32px;
+}
+
+.description-details {
+  color: white;
+  font-size: 16px;
+}
+
+.release-details {
+  color: #a5a5a5;
+}
+
+.price-details {
+  color: white;
+  font-size: 18px;
+}
+
+.addBtn-details {
+  width: 200px;
+  padding: 20px;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  background-color: #f7ab03;
+  border-radius: 5px;
+}
+
+.addBtn-details:hover {
+  cursor: pointer;
+}
+
+.details:after{
+content: ".";
+visibility: hidden;
+display: block;
+height: 0;
+clear: both;
 }
 
 footer {
-  /* height: 200px; */
   color: white;
   background-color: #f7ab03;
   padding-bottom: 20px;
@@ -148,36 +239,49 @@ height: 0;
 clear: both;}
 
 #infoBox {
-  width: 25%;
-  margin: 25px;
+  width: calc(40% - 50px);
+  margin-top: 20px;
   margin-bottom: 0;
-  float: left;
-}
+  float: left;}
+  @media (min-width: 700px) {
+      #infoBox {
+        margin: 25px;}}
+
+#infoBox ul{
+  padding: 0;}
 
 #infoBox li {
   list-style-type: none;
   font-weight: bold;
-  font-size: 18px;
-}
+  font-size: 12px;}
+  @media (min-width: 700px) {
+    #infoBox li  {
+      font-size: 18px;}}
+
+#infoBox h2  {
+  font-size: 16px;}
+@media (min-width: 700px) {
+  #infoBox h2  {
+    font-size: 24px;}}
 
 #infoBox a {
   color: black;
 }
 
 #logo3 {
-  width: 50%;
+  width: 100%;
   margin: 10px;
-  float: right;
 }
 
 #followBox {
   text-align: center;
-  width: calc(50% - 20px);
+  width: 60%;
   margin: 10px;
   margin-bottom: 0;
-  float: right;
-  clear:both;
-}
+  float: left;}
+  @media (min-width: 700px) {
+    #followBox {
+      width: calc(60% - 20px);}}
 
 #followBox h3{
   margin-top: 0;
@@ -192,11 +296,15 @@ clear: both;}
 }
 
 .follow-icon {
-  height: 25px;
+  height: 15px;
   margin: 5px;
-  margin-bottom: 0;
-}
+  margin-bottom: 0;}
+  @media (min-width: 700px) {
+    .follow-icon {
+      height: 25px;}}
 
 .follow-icon img {
-  height: 25px;
-}
+  height: 15px;}
+  @media (min-width: 700px) {
+    .follow-icon img {
+      height: 25px;}}

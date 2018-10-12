@@ -54,6 +54,12 @@ Start the development server (this will use concurrently to run both the *backen
 npm run dev
 ````
 
+To seed local DB for dev environment:
+````
+cd seed
+node item-seeder.js
+````
+
 ### Done!
 
 You can now use the application and make any necessary changes.
