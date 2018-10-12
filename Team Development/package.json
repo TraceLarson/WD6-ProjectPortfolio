@@ -2,6 +2,7 @@
   "name": "drop-shop-server",
   "version": "1.0.0",
   "description": "A shopping cart application built with NodeJS, Express, Bootstrap, and MongoDB",
+  "homepage": "https://github.com/TraceLarson/WD6-ProjectPortfolio#readme",
   "main": "bin/www",
   "scripts": {
     "client-install": "npm install --prefix ./client",
