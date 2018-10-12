@@ -1,6 +1,10 @@
 # WD6-ProjectPorfolio
 Portfolio Repo For Project &amp; Porfolio 6 at Full Sail University Online
 
+
+## Getting Started
+This section will help you get a local copy of the project up and running on your machine.
+
 To run application make sure you have mongoDB installed and it is running.
 Also install concurrently globally:
 ```
