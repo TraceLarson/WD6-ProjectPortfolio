@@ -15,12 +15,16 @@
     "client": "npm start --prefix ./client",
     "dev": "concurrently \"npm run server\" \"npm run client\" "
   },
+  "license": "MIT",
   "contributors": [
     {"name": "Trace Larson", "email": "talarson@student.fullsail.edu", "url": "https://larsonportfolio.wordpress.com/"},
     {"name": "Daniel Hughes", "email": "dshughes@student.fullsail.edu", "url": "https://hughesdanielwdd469.wordpress.com/"},
     {"name": "Chris Feidor", "email": "csfiedor@student.fullsail.edu", "url": "https://csfiedor.github.io/Portfolio/"}
   ],
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TraceLarson/WD6-ProjectPortfolio.git"
+  },
   "dependencies": {
     "concurrently": "^4.0.1",
     "dotenv": "^6.0.0",
