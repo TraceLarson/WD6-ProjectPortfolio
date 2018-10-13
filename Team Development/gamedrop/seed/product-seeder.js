@@ -68,10 +68,16 @@ let products = [
     })
 ];
 
+let done = 0;
 for (let i = 0; i < products.length; i++) {
     products[i].save((err, result) => {
-        if (i === products.length) {
-            mongoose.disconnect();
+        done++;
+        if (done === products.length) {
+            exit();
         }
     });
+}
+
+function exit() {
+    mongoose.disconnect();
 }

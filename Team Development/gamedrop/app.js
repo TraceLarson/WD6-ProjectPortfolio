@@ -12,7 +12,7 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // Database
-mongoose.connect("localhost:27017/gamedrop");
+mongoose.connect("mongodb://localhost:27017/gamedrop", { useNewUrlParser: true });
 
 // view engine setup
 app.engine(".hbs", expressHbs({
