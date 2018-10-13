@@ -1,4 +1,9 @@
+const mongoose = require("mongoose");
+
 const Product = require("../models/product");
+
+// Connect to db so products can be saved into it
+mongoose.connect("localhost:27017/gamedrop");
 
 let products = [
     new Product({
@@ -62,3 +67,11 @@ let products = [
         price: 19.88
     })
 ];
+
+for (let i = 0; i < products.length; i++) {
+    products[i].save((err, result) => {
+        if (i === products.length) {
+            mongoose.disconnect();
+        }
+    });
+}
