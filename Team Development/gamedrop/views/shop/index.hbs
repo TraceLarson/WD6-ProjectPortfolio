@@ -3,15 +3,11 @@
         {{# each this }}
             <div class="col-sm-6 col-md-4">
                 <div class="card">
-                    <img class="card-img-top" src="images/game-assassins-creed-odyssey.jpg" alt="Card image cap">
+                    <img class="card-img-top" src="{{ this.imgPath }}" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Product Title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">$11.99</h6>
-                        <p class="card-text text-muted">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fuga
-                            reiciendis eos
-                            iure dicta necessitatibus autem, blanditiis totam voluptatibus labore corrupti dolor suscipit
-                            tempore
-                            possimus soluta et praesentium ut quidem at.</p>
+                        <h5 class="card-title">{{ this.title }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">${{ this.price }}</h6>
+                        <p class="card-text text-muted">{{ this.description }}</p>
                     </div>
                     <div class="card-footer text-center">
                         <a href="#" class="btn btn-success text-white font-weight-bold">Add To Cart</a>
