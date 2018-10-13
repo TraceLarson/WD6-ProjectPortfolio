@@ -13,7 +13,7 @@ let products = [
         price: 59.99
     }),
     new Product({
-        imgPath: "images/game-desinty-2.jpg",
+        imgPath: "images/game-destiny-2.jpg",
         title: "Destiny 2",
         description: "An online-only multiplayer first-person shooter video game developed by Bungie and published by Activision. Sequel to 2014's Destiny and subsequent expansions.",
         price: 39.99
@@ -37,7 +37,7 @@ let products = [
         price: 29.99
     }),
     new Product({
-        imgPath: "images/rdr2.png",
+        imgPath: "images/game-rdr2.png",
         title: "Red Dead Redemption II",
         description: "Red Dead Redemption 2 is an upcoming Western-themed action-adventure video game developed and published by Rockstar Games. It is scheduled to be released for PlayStation 4 and Xbox One on October 26, 2018. The game is a prequel to the 2010 title Red Dead Redemption and will be the third entry in the Red Dead series.",
         price: 59.99
