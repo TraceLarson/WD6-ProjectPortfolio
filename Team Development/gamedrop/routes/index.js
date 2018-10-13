@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
   // Render products index view
   // Pass products data to view
-  res.render('shop/index', { title: 'Express', products: products});
+  res.render('shop/index', { title: 'GameDrop', products: products});
 });
 
 module.exports = router;
