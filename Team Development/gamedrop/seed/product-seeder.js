@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Product = require("../models/product");
 
 // Connect to db so products can be saved into it
-mongoose.connect("localhost:27017/gamedrop", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/gamedrop", { useNewUrlParser: true });
 
 let products = [
     new Product({
