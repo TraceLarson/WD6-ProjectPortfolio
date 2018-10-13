@@ -4,11 +4,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const expressHbs = require("express-handlebars");
+const mongoose = require("mongoose");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+// Database
+mongoose.connect("localhost:27017/gamedrop");
 
 // view engine setup
 app.engine(".hbs", expressHbs({
