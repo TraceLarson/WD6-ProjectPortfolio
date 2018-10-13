@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 
     // Render products index view
     // Pass products data to view
-    res.render('shop/index', { title: 'GameDrop', products: docs});
+    res.render('shop/index', { title: 'GameDrop', products: productChunks});
   });
 });
 
