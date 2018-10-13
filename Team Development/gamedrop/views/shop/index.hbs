@@ -1,6 +1,6 @@
-{{# each products }}
+{{# each products }} {{!-- Loop through array of product chunks --}}
     <div class="row mb-4">
-        {{# each this }}
+        {{# each this }} {{!-- Loop through each chunk --}}
             <div class="col-sm-6 col-md-4">
                 <div class="card">
                     <img class="card-img-top" src="{{ this.imgPath }}" alt="Card image cap">
