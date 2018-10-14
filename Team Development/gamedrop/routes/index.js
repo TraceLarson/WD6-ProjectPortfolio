@@ -49,4 +49,21 @@ router.get("/user/profile", (req, res, next) => {
   res.render("user/profile");
 });
 
+/* POST sign in page */
+router.post("/user/signin", passport.authenticate("local.signin", {
+  successRedirect: "/user/profile",
+  failureRedirect: "/user/signin",
+  failureFlash: true
+}));
+
+
+/* GET sign in page */
+router.get("/user/signin", (req, res, next) => {
+  // Cache any error messages that exist
+  let messages = req.flash("error");
+
+  // Render signin view, passing csrf token for protection and error messages to display
+  res.render("user/signin", {csrfToken: req.csrfToken, messages: messages, hasErrors: messages.length > 0});
+});
+
 module.exports = router;

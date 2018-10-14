@@ -22,7 +22,7 @@ userSchema.methods.encryptPassword = function(password) {
 };
 
 // Create a method to check whether a password matches this user's encrypted password
-userSchema.methods.validPassword = function() {
+userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
 
