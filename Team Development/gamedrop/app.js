@@ -11,6 +11,9 @@ const passport = require("passport");
 const flash = require("connect-flash");
 const validator = require("express-validator");
 
+/* Express App */
+let app = express();
+
 // Middleware executed on all requests
 app.use((req, res, next) => {
   // Save user authentication state in a global var, allowing use in all routes
@@ -21,9 +24,6 @@ app.use((req, res, next) => {
 /* Route Imports */
 const indexRouter = require('./routes/index');
 const userRouter = require("./routes/user");
-
-/* Express App */
-let app = express();
 
 /* Database */
 mongoose.connect("mongodb://localhost:27017/gamedrop", { useNewUrlParser: true });
