@@ -15,3 +15,25 @@ passport.deserializeUser((id, done) => {
         done(err, user);
     });
 });
+
+// Create a new local strategy called local.signup
+passport.use("local.signup", new localStrategy({
+    // Strategy configuration
+    usernameField: "email",
+    password: "password",
+    passReqToCallback: true
+}, (req, email, password, done) => {
+    // Check if user with that email already exists in database
+    User.findOne({"email": email}, (err, user) => {
+        if (err) { // There was an error with the search
+            return done(err);
+        }
+        if (user) { // User already exists in database
+            return done(null, false, {message: "Email is already in use."}); // Return a message to be output in the view
+        }
+
+        let newUser = new User();
+        newUser.email = email;
+        newUser.password = password;
+    });
+}));
