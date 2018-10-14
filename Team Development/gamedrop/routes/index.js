@@ -5,6 +5,7 @@ const csrf = require("csurf");
 const Product = require("../models/product");
 
 let csrfProtection = csrf();
+router.use(csrfProtection); // Protect all routes in this file with csrf protection
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
