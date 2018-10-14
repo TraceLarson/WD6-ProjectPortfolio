@@ -21,4 +21,9 @@ userSchema.methods.encryptPassword = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
 };
 
+// Create a method to check whether a password matches this user's encrypted password
+userSchema.methods.validPassword = function() {
+    return bcrypt.compareSync(password, this.password);
+};
+
 module.exports = mongoose.model("User", userSchema);
