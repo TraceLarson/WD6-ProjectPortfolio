@@ -3,11 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const bodyParser = require("body-parser");
 const expressHbs = require("express-handlebars");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const flash = require("connect-flash");
+const validator = require("express-validator");
 
 /* Routes */
 var indexRouter = require('./routes/index');
@@ -31,8 +33,9 @@ app.set('view engine', '.hbs');
 
 /* Middleware */
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(validator());
 app.use(cookieParser());
 app.use(session({
   secret: "798had83hbyawd67b",
