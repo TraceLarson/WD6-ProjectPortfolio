@@ -4,18 +4,15 @@
             <ul class="list-group">
                 {{#each products }} {{!-- Loop through products --}}
                     {{!-- Create a list group item for each product with its data --}}
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item align-items-center">
                         <strong>{{ this.item.title }}</strong>
                         <span class="badge badge-success p-2">${{ this.price }}</span>
-                        <span>
-                            Qty:
-                            <span class="badge badge-primary badge-pill px-2">{{ this.qty }}</span>
-                        </span>
+                        <span class="badge badge-primary badge-pill px-2 py-1 float-right">{{ this.qty }}</span>
                         <div class="btn-group" role="group">
                             <div class="btn-group-sm" role="group">
                                 <button id="tools" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
-                                    Action
+                                    Qty
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="tools">
                                     <a class="dropdown-item" href="#">Reduce by 1</a>
