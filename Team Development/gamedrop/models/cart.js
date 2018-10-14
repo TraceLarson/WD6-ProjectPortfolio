@@ -1,12 +1,12 @@
 module.exports = function Cart(oldCart) {
     // Object containing the items in the cart
-    this.items = oldCart.items;
+    this.items = oldCart.items || {};
 
     // Total num items in cart
-    this.totalQty = oldCart.totalQty;
+    this.totalQty = oldCart.totalQty || 0;
 
     // Total price of cart
-    this.totalPrice = oldCart.totalPrice; 
+    this.totalPrice = oldCart.totalPrice || 0; 
 
     // Adds an item to the cart
     this.add = function(item, id) {
