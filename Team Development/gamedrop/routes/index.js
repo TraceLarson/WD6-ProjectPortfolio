@@ -31,7 +31,7 @@ router.get("/add-to-cart/:id", (req, res, next) => { // id of product to add to 
   let productId = req.params.id;
 
   // Create new cart, passing old cart if one exists
-  let cart = new Cart(req.session.cart ? req.session.cart : {});
+  let cart = new Cart(req.session.cart ? req.session.cart : {items: {}});
 
   // Find product based on id
   Product.findById(productId, (err, product) => {
