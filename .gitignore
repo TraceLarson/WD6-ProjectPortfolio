@@ -75,3 +75,7 @@ typings/
 # PHP Storm local IDE files
 .idea/
 .idea/*
+
+# Non Team Files
+Solo\ Work/
+Solo\ Work/*
