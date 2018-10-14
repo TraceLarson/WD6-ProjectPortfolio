@@ -26,20 +26,18 @@ class UserReviews extends Component {
     }
 
 
-
-render()
-{
-    const reviewList = this.state.reviews.map(review => {
+    render() {
+        const reviewList = this.state.reviews.map(review => {
+            return (
+                <Review key={review._id} _id={review._id} user={review.user} message={review.message}/>
+            )
+        })
         return (
-            <Review key={review._id} _id={review._id} user={review.user} message={review.message}/>
-        )
-    })
-    return (
-        <div>
-            {reviewList}
-        </div>
-    );
-}
+            <div className={'container'}>
+                {reviewList}
+            </div>
+        );
+    }
 }
 
 // UserReviews.propTypes = {};

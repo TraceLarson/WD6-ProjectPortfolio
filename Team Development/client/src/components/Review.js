@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 const Review = props => {
         return (
             <div>
-                <ul>
-                    <li>id: {props._id}</li>
-                    <li>User: {props.user} </li>
-                    <li>Message: <br/>{props.message}</li>
+                <ul className={'list-group'}>
+                    <li className={'list-group-item hidden'}>id: {props._id}</li>
+                    <li className={'list-group-item'}>User: {props.user} </li>
+                    <li className={'list-group-item'}>Message: <br/>{props.message}</li>
                 </ul>
             </div>
         );
