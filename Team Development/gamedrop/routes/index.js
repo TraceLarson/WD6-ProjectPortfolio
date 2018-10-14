@@ -30,7 +30,11 @@ router.get('/', function(req, res, next) {
 
 /* GET sign up page */
 router.get("/user/signup", (req, res, next) => {
-  res.render("user/signup", {csrfToken: req.csrfToken});
+  // Cache any error messages that exist
+  let messages = req.flash("error");
+
+  // Render signup view, passing csrf token for protection and error messages to display
+  res.render("user/signup", {csrfToken: req.csrfToken, messages: messages, hasErrors: messages.length > 0});
 });
 
 /* POST sign up page */
