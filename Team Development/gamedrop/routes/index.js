@@ -49,6 +49,14 @@ router.get("/user/profile", (req, res, next) => {
   res.render("user/profile");
 });
 
+/* POST sign in page */
+router.post("/user/signin", passport.authenticate("local.signin", {
+  successRedirect: "/user/profile",
+  failureRedirect: "/user/signin",
+  failureFlash: true
+}));
+
+
 /* GET sign in page */
 router.get("/user/signin", (req, res, next) => {
   // Cache any error messages that exist
