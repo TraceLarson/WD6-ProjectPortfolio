@@ -17,7 +17,7 @@
             <hr>
 
             <div class="form-group">
-                <label for="card-name">Name on Card</label>
+                <label for="card-name">Card Holder Name</label>
                 <input type="text" class="form-control" id="card-name" placeholder="Enter name on card" required>
             </div>
 
@@ -26,21 +26,32 @@
                 <input type="text" class="form-control" id="card-number" placeholder="Enter card number" required>
             </div>
 
-            <div class="form-group">
-                <label for="card-expiry-month">Expiration Month</label>
-                <input type="text" class="form-control" id="card-expiry-month" placeholder="Enter expiration month" required>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="card-expiry-month">Expiration Month</label>
+                        <input type="text" class="form-control" id="card-expiry-month" placeholder="Enter expiration month"
+                            required>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="card-expiry-year">Expiration Year</label>
+                        <input type="text" class="form-control" id="card-expiry-year" placeholder="Enter expiration year"
+                            required>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="card-expiry-year">Expiration Year</label>
-                <input type="text" class="form-control" id="card-expiry-year" placeholder="Enter expiration year" required>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="card-cvc">CVC</label>
+                        <input type="text" class="form-control" id="card-cvc" placeholder="Enter CVC" required>
+                    </div>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label for="card-cvc">CVC</label>
-                <input type="text" class="form-control" id="card-cvc" placeholder="Enter CVC code" required>
-            </div>
-            
 
             <button type="submit" class="btn btn-success">Buy Now</button>
         </form>
