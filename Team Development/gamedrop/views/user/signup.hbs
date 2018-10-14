@@ -10,7 +10,6 @@
     <label for="passport">Password</label>
     <input type="password" class="form-control" id="passport" placeholder="Password" name="password">
   </div>
+  <input type="hidden" name="_csrf" value="{{ csrfToken }}">
   <button type="submit" class="btn btn-primary">Sign Up</button>
 </form>
-
-{{ csrfToken }}
