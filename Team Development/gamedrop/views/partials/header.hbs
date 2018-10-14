@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/">
         <img src="/images/Logo1.png" alt="GameDrop Logo" class="img-fluid mr-1">
         GameDrop
     </a>
@@ -19,8 +19,15 @@
                     <i class="fas fa-user"></i> User Management
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">User Account</a>
-                    <a class="dropdown-item" href="#">Logout</a>
+                    {{#if login }} {{!-- If user is logged in --}}
+                        <a class="dropdown-item" href="/user/profile">Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/user/logout">Logout</a>
+                    {{ else }}
+                        <a class="dropdown-item" href="/user/signup">Sign Up</a>
+                        <a class="dropdown-item" href="/user/signin">Sign In</a>
+                    {{/if}}
+                    
                 </div>
             </li>
         </ul>
