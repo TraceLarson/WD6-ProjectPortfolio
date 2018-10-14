@@ -10,7 +10,7 @@ const Review = props => {
 }
 
 Review.propTypes = {
-    _id: PropTypes.string.isRequired,
+    _id: PropTypes.number.isRequired,
     user: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
 }
