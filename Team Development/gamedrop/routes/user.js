@@ -56,3 +56,14 @@ router.get("/signin", (req, res, next) => {
 });
 
 module.exports = router;
+
+// Write own middleware to handle route protection
+function isLoggedIn(req, res, next) {
+    // If user is authenticated, continue as normal
+    if (req.isAuthenticated()) {
+        return next();
+    }
+
+    // Otherwise user is not authenticated, so redirect them to root route
+    res.redirect("/");
+}
