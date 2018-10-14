@@ -7,9 +7,11 @@ const bodyParser = require("body-parser");
 const expressHbs = require("express-handlebars");
 const mongoose = require("mongoose");
 const expressSession = require("express-session");
+const MongoStore = require("connect-mongo")(expressSession);
 const passport = require("passport");
 const flash = require("connect-flash");
 const validator = require("express-validator");
+
 
 /* Express App */
 let app = express();
@@ -40,7 +42,9 @@ app.use(cookieParser());
 app.use(expressSession({
   secret: "798had83hbyawd67b",
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  cookie: { maxAge: 180 * 60 * 1000 } // 180 minutes (3 hrs)
 }));
 app.use(flash());
 app.use(passport.initialize());
@@ -51,6 +55,7 @@ app.use(express.static(path.join(__dirname, 'public'))); // Static file serving
 app.use((req, res, next) => {
   // Save user authentication state in a global var, allowing use in all routes
   res.locals.login = req.isAuthenticated();
+  res.locals.session = req.session;
   next();
 });
 
