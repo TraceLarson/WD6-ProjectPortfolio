@@ -24,4 +24,10 @@ router.get('/', function(req, res, next) {
   });
 });
 
+/* GET add to cart view */
+router.get("/add-to-cart/:id", (req, res, next) => { // id of product to add to cart
+  // Cache id of item to add to cart
+  let productId = req.params.id;
+});
+
 module.exports = router;
