@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const csrf = require("csurf");
+const passport = require("passport");
 
 const Product = require("../models/product");
 
@@ -33,8 +34,15 @@ router.get("/user/signup", (req, res, next) => {
 });
 
 /* POST sign up page */
-router.post("/user/signup", (req, res, next) => {
-  res.redirect("/");
+router.post("/user/signup", passport.authenticate("local.signup", {
+  successRedirect: "/user/profile",
+  failureRedirect: "/user/signup",
+  failureFlash: true
+}));
+
+/* GET profile page */
+router.get("/user/profile", (req, res, next) => {
+  res.render("user/profile");
 });
 
 module.exports = router;

@@ -6,7 +6,10 @@ var logger = require('morgan');
 const expressHbs = require("express-handlebars");
 const mongoose = require("mongoose");
 const session = require("express-session");
+const passport = require("passport");
+const flash = require("connect-flash");
 
+/* Routes */
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -15,6 +18,9 @@ var app = express();
 
 /* Database */
 mongoose.connect("mongodb://localhost:27017/gamedrop", { useNewUrlParser: true });
+
+// Setup passport
+require("./config/passport");
 
 /* View Engine */
 app.engine(".hbs", expressHbs({
@@ -33,6 +39,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
+app.use(flash());
+app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, 'public'))); // Static file serving
 
 /* Routes */
