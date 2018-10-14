@@ -23,6 +23,27 @@ passport.use("local.signup", new localStrategy({
     password: "password",
     passReqToCallback: true
 }, (req, email, password, done) => {
+    // Validate form inputs using express-validator
+    req.checkBody("email", "Invalid email").notEmpty().isEmail();
+    req.checkBody("password", "Invalid password").notEmpty().isLength({ min: 4 });
+
+    // Cache validation errors
+    let errors = req.validationErrors();
+
+    // Check to see if there are any validation errors
+    if (errors) {
+        // Create array of messages to pass to view
+        let messages = [];
+
+        // Loop through the errors and push their messages to message arr
+        errors.forEach((err) => {
+            messages.push(err.msg);
+        });
+
+        // Send errors to flash middleware to be be passed to view
+        return done(null, false, req.flash("error", messages));
+    }
+
     // Check if user with that email already exists in database
     User.findOne({"email": email}, (err, user) => {
         if (err) { // There was an error with the search
