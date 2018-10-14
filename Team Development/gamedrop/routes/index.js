@@ -34,7 +34,7 @@ router.get("/user/signup", (req, res, next) => {
   let messages = req.flash("error");
 
   // Render signup view, passing csrf token for protection and error messages to display
-  res.render("user/signup", {csrfToken: req.csrfToken, messages: messages});
+  res.render("user/signup", {csrfToken: req.csrfToken, messages: messages, hasErrors: messages.length > 0});
 });
 
 /* POST sign up page */
