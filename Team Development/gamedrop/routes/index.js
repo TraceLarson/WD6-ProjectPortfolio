@@ -50,4 +50,17 @@ router.get("/add-to-cart/:id", (req, res, next) => { // id of product to add to 
   });
 });
 
+/* GET cart view */
+router.get("/cart", (req, res, next) => {
+  if (!req.session.cart) { // If no items in cart
+    return res.render("shop/shopping-cart", {products: null}); // Pass no products
+  }
+
+  // Otherwise there are items in cart
+  let cart = new Cart(req.session.cart); // Create cart from session data
+
+  // Render cart view passing item information and total price of cart
+  res.render("shop/shopping-cart", {products: cart.generateArray(), totalPrice: cart.totalPrice})
+});
+
 module.exports = router;
