@@ -60,7 +60,7 @@ router.get("/cart", (req, res, next) => {
   let cart = new Cart(req.session.cart); // Create cart from session data
 
   // Render cart view passing item information and total price of cart
-  res.render("/shopping-cart", {products: cart.generateArray(), totalPrice: cart.totalPrice})
+  res.render("shop/shopping-cart", {products: cart.generateArray(), totalPrice: cart.totalPrice})
 });
 
 module.exports = router;
