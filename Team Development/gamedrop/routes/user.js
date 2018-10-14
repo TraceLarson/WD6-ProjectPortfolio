@@ -9,6 +9,15 @@ let router = express.Router();
 let csrfProtection = csrf();
 router.use(csrfProtection); // Protect all routes in this file with csrf protection
 
+/* GET profile page */
+router.get("/profile", isLoggedIn, (req, res, next) => {
+    res.render("user/profile");
+});
+
+router.use("/", notLoggedIn, (req, res, next) => {
+    next();
+});
+
 /* GET sign up page */
 router.get("/signup", (req, res, next) => {
     // Cache any error messages that exist
@@ -57,11 +66,6 @@ router.get("/logout", (req, res, next) => {
 
     // Redirect user to root route
     res.redirect("/");
-});
-
-/* GET profile page */
-router.get("/profile", isLoggedIn, (req, res, next) => {
-    res.render("user/profile");
 });
 
 module.exports = router;
