@@ -7,6 +7,7 @@ class UserReviews extends Component {
         reviews:
             [
                 {
+                    _id: 0,
                     user: 'Trace@email.com',
                     message: 'This is the message I wanted to leave'
                 },
@@ -30,7 +31,7 @@ render()
 {
     const reviewList = this.state.reviews.map(review => {
         return (
-            <Review _id={review._id} user={review.user} message={review.message}/>
+            <Review key={review._id} _id={review._id} user={review.user} message={review.message}/>
         )
     })
     return (
