@@ -1,6 +1,10 @@
 <h1>Sign Up</h1>
-{{#if hasErrors }}
-    
+{{#if hasErrors }} {{!-- Check if there are server side validation errors --}}
+    {{#each messages }} {{!-- Loop through error messages and output them to view --}}
+        <div class="alert alert-danger" role="alert">
+            {{ this }}
+        </div>
+    {{/each}}
 {{/if}}
 <form action="" method="POST">
   <div class="form-group">
