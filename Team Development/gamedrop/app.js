@@ -5,28 +5,37 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const expressHbs = require("express-handlebars");
 const mongoose = require("mongoose");
+const session = require("express-session");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+/* Express App */
 var app = express();
 
-// Database
+/* Database */
 mongoose.connect("mongodb://localhost:27017/gamedrop", { useNewUrlParser: true });
 
-// view engine setup
+/* View Engine */
 app.engine(".hbs", expressHbs({
   defaultLayout: "layout",
   extname: ".hbs"
 }));
 app.set('view engine', '.hbs');
 
+/* Middleware */
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: "798had83hbyawd67b",
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(express.static(path.join(__dirname, 'public'))); // Static file serving
 
+/* Routes */
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
