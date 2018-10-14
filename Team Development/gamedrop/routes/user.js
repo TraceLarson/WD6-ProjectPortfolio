@@ -76,3 +76,14 @@ function isLoggedIn(req, res, next) {
     // Otherwise user is not authenticated, so redirect them to root route
     res.redirect("/");
 }
+
+// Write middleware function to check if user is NOT logged in
+function notLoggedIn(req, res, next) {
+    // If user is not authenticated, continue as normal
+    if (!req.isAuthenticated()) {
+        return next();
+    }
+
+    // Otherwise user is authenticated, so redirect them to root route
+    res.redirect("/");
+}
