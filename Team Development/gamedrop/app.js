@@ -6,7 +6,7 @@ const logger = require('morgan');
 const bodyParser = require("body-parser");
 const expressHbs = require("express-handlebars");
 const mongoose = require("mongoose");
-const session = require("express-session");
+const expressSession = require("express-session");
 const passport = require("passport");
 const flash = require("connect-flash");
 const validator = require("express-validator");
@@ -37,13 +37,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(validator());
 app.use(cookieParser());
-app.use(session({
+app.use(expressSession({
   secret: "798had83hbyawd67b",
   resave: false,
   saveUninitialized: false
 }));
 app.use(flash());
 app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public'))); // Static file serving
 
 /* Routes */
