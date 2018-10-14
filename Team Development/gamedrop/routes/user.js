@@ -29,11 +29,6 @@ router.post("/signup", passport.authenticate("local.signup", {
     failureFlash: true
 }));
 
-/* GET profile page */
-router.get("/profile", isLoggedIn, (req, res, next) => {
-    res.render("user/profile");
-});
-
 /* POST sign in page */
 router.post("/signin", passport.authenticate("local.signin", {
     successRedirect: "/user/profile",
@@ -53,6 +48,20 @@ router.get("/signin", (req, res, next) => {
         messages: messages,
         hasErrors: messages.length > 0
     });
+});
+
+/* GET logout page */
+router.get("/logout", (req, res, next) => {
+    // Log user out with passport
+    req.logout();
+
+    // Redirect user to root route
+    res.redirect("/");
+});
+
+/* GET profile page */
+router.get("/profile", isLoggedIn, (req, res, next) => {
+    res.render("user/profile");
 });
 
 module.exports = router;
