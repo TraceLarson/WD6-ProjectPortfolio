@@ -28,8 +28,8 @@ module.exports = function Cart(oldCart) {
         // Increment cart qty
         this.totalQty++;
 
-        // Update cart price total
-        this.totalPrice += storedItem.price;
+        // Increase cart's price by total aggregate price of item
+        this.totalPrice += storedItem.item.price;
 
     };
 
