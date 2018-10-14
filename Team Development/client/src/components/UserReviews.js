@@ -1,21 +1,24 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import Review from "./Review";
 
 class UserReviews extends Component {
     state = {
         reviews:
             [
                 {
-                    User: 'Trace@email.com',
-                    Message: 'This is the message I wanted to leave'
+                    user: 'Trace@email.com',
+                    message: 'This is the message I wanted to leave'
                 },
                 {
-                    User: 'Chris@email.com',
-                    Message: 'This is the message I wanted to leave'
+                    _id: 1,
+                    user: 'Chris@email.com',
+                    message: 'This is the message I wanted to leave'
                 },
                 {
-                    User: 'Dan@email.com',
-                    Message: 'This is the message I wanted to leave'
+                    _id: 2,
+                    user: 'Dan@email.com',
+                    message: 'This is the message I wanted to leave'
                 },
 
             ]
@@ -25,15 +28,19 @@ class UserReviews extends Component {
 
 render()
 {
-
+    const reviewList = this.state.reviews.map(review => {
+        return (
+            <Review _id={review._id} user={review.user} message={review.message}/>
+        )
+    })
     return (
         <div>
-            <h1>User Reviews</h1>
+            {reviewList}
         </div>
     );
 }
 }
 
-UserReviews.propTypes = {};
+// UserReviews.propTypes = {};
 
 export default UserReviews;
