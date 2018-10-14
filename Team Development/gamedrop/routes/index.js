@@ -33,8 +33,10 @@ router.get("/user/signup", (req, res, next) => {
 });
 
 /* POST sign up page */
-router.post("/user/signup", (req, res, next) => {
-  res.redirect("/");
-});
+router.post("/user/signup", passport.authenticate("local.signup", {
+  successRedirect: "/profile",
+  failureRedirect: "/user/signup",
+  failureFlash: true
+}));
 
 module.exports = router;
