@@ -33,7 +33,13 @@ passport.use("local.signup", new localStrategy({
         }
 
         let newUser = new User();
-        newUser.email = email;
-        newUser.password = password;
+        newUser.email = email; // Set user's email to what was entered in form
+        newUser.password = newUser.encryptPassword(password); // Encrypt the password the user entered in the form before setting it to the user document
+        newUser.save((err, result) => { // Save user in db
+            if (err) {
+                return done(err);
+            }
+            return done(null, newUser);
+        });
     });
 }));
