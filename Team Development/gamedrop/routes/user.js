@@ -15,7 +15,7 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
 });
 
 /* GET logout page */
-router.get("/logout", (req, res, next) => {
+router.get("/logout", isLoggedIn, (req, res, next) => {
     // Log user out with passport
     req.logout();
 
