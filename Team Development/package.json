@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "description": "A shopping cart application built with NodeJS, Express, Bootstrap, and MongoDB",
   "homepage": "https://github.com/TraceLarson/WD6-ProjectPortfolio#readme",
-  "bugs": {
-    "url": "https://github.com/TraceLarson/WD6-ProjectPortfolio/issues",
-    "email": "dshughes@student.fullsail.edu"
-  },
+  "bugs": "https://github.com/TraceLarson/WD6-ProjectPortfolio/labels/bug",
   "main": "bin/www",
   "scripts": {
     "client-install": "npm install --prefix ./client",
@@ -28,7 +25,7 @@
       "url": "https://hughesdanielwdd469.wordpress.com/"
     },
     {
-      "name": "Chris Feidor",
+      "name": "Chris Fiedor",
       "email": "csfiedor@student.fullsail.edu",
       "url": "https://csfiedor.github.io/Portfolio/"
     }
@@ -39,13 +36,19 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.0.1",
+    "connect-mongo": "^2.0.1",
+    "connect-mongodb-session": "^2.0.3",
     "create-react-app": "^2.0.3",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
     "mongoose": "^5.3.1",
     "nodemon": "^1.18.4",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "react": "^16.5.2",
     "react-router-dom": "^4.3.1",
     "validator": "^10.8.0"

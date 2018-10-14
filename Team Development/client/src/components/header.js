@@ -1,8 +1,31 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 
 class Header extends Component {
+
+  constructor() {
+    super()
+    this.logout = this.logout.bind(this)
+  }
+
+  logout(event) {
+    event.preventDefault()
+    axios.post('/user/logout').then(response => {
+      console.log(response.data)
+      if (response.status === 200) {
+        this.props.updateUser({
+          loggedIn: false,
+          email: null
+        })
+      }
+    }).catch(error => {
+        console.log('Logout error')
+    })
+  }
+
   render(){
+    const loggedIn = this.props.loggedIn;
     return (
       <nav className="navbar navbar-default">
           <div className="container-fluid">
@@ -18,17 +41,29 @@ class Header extends Component {
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav navbar-right">
               {/*
-              PLACEHOLDER: update with shopping cart
+              PLACEHOLDER BELOW: update with shopping cart
               */}
               <li><Link to="#"><i className="fa fa-shopping-cart" aria-hidden="true"></i> Shopping Cart</Link></li>
-              {/*
-              PLACEHOLDER: update with user login
-              */}
-              <li className="dropdown"><Link to="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> User Management <span class="caret"></span></Link>
+              <li className="dropdown">
+              {loggedIn ? (
+                <Link to="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> {this.props.loggedUser} <span class="caret"></span></Link>
+              ) : (
+                <Link to="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> Your Account <span class="caret"></span></Link>
+              )}
                 <ul className="dropdown-menu">
-                  <li><Link to="#">User Account</Link></li>
-                  <li role="separator" className="divider"></li>
-                  <li><Link to="#">Logout</Link></li>
+                  {loggedIn ? (
+                      <div className='drop-tab'>
+                        <li><Link to="#">Account Details</Link></li>
+                        <li role="separator" className="divider"></li>
+                        <li><Link to="#" onClick={this.logout}>Logout</Link></li>
+                      </div>
+                    ) : (
+                      <div className='drop-tab'>
+                        <li><Link to="/register">Register</Link></li>
+                        <li role="separator" className="divider"></li>
+                        <li><Link to="/login">Login</Link></li>
+                      </div>
+                  )}
                 </ul>
               </li>
             </ul>

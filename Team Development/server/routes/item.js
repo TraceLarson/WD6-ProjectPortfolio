@@ -1,7 +1,6 @@
-const express = require('express');
-const router = express.Router();
-const mongoose = require('mongoose');
-const Item = require('../models/item.js');
+const express = require('express')
+const router = express.Router()
+const Item = require('../models/item.js')
 
 // Get all items
 router.get('/', (req, res, next) => {
