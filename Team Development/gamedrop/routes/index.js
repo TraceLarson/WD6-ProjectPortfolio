@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
 const csrf = require("csurf");
 const passport = require("passport");
 
 const Product = require("../models/product");
+
+let router = express.Router();
 
 let csrfProtection = csrf();
 router.use(csrfProtection); // Protect all routes in this file with csrf protection
