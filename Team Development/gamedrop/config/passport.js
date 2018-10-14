@@ -100,7 +100,7 @@ passport.use("local.signin", new localStrategy({
         if (!user) { // User already exists in database
             return done(null, false, {message: "No user found."}); // Return a message to be output in the view
         }
-        if (!user.validPassword()) { // If user's entered password doesn't match the encrypted one in the database
+        if (!user.validPassword(password)) { // If user's entered password doesn't match the encrypted one in the database
             return done(null, false, {message: "Incorrect password."});
         }
 
