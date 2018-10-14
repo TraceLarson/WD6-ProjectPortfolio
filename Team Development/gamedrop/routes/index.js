@@ -26,4 +26,9 @@ router.get('/', function(req, res, next) {
   });
 });
 
+/* GET sign up page */
+router.get("/user/signup", (req, res, next) => {
+  res.render("user/signup", {csrfToken: req.csrfToken});
+});
+
 module.exports = router;
