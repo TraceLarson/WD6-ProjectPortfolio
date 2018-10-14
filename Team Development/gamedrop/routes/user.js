@@ -14,6 +14,15 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
     res.render("user/profile");
 });
 
+/* GET logout page */
+router.get("/logout", (req, res, next) => {
+    // Log user out with passport
+    req.logout();
+
+    // Redirect user to root route
+    res.redirect("/");
+});
+
 router.use("/", notLoggedIn, (req, res, next) => {
     next();
 });
@@ -57,15 +66,6 @@ router.get("/signin", (req, res, next) => {
         messages: messages,
         hasErrors: messages.length > 0
     });
-});
-
-/* GET logout page */
-router.get("/logout", (req, res, next) => {
-    // Log user out with passport
-    req.logout();
-
-    // Redirect user to root route
-    res.redirect("/");
 });
 
 module.exports = router;
