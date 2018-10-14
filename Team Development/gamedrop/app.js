@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const flash = require("connect-flash");
+const validator = require("express-validator");
 
 /* Routes */
 var indexRouter = require('./routes/index');
