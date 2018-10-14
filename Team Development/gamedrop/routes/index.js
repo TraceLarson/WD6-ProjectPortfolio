@@ -73,7 +73,7 @@ router.get("/checkout", (req, res, next) => {
   let cart = new Cart(req.session.cart); // Create cart from session data
 
   // Render checkout view and pass data
-  res.render("/checkout", {total: cart.totalPrice});
+  res.render("shop/checkout", {total: cart.totalPrice});
 });
 
 module.exports = router;
