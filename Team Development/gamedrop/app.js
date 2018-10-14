@@ -11,6 +11,13 @@ const passport = require("passport");
 const flash = require("connect-flash");
 const validator = require("express-validator");
 
+// Middleware executed on all requests
+app.use((req, res, next) => {
+  // Save user authentication state in a global var, allowing use in all routes
+  res.locals.login = req.isAuthenticated();
+  next();
+});
+
 /* Route Imports */
 const indexRouter = require('./routes/index');
 const userRouter = require("./routes/user");
