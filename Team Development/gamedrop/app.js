@@ -14,13 +14,6 @@ const validator = require("express-validator");
 /* Express App */
 let app = express();
 
-// Middleware executed on all requests
-app.use((req, res, next) => {
-  // Save user authentication state in a global var, allowing use in all routes
-  res.locals.login = req.isAuthenticated();
-  next();
-});
-
 /* Route Imports */
 const indexRouter = require('./routes/index');
 const userRouter = require("./routes/user");
@@ -53,6 +46,13 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public'))); // Static file serving
+
+// Middleware executed on all requests
+app.use((req, res, next) => {
+  // Save user authentication state in a global var, allowing use in all routes
+  res.locals.login = req.isAuthenticated();
+  next();
+});
 
 /* Routes */
 app.use("/user", userRouter);
