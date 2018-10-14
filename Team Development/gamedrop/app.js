@@ -6,6 +6,8 @@ var logger = require('morgan');
 const expressHbs = require("express-handlebars");
 const mongoose = require("mongoose");
 const session = require("express-session");
+const passport = require("passport");
+const flash = require("connect-flash");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -33,6 +35,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
+app.use(flash());
+app.use(passport.initialize());
+app.use(session());
 app.use(express.static(path.join(__dirname, 'public'))); // Static file serving
 
 /* Routes */
