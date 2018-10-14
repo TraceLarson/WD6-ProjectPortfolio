@@ -63,4 +63,17 @@ router.get("/cart", (req, res, next) => {
   res.render("shop/shopping-cart", {products: cart.generateArray(), totalPrice: cart.totalPrice})
 });
 
+/* GET checkout view */
+router.get("/checkout", (req, res, next) => {
+  if (!req.session.cart) { // If no cart exists
+    // Redirect to shopping cart page
+    return res.redirect("/shopping-cart");
+  }
+
+  let cart = new Cart(req.session.cart); // Create cart from session data
+
+  // Render checkout view and pass data
+  res.render("/checkout", {total: cart.totalPrice});
+});
+
 module.exports = router;
