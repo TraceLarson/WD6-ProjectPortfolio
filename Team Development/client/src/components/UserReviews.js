@@ -7,12 +7,12 @@ import axios from 'axios'
 import PropTypes from 'prop-types';
 import Review from "./Review";
 
-// TODO: get item _id from props, get current user email address from auth
+// TODO:  get current user email address from auth and change hardCoded currentUser
 
 class UserReviews extends Component {
 	state = {
 		show: false,
-		currentUser: 'Trace@email.com',
+		currentUser: 'Admin@GameDrop.com',
 		message: '',
 		reviews:
 			[
@@ -36,7 +36,7 @@ class UserReviews extends Component {
 	}
 
 	componentDidMount() {
-		this.getReviews()
+		// this.getReviews()
 	}
 
 	getReviews = () => {
@@ -80,7 +80,7 @@ class UserReviews extends Component {
 				console.log(response.data)
 			})
 			.then(() => {
-				this.getReviews()
+				this.props.updateReviews()
 				this.toggle()
 				this.setState({
 					message: ''
@@ -94,7 +94,8 @@ class UserReviews extends Component {
 
 
 	render() {
-		const reviewList = this.state.reviews.map(review => {
+		const {reviews} = this.props || this.state
+		const reviewList = reviews.map(review => {
 			return (
 				<Review key={review._id} _id={review._id} user={review.user} message={review.message}/>
 			)
@@ -114,7 +115,7 @@ class UserReviews extends Component {
 					</Modal.Header>
 					<Modal.Body>
 						<form onSubmit={this.handleSubmit}>
-							<input className={'hidden'} type="text" name={'item'} id={'item'} value={this.props.itemId}/>
+							<input className={'hidden'} type="text" name={'item'} id={'item'} defaultValue={this.props.itemId}/>
 							<div className={'form-group'}>
 								<label htmlFor={'user'}>User</label>
 								<input className={'form-control'} type="text" name={'user'} id={'user'}
@@ -145,7 +146,8 @@ class UserReviews extends Component {
 
 UserReviews.propTypes = {
 	itemId: PropTypes.string.isRequired,
-	reviews: PropTypes.array.isRequired
+	reviews: PropTypes.array.isRequired,
+	updateReviews: PropTypes.func.isRequired,
 //  currentUser: PropTypes.string.isRequired
 };
 

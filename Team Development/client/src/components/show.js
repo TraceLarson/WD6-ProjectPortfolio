@@ -14,11 +14,19 @@ class Show extends Component {
 	}
 
 	componentDidMount() {
+		this.getItem()
+	}
+
+	getItem = () => {
 		axios.get('/api/item/' + this.props.match.params.id)
 			.then(res => {
 				this.setState({item: res.data});
 				console.log(this.state.item);
 			});
+	}
+
+	updateReviews = () => {
+		this.getItem()
 	}
 
 	render() {
@@ -42,7 +50,10 @@ class Show extends Component {
 				<div className={'details'}>
 					<h2>User Reviews</h2>
 					<hr/>
-					<UserReviews itemId={this.state.item._id ? this.state.item._id : '...loading'} reviews={this.state.item.reviews ? this.state.item.reviews : []} />
+					<UserReviews itemId={this.state.item._id ? this.state.item._id : '...loading'}
+					             reviews={this.state.item.reviews ? this.state.item.reviews : []}
+					             updateReviews={this.updateReviews}
+					/>
 				</div>
 			</div>
 		);

@@ -15,19 +15,16 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) =>{
 	// console.log(req.body)
 	let newReview = new Review(req.body)
-	Item.findById({_id: req.body.item})
+	Item.findById(req.body.item)
 		.exec((err, item) => {
 			err? console.error(`Error finding id: ${err.message}`): console.log(item)
-
 			newReview.save((err, review) => {
 				err ? res.sendStatus(500).send(`Error saving review`) : item.reviews.push(review._id)
 				item.save((err, item) => {
-					err ? res.sendStatus(500).send(`Error saving review`) : res.send(item)
+					err ? res.sendStatus(500).send(`Error saving review to item`) : res.send(item)
 				})
 			})
-
 		})
-
 
 })
 
