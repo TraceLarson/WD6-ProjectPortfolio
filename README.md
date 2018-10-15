@@ -55,3 +55,10 @@ $ touch .env
 ```
 APIKEY_STRIPE=uh23932rg68uib978
 ```
+
+### Start MongoDB
+
+*This example is for Windows, but start MongoDB whichever way you're used to*
+```
+$ net start MongoDB
+```
