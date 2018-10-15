@@ -3,3 +3,9 @@ A shopping cart application built for WD6-International Inc, the world leader in
 
 ## Getting Started
 These instructions will help you get a local copy of the application up and running on your machine.
+
+### Requirements
+
+- You must have [Node.js](https://nodejs.org/en/) installed
+- You must have [MongoDB](https://www.mongodb.com/) installed
+- You must have a Stripe.com API Key
