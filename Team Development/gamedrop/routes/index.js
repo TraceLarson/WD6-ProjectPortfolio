@@ -83,6 +83,23 @@ router.get("/checkout", isLoggedIn, (req, res, next) => {
   res.render("shop/checkout", {total: cart.totalPrice, errMsg: errMsg, noError: !errMsg});
 });
 
+/* GET reduce item qty route */
+router.get("/reduce/:id", (req, res, next) => {
+  // Store item id from url params
+  let productId = req.params.id;
+
+  // Instantiate new cart object with contents of old cart if available
+  let cart = new Cart(req.sessions.cart ? req.sessions.cart : {});
+
+  // Reduce the qty of item by one
+  cart.reduceByOne(productId);
+
+  // Update the cart in the session
+  req.session.cart = cart;
+
+  // Redirect user to the cart page so they can see the changes
+  res.redirect("/cart");
+});
 
 router.post("/checkout", (req, res, next) => {
   // Redirect user if they don't have a cart
