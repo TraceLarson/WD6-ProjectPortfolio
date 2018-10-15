@@ -31,8 +31,15 @@ router.get('/', function(req, res, next) {
 
 /* GET rate product page */
 router.get("/rate-product/:id", (req, res, next) => {
-  // Render form to add rating, passing item id to view
-  res.render("shop/rate", {itemId: req.params.id});
+  // Find product in database
+  Product.findById(req.params.id, (err, product) => {
+    if (err) {
+      req.flash("error", "SERVER ERROR: Problem finding product. If issue persists, please contact the website administrator.");
+      return res.redirect("/");
+    }
+    // Render form to add rating, passing product to view
+    res.render("shop/rate", {product: product});
+  });
 });
 
 /* POST rate product route */
@@ -51,6 +58,7 @@ router.get("/add-to-cart/:id", (req, res, next) => { // id of product to add to 
   // Find product based on id
   Product.findById(productId, (err, product) => {
     if (err) {
+      req.flash("error", "")
       return res.redirect("/");
     }
 
