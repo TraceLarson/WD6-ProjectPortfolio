@@ -4,22 +4,28 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('gamedrop:server');
-var http = require('http');
+const app = require('../app');
+const debug = require('debug')('gamedrop:server');
+const http = require('http');
+
+// Load env vars in dev environment
+let NODE_ENV = process.env.NODE_ENV || "development";
+if (NODE_ENV === "development") {
+  require("dotenv").load();
+}
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+let server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
