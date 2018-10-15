@@ -13,3 +13,8 @@
 .hidden {
     display: none;
 }
+
+footer img:not(:first-of-type) {
+    max-height: 2rem;
+    margin: 0 .5rem;
+}
