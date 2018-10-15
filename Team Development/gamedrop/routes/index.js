@@ -68,7 +68,7 @@ router.get("/cart", (req, res, next) => {
 });
 
 /* GET checkout view */
-router.get("/checkout", (req, res, next) => {
+router.get("/checkout", isLoggedIn, (req, res, next) => {
   if (!req.session.cart) { // If no cart exists
     // Redirect to shopping cart page
     return res.redirect("/shopping-cart");
@@ -134,3 +134,18 @@ router.post("/checkout", (req, res, next) => {
 });
 
 module.exports = router;
+
+
+// Write own middleware to handle route protection
+function isLoggedIn(req, res, next) {
+  // If user is authenticated, continue as normal
+  if (req.isAuthenticated()) {
+      return next();
+  }
+
+  // Store url user was attempting to access
+  req.session.oldURL = req.url;
+
+  // Otherwise user is not authenticated, so redirect them
+  res.redirect("/user/signin");
+}
