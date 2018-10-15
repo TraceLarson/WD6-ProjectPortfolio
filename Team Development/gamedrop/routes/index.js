@@ -76,7 +76,7 @@ router.get("/checkout", isLoggedIn, (req, res, next) => {
 
   let cart = new Cart(req.session.cart); // Create cart from session data
 
-  // Display first error message
+  // Store first error message
   let errMsg = req.flash("error")[0];
 
   // Render checkout view and pass data
