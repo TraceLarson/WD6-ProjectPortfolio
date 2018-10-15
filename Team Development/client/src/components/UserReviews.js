@@ -7,6 +7,8 @@ import axios from 'axios'
 // import PropTypes from 'prop-types';
 import Review from "./Review";
 
+// TODO: get item _id from props, get current user email address from auth
+
 class UserReviews extends Component {
 	state = {
 		currentUser: 'Trace@email.com',
@@ -101,6 +103,8 @@ class UserReviews extends Component {
 	}
 }
 
-// UserReviews.propTypes = {};
+// UserReviews.propTypes = {
+// 	_id: PropTypes.string.isRequired
+// };
 
 export default UserReviews;
