@@ -88,3 +88,13 @@ The server is automatically started with nodemon, so you don't need to restart i
 ### Daniel Hughes
 - dshughes@student.fullsail.edu
 - @hughesd22 (Slack)
+
+## Technologies & Integrations
+
+- **Node.js** => Server JavaScript Runtime
+- **Express.js** => Web Framework
+- **MongoDB** => NoSQL Database
+- **NPM** => Dependency Management
+- **FontAwesome** => Icons
+- **Bootstrap** => User Interface (UI)
+- **Stripe API** => Payment Processing
