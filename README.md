@@ -1,2 +1,2 @@
-# WD6-ProjectPorfolio
-Portfolio Repo For Project &amp; Porfolio 6 at Full Sail University Online
+# GameDrop
+A shopping cart application built for WD6-International Inc, the world leader in online video game sales.
