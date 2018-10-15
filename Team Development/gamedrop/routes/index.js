@@ -89,7 +89,7 @@ router.get("/reduce/:id", (req, res, next) => {
   let productId = req.params.id;
 
   // Instantiate new cart object with contents of old cart if available
-  let cart = new Cart(req.sessions.cart ? req.sessions.cart : {});
+  let cart = new Cart(req.session.cart ? req.session.cart : {});
 
   // Reduce the qty of item by one
   cart.reduceByOne(productId);
