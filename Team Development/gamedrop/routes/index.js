@@ -76,4 +76,34 @@ router.get("/checkout", (req, res, next) => {
   res.render("shop/checkout", {total: cart.totalPrice});
 });
 
+
+router.post("/checkout", (req, res, next) => {
+  // Redirect user if they don't have a cart
+  if (!req.session.cart) {
+    return res.redirect("/shopping-cart");
+  }
+
+  // Create cart from session data
+  let cart = new Cart(req.session.cart);
+
+  // Use Stripe
+  const stripe = require("stripe")(process.env.APIKEY_STRIPE);
+
+  const charge = stripe.charges.create({
+    amount: cart.totalPrice * 100, // convert price to cents
+    currency: 'usd',
+    description: 'Test charge',
+    source: req.body.stripeToken,
+  }, (err, result) => {
+    if (err) {
+      req.flash("error", err.message);
+      res.redirect("/checkout");
+    }
+    req.flash("success", "Purchase successful!");
+    req.cart = null;
+    res.redirect("/");
+  });
+
+});
+
 module.exports = router;
