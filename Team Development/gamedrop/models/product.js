@@ -32,4 +32,9 @@ let productSchema = new Schema({
     }
 });
 
+productSchema.pre("save", function(next) {
+    this.rating = this.totalRating / this.numRatings;
+    next();
+});
+
 module.exports = mongoose.model("Product", productSchema);
