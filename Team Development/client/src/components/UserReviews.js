@@ -14,17 +14,17 @@ class UserReviews extends Component {
 		reviews:
 			[
 				{
-					_id: 0,
+					_id: '0',
 					user: 'Trace@email.com',
 					message: 'This is the message I wanted to leave'
 				},
 				{
-					_id: 1,
+					_id: '1',
 					user: 'Chris@email.com',
 					message: 'This is the message I wanted to leave'
 				},
 				{
-					_id: 2,
+					_id: '2',
 					user: 'Dan@email.com',
 					message: 'This is the message I wanted to leave'
 				},
@@ -34,6 +34,15 @@ class UserReviews extends Component {
 
 	componentDidMount() {
 		// Axios call to get messages
+		axios.get('/reviews')
+			.then(response => {
+				this.setState({
+					reviews: response.data
+				})
+			})
+			.catch(err => {
+				console.log(`Error fetching reviews: ${err.message}`)
+			})
 	}
 
 	toggle = () => {
