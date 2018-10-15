@@ -44,6 +44,12 @@ module.exports = function Cart(oldCart) {
         // Update cart qty and price
         this.totalQty--;
         this.totalPrice -= this.items[id].item.price;
+
+        // Check if item qty is zero (or less)
+        if (this.items[id].qty <= 0) {
+            // Remove it since it's not being purchased
+            delete this.items[id];
+        }
     };
 
     // Outputs cart's item information as an array
