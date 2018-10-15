@@ -42,6 +42,9 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ this.title }}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">${{ this.price }}</h6>
+                        <span class="badge badge-pill badge-warning">
+                          {{#if this.rating }} Rating: {{this.rating }} / 5 {{else}} No Rating{{/if}}
+                        </span> <a href="/rate-product/{{ this._id }}" class="badge badge-info">Rate</a>
                         <p class="card-text text-muted">{{ this.description }}</p>
                     </div>
                     <div class="card-footer text-center">

@@ -17,7 +17,24 @@ let productSchema = new Schema({
     price: {
         type: Number,
         required: true
+    },
+    totalRating: { // Total cumulative rating value
+        type: Number,
+        required: true
+    },
+    numRatings: { // Number of ratings the product has had
+        type: Number,
+        required: true
+    },
+    rating: { // Calculated average rating
+        type: Number,
+        required: true
     }
+});
+
+productSchema.pre("save", function(next) {
+    this.rating = this.totalRating / this.numRatings;
+    next();
 });
 
 module.exports = mongoose.model("Product", productSchema);

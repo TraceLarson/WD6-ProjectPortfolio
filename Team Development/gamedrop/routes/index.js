@@ -29,6 +29,46 @@ router.get('/', function(req, res, next) {
   });
 });
 
+/* GET rate product page */
+router.get("/rate-product/:id", (req, res, next) => {
+  // Find product in database
+  Product.findById(req.params.id, (err, product) => {
+    if (err) {
+      req.flash("error", "SERVER ERROR: Problem finding product. If issue persists, please contact the website administrator.");
+      return res.redirect("/");
+    }
+    // Render form to add rating, passing product to view
+    res.render("shop/rate", {product: product});
+  });
+});
+
+/* POST rate product route */
+router.post("/rate-product/:id", (req, res, next) => {
+  // Search for product in db
+  Product.findById(req.params.id, (err, product) => {
+    if (err) {
+      req.flash("error", "SERVER ERROR: Problem finding product to rate. If issue persists, please contact the website administrator.");
+      return res.redirect("/");
+    }
+
+    // Update product based on user rating
+    product.totalRating += parseInt(req.body.rating);
+    product.numRatings++;
+    
+    // Save updated product
+    product.save((err) => {
+      if (err) {
+        req.flash("error", "SERVER ERROR: Problem updating product rating. If issue persists, please contact the website administrator.");
+        res.redirect("/");
+      }
+
+      // Create success message and redirect user to root
+      req.flash("success", "Rating submitted!");
+      res.redirect("/");
+    });
+  });
+});
+
 /* GET add to cart view */
 router.get("/add-to-cart/:id", (req, res, next) => { // id of product to add to cart
   // Cache id of item to add to cart
@@ -40,6 +80,7 @@ router.get("/add-to-cart/:id", (req, res, next) => { // id of product to add to 
   // Find product based on id
   Product.findById(productId, (err, product) => {
     if (err) {
+      req.flash("error", "")
       return res.redirect("/");
     }
 
