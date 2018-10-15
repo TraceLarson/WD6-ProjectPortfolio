@@ -10,8 +10,14 @@
                 <div class="card mb-2">
                     <div class="card-body">
                         <h5 class="card-title">{{ product.title }}</h5>
-                        <span class="badge badge-pill badge-warning">Rating: {{ product.rating }} / 5</span> | <span
-                            class="badge badge-pill badge-warning">Total Ratings: {{ product.numRatings }}</span>
+                        
+                        {{#if product.rating }}
+                            <span class="badge badge-pill badge-warning">Rating: {{ product.rating }} / 5</span> | <span class="badge badge-pill badge-warning">Total Ratings: {{ product.numRatings }}</span>
+                        {{else}}
+                            <span class="badge badge-pill badge-warning">No Rating</span>
+                            <span class="badge badge-success d-block mt-3 py-2">Be the first to rate!</span>
+                        {{/if}}    
+                        
                         <p class="card-text text-muted">{{ this.description }}</p>
                     </div>
                 </div>
