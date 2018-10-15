@@ -5,27 +5,27 @@ mongoose.connect('mongodb://localhost/gamedrop', { useNewUrlParser: true })
 
 const reviews = [
 	new Review({
-		name: 'trace@email.com',
+		user: 'trace@email.com',
 		message: 'Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur purus sit amet fermentum. Nullam quis risus eget urna mollis ornare vel eu leo.',
 	}),
 	new Review({
-		name: 'chris@email.com',
+		user: 'chris@email.com',
 		message: 'Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur purus sit amet fermentum. Nullam quis risus eget urna mollis ornare vel eu leo.',
 	}),
 	new Review({
-		name: 'dan@email.com',
+		user: 'dan@email.com',
 		message: 'Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur purus sit amet fermentum. Nullam quis risus eget urna mollis ornare vel eu leo.',
 	}),
 	new Review({
-		name: 'fia@email.com',
+		user: 'fia@email.com',
 		message: 'Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur purus sit amet fermentum. Nullam quis risus eget urna mollis ornare vel eu leo.',
 	}),
 	new Review({
-		name: 'jim@email.com',
+		user: 'jim@email.com',
 		message: 'Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur purus sit amet fermentum. Nullam quis risus eget urna mollis ornare vel eu leo.e',
 	}),
 	new Review({
-		name: 'joe@email.com',
+		user: 'joe@email.com',
 		message: 'Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur purus sit amet fermentum. Nullam quis risus eget urna mollis ornare vel eu leo.',
 	})
 ]
