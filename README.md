@@ -68,3 +68,9 @@ $ net start MongoDB
 ```
 $ npm start
 ```
+
+### DONE
+
+You can now connect to the app by visiting `localhost:3000` in your browser.
+
+The server is automatically started with nodemon, so you don't need to restart the server on changes.
