@@ -29,6 +29,12 @@ router.get('/', function(req, res, next) {
   });
 });
 
+/* GET rate product page */
+router.get("/rate-product/:id", (req, res, next) => {
+  // Render form to add rating, passing item id to view
+  res.render("shop/rate", {itemId: req.params.id});
+});
+
 /* GET add to cart view */
 router.get("/add-to-cart/:id", (req, res, next) => { // id of product to add to cart
   // Cache id of item to add to cart
