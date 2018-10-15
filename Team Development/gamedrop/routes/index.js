@@ -144,7 +144,7 @@ function isLoggedIn(req, res, next) {
   }
 
   // Store url user was attempting to access
-  req.session.oldURL = req.url;
+  req.session.oldUrl = req.url;
 
   // Otherwise user is not authenticated, so redirect them
   res.redirect("/user/signin");

@@ -45,10 +45,11 @@ router.post("/signup", passport.authenticate("local.signup", {
     failureRedirect: "/user/signup",
     failureFlash: true
 }), (req, res, next) => { // Handle success
-    if (req.session.oldUrl) {
+        if (req.session.oldUrl) {
         // Redirect user to url they were attempting to access prior to logging in
-        res.redirect(req.session.oldUrl);
-        req.session.oldUrl = null; // Reset old url
+        let oldUrl = req.session.oldUrl;
+        req.session.oldUrl = null; // Reset session old url, ensures user won't keep getting redirected to checkout after logging out & in again
+        res.redirect(oldUrl);
     } else {
         res.redirect("/user/profile");
     }
@@ -61,8 +62,9 @@ router.post("/signin", passport.authenticate("local.signin", {
 }), (req, res, next) => { // Handle success
     if (req.session.oldUrl) {
         // Redirect user to url they were attempting to access prior to logging in
-        res.redirect(req.session.oldUrl);
-        req.session.oldUrl = null; // Reset old url
+        let oldUrl = req.session.oldUrl;
+        req.session.oldUrl = null; // Reset session old url, ensures user won't keep getting redirected to checkout after logging out & in again
+        res.redirect(oldUrl);
     } else {
         res.redirect("/user/profile");
     }
