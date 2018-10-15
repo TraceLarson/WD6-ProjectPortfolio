@@ -33,3 +33,9 @@ $ cd WD6-ProjectPortfolio
 ```
 $ cd "Team Development"/gamedrop
 ```
+
+### Install Dependencies
+
+```
+$ npm install
+```
