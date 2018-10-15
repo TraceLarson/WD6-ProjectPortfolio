@@ -1,49 +1,51 @@
-{{#if products }} {{!-- If there are products in cart --}}
-    <div class="row">
-        <div class="col">
-            <ul class="list-group">
-                {{#each products }} {{!-- Loop through products --}}
-                    {{!-- Create a list group item for each product with its data --}}
-                    <li class="list-group-item align-items-center">
-                        <strong>{{ this.item.title }}</strong>
-                        <span class="badge badge-success p-2">${{ this.price }}</span>
-                        <span class="badge badge-primary badge-pill px-2 py-1 float-right">{{ this.qty }}</span>
-                        <div class="btn-group" role="group">
-                            <div class="btn-group-sm" role="group">
-                                <button id="tools" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    Qty
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="tools">
-                                    <a class="dropdown-item" href="/reduce/{{ this.item._id }}">Remove One</a>
-                                    <a class="dropdown-item" href="/remove/{{ this.item._id }}">Remove All</a>
+<div id="shopping-cart-page">
+    {{#if products }} {{!-- If there are products in cart --}}
+        <div class="row">
+            <div class="col">
+                <ul class="list-group">
+                    {{#each products }} {{!-- Loop through products --}}
+                        {{!-- Create a list group item for each product with its data --}}
+                        <li class="list-group-item align-items-center">
+                            <strong>{{ this.item.title }}</strong>
+                            <span class="badge badge-success p-2">${{ this.price }}</span>
+                            <span class="badge badge-primary badge-pill px-2 py-1 float-right">{{ this.qty }}</span>
+                            <div class="btn-group" role="group">
+                                <div class="btn-group-sm" role="group">
+                                    <button id="tools" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        Qty
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="tools">
+                                        <a class="dropdown-item" href="/reduce/{{ this.item._id }}">Remove One</a>
+                                        <a class="dropdown-item" href="/remove/{{ this.item._id }}">Remove All</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                {{/each}}
+                        </li>
+                    {{/each}}
 
-            </ul>
+                </ul>
+            </div>
         </div>
-    </div>
 
-    <div class="row mt-5">
-        <div class="col">
-            <strong>Total: ${{ totalPrice }}</strong>
+        <div class="row mt-5">
+            <div class="col">
+                <strong>Total: ${{ totalPrice }}</strong>
+            </div>
         </div>
-    </div>
 
-    <hr>
+        <hr>
 
-    <div class="row">
-        <div class="col">
-            <a href="/checkout" type="button" class="btn btn-success">Checkout</a>
+        <div class="row">
+            <div class="col">
+                <a href="/checkout" type="button" class="btn btn-success">Checkout</a>
+            </div>
         </div>
-    </div>
-{{ else }} {{!-- There are no products in cart --}}
-    <div class="row">
-        <div class="col">
-            <h2>No Items in Cart</h2>
+    {{ else }} {{!-- There are no products in cart --}}
+        <div class="row">
+            <div class="col">
+                <h2>No Items in Cart</h2>
+            </div>
         </div>
-    </div>
-{{/if}}
+    {{/if}}
+</div>

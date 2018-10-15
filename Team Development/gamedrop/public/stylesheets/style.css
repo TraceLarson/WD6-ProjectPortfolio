@@ -24,3 +24,6 @@ footer img:not(:first-of-type) {
     margin-bottom: 12rem;
 }
 
+#shopping-cart-page {
+    margin-bottom: 26rem;
+}
