@@ -19,6 +19,8 @@ footer img:not(:first-of-type) {
     margin: 0 .5rem;
 }
 
-#signup-page {
+#signup-page,
+#signin-page {
     margin-bottom: 12rem;
 }
+
