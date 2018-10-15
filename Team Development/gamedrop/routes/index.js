@@ -2,6 +2,7 @@ const express = require('express');
 
 const Product = require("../models/product");
 const Cart = require("../models/cart");
+const Order = require("../models/order");
 
 let router = express.Router();
 
@@ -100,14 +101,34 @@ router.post("/checkout", (req, res, next) => {
     currency: 'usd',
     description: 'Test charge',
     source: req.body.stripeToken,
-  }, (err, result) => {
+  }, (err, charge) => {
     if (err) {
+      // Add error message to flash
       req.flash("error", err.message);
       res.redirect("/checkout");
     }
-    req.flash("success", "Purchase successful!");
-    req.session.cart = null;
-    res.redirect("/");
+
+    let order = new Order({
+      user: req.user,
+      cart: cart,
+      address: req.body.address,
+      name: req.body.name,
+      paymentId: charge.id
+    });
+
+    order.save((err, order) => {
+      if (err) {
+        req.flash("error", "SERVER ERROR: Problem saving order. Try again. If issues continue, please contact the website administrator.");
+        res.redirect("/checkout");
+      }
+      // Add success message to flash
+      req.flash("success", "Purchase successful!");
+
+      // Set session cart to null, effectively emptying the cart
+      req.session.cart = null;
+      res.redirect("/");
+    });
+
   });
 
 });

@@ -6,7 +6,7 @@ let orderSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
-    cart {
+    cart: {
         type: Object,
         required: true
     },
