@@ -49,7 +49,7 @@ $ touch .env
 
 *Edit File*  
 
-*(Replace value with your Stripe<span>.</span>com test API Key)*
+*(Replace value with your Stripe<span>.</span>com secret test API Key)*
 
 *.env*
 ```
