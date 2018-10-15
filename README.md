@@ -91,10 +91,10 @@ The server is run with nodemon, so you don't need to restart it on changes.
 
 ## Technologies & Integrations
 
-- **Node.js** => Server JavaScript Runtime
-- **Express.js** => Web Framework
-- **MongoDB** => NoSQL Database
-- **NPM** => Dependency Management
-- **FontAwesome** => Icons
-- **Bootstrap** => User Interface (UI)
-- **Stripe API** => Payment Processing
+- [**Node.js**](https://nodejs.org/en/) => Server JavaScript Runtime
+- [**Express.js**](http://expressjs.com/) => Web Framework
+- [**MongoDB**](https://www.mongodb.com/) => NoSQL Database
+- [**NPM**](https://www.npmjs.com/) => Dependency Management
+- [**FontAwesome**](https://fontawesome.com/free) => Icons
+- [**Bootstrap**](https://getbootstrap.com/docs/4.1/getting-started/introduction/) => User Interface (UI)
+- [**Stripe API**](https://stripe.com/docs/api#intro) => Payment Processing
