@@ -18,38 +18,10 @@ class UserReviews extends Component {
 			[
 				{
 					_id: '0',
-					user: 'Trace@email.com',
-					message: 'This is the message I wanted to leave'
-				},
-				{
-					_id: '1',
-					user: 'Chris@email.com',
-					message: 'This is the message I wanted to leave'
-				},
-				{
-					_id: '2',
-					user: 'Dan@email.com',
-					message: 'This is the message I wanted to leave'
-				},
-
+					user: 'Admin@GameDrop.com',
+					message: '...Loading reviews'
+				}
 			]
-	}
-
-	componentDidMount() {
-		// this.getReviews()
-	}
-
-	getReviews = () => {
-		// Axios call to get messages
-		axios.get('/reviews')
-			.then(response => {
-				this.setState({
-					reviews: response.data
-				})
-			})
-			.catch(err => {
-				console.log(`Error fetching reviews: ${err.message}`)
-			})
 	}
 
 	toggle = () => {
@@ -69,7 +41,6 @@ class UserReviews extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault()
-		// e.target.reset()
 		console.log(e.target)
 		axios.post('/reviews',{
 			user: this.state.currentUser, //will change to props
