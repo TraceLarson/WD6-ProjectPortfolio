@@ -52,6 +52,16 @@ module.exports = function Cart(oldCart) {
         }
     };
 
+    // Removes an item completely from the cart
+    this.removeItem = function(id) {
+        // Adjust cart totals
+        this.totalQty -= this.items[id].qty;
+        this.totalPrice -= this.items[id].price;
+
+        // Remove item from cart
+        delete this.items[id];
+    };
+
     // Outputs cart's item information as an array
     this.generateArray = function() {
         let arr = [];
