@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
-import axios from 'axios';
+import axios from 'axios'
 
 class Login extends Component {
 
@@ -9,6 +9,8 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
+      error: null,
+      regSuccess: JSON.parse(localStorage.getItem('regSuccess')) || null,
       redirectTo: null
     }
 
@@ -22,6 +24,8 @@ class Login extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
+    localStorage.clear()
+    this.setState ({ regSuccess: null })
     axios.post('/user/login', {
         email: this.state.email,
         password: this.state.password
@@ -34,29 +38,16 @@ class Login extends Component {
             email: response.data.email
           })
           this.setState({
+            error: null,
             redirectTo: '/'
           })
         }
       }).catch(error => {
         console.log(error)
+        this.setState({
+          error: <p>Incorrect Email or Password</p>
+        })
       })
-  }
-
-  getErrors() {
-    axios.get('/login').then(response => {
-      console.log(response.data)
-      if (response.data.errors) {
-        console.log('session errors: ' + response.data.errors)
-
-        this.setState({
-          errors: response.data.errors
-        })
-      } else {
-        this.setState({
-          errors: null
-        })
-      }
-    })
   }
 
   render() {
@@ -67,6 +58,10 @@ class Login extends Component {
       return (
         <div className='form-box'>
           <h1>Login</h1>
+          <h2>{this.state.regSuccess}</h2>
+          <div className='formErrors'>
+            {this.state.error}
+          </div>
           <form id='login-form' onSubmit={this.handleSubmit}>
             <div className='input-group'>
               <label htmlFor='email'>Email: </label>

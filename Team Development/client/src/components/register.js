@@ -13,8 +13,8 @@ class Register extends Component {
       redirectTo: null
     }
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(event) {
@@ -30,15 +30,16 @@ class Register extends Component {
       .then(response => {
         if(!response.data.error) {
           console.log('Account Registered')
+          localStorage.setItem('regSuccess', JSON.stringify('Account Registered! Login to your account below.'))
           this.setState ({
-            errors: null,
-            redirectTo: '/login'
+            error: null,
+            redirectTo: '/login',
           })
         }
         else {
-          console.log('validation error ' + response.data.error);
+          console.log('validation error ' + response.data.error)
           this.setState({
-            errors: response.data.error
+            error: <p>{response.data.error}</p>
           })
         }
       }).catch(error => {
@@ -55,7 +56,7 @@ class Register extends Component {
           <div className='form-box'>
             <h1>Register Account</h1>
             <div className='formErrors'>
-              {this.state.errors}
+              {this.state.error}
             </div>
             <form id='register-form' onSubmit={this.handleSubmit}>
               <div className='input-group'>
@@ -76,4 +77,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default Register

@@ -3,7 +3,7 @@ const app = express()
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const session = require('express-session')
-const expressValidator = require('express-validator');
+const expressValidator = require('express-validator')
 const passport = require('./passport')
 const MongoStore = require('connect-mongodb-session')(session)
 const CONNECTION_URI = process.env.MONGODB_URI || 'mongodb://localhost/gamedrop'
@@ -21,7 +21,7 @@ app.use(bodyParser.json())
 mongoose.Promise = global.Promise
 mongoose.connect(CONNECTION_URI, { useNewUrlParser: true })
   .then(() =>  console.log('connection succesful'))
-  .catch((err) => console.error(err));
+  .catch((err) => console.error(err))
 
 // Get default connection
 var db = mongoose.connection

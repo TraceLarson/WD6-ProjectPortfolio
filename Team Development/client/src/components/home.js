@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 class Home extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class Home extends Component {
   componentDidMount() {
     axios.get('/api/item')
       .then(res => {
-        this.setState({ items: res.data });
+        this.setState({ items: res.data })
         console.log(this.state.items)
       })
   }
@@ -72,4 +72,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Home

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 class Show extends Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       item: {}
     };
@@ -14,8 +14,8 @@ class Show extends Component {
   componentDidMount() {
     axios.get('/api/item/'+this.props.match.params.id)
       .then(res => {
-        this.setState({ item: res.data });
-        console.log(this.state.item);
+        this.setState({ item: res.data })
+        console.log(this.state.item)
       });
   }
 
@@ -37,4 +37,4 @@ class Show extends Component {
   }
 }
 
-export default Show;
+export default Show

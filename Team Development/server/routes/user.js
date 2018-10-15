@@ -49,12 +49,12 @@ router.post('/login', (req, res, next) => {
     console.log(req.body)
     next()
   },
-  passport.authenticate('local'), (req, res) => {
-    console.log('logged user: ', req.user);
+  passport.authenticate('local', { failureFlash: 'Invalid username or password.' }), (req, res) => {
+    console.log('logged user: ', req.user)
     var userInfo = {
       email: req.user.email
     };
-    res.send(userInfo);
+    res.send(userInfo)
   }
 )
 

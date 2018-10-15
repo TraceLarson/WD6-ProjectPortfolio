@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 class Header extends Component {
@@ -25,7 +25,7 @@ class Header extends Component {
   }
 
   render(){
-    const loggedIn = this.props.loggedIn;
+    const loggedIn = this.props.loggedIn
     return (
       <nav className="navbar navbar-default">
           <div className="container-fluid">
@@ -74,4 +74,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default Header
