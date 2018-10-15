@@ -74,3 +74,17 @@ $ npm start
 You can now connect to the app by visiting `localhost:3000` in your browser.
 
 The server is automatically started with nodemon, so you don't need to restart it on changes.
+
+## Devs
+
+### Trace Larson
+- talarson@student.fullsail.edu
+- @TraceLarson (Slack)
+
+### Chris Fiedor
+- csfiedor@student.fullsail.edu
+- @csfiedor (Slack)
+
+### Daniel Hughes
+- dshughes@student.fullsail.edu
+- @hughesd22 (Slack)
