@@ -5,29 +5,43 @@ const passport = require('../passport')
 
 //Register user
 router.post('/', (req, res) => {
-
   const { email, password } = req.body
-  // ****REMINDER: WRITE VALIDATION BEFORE DB QUERY****
-  User.findOne({ email: email }, (err, user) => {
-    if (err) {
-      console.log(err)
-    }
-    else if (user) {
-      res.json({
-          error: `Sorry, email already registered: ${email}`
-      })
-    }
-    else {
-      const newUser = new User({
-          email: email,
-          password: password
-      })
-      newUser.save((err, savedUser) => {
-          if (err) return res.json(err)
-          res.json(savedUser)
-      })
-    }
-  })
+  req.check('email').isEmail()
+  var emailCheck = req.validationErrors()
+  if(emailCheck) {
+    return res.json({
+        error: 'Email must be a valid email'
+    })
+  }
+  req.check('password').matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
+  var passCheck = req.validationErrors()
+  if(passCheck) {
+    return res.json({
+        error: 'Password must be a minimum of 8 characters, at least one letter and one number'
+    })
+  }
+  else {
+    User.findOne({ email: email }, (err, user) => {
+      if (err) {
+        console.log(err)
+      }
+      else if (user) {
+        res.json({
+            error: `Sorry, email already registered: ${email}`
+        })
+      }
+      else {
+        const newUser = new User({
+            email: email,
+            password: password
+        })
+        newUser.save((err, savedUser) => {
+            if (err) return res.json(err)
+            res.json(savedUser)
+        })
+      }
+    })
+  }
 })
 
 //Login user
@@ -53,7 +67,6 @@ router.get('/', (req, res, next) => {
         res.json({ user: null })
     }
 })
-
 
 //Logout User
 router.post('/logout', (req, res) => {

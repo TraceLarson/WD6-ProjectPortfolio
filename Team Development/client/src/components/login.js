@@ -42,6 +42,23 @@ class Login extends Component {
       })
   }
 
+  getErrors() {
+    axios.get('/login').then(response => {
+      console.log(response.data)
+      if (response.data.errors) {
+        console.log('session errors: ' + response.data.errors)
+
+        this.setState({
+          errors: response.data.errors
+        })
+      } else {
+        this.setState({
+          errors: null
+        })
+      }
+    })
+  }
+
   render() {
     if (this.state.redirectTo) {
       return <Redirect to={{ pathname: this.state.redirectTo }} />
