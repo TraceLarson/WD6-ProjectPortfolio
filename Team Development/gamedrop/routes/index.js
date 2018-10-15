@@ -35,6 +35,11 @@ router.get("/rate-product/:id", (req, res, next) => {
   res.render("shop/rate", {itemId: req.params.id});
 });
 
+/* POST rate product route */
+router.post("/rate-product/:id", (req, res, next) => {
+  res.json("YOU MADE IT");
+});
+
 /* GET add to cart view */
 router.get("/add-to-cart/:id", (req, res, next) => { // id of product to add to cart
   // Cache id of item to add to cart
