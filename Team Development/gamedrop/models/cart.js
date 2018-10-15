@@ -33,6 +33,19 @@ module.exports = function Cart(oldCart) {
 
     };
 
+    // Reduces the qty of an item in the cart by one
+    this.reduceByOne = function(id) {
+        // Decrement item qty
+        this.items[id].qty--;
+
+        // Also update the price of item group in cart
+        this.items[id].price -= this.items[id].item.price;
+
+        // Update cart qty and price
+        this.totalQty--;
+        this.totalPrice -= this.items[id].item.price;
+    };
+
     // Outputs cart's item information as an array
     this.generateArray = function() {
         let arr = [];
