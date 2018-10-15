@@ -44,7 +44,29 @@ router.get("/rate-product/:id", (req, res, next) => {
 
 /* POST rate product route */
 router.post("/rate-product/:id", (req, res, next) => {
-  res.json("YOU MADE IT");
+  // Search for product in db
+  Product.findById(req.params.id, (err, product) => {
+    if (err) {
+      req.flash("error", "SERVER ERROR: Problem finding product to rate. If issue persists, please contact the website administrator.");
+      return res.redirect("/");
+    }
+
+    // Update product based on user rating
+    product.totalRating += parseInt(req.body.rating);
+    product.numRatings++;
+    
+    // Save updated product
+    product.save((err) => {
+      if (err) {
+        req.flash("error", "SERVER ERROR: Problem updating product rating. If issue persists, please contact the website administrator.");
+        res.redirect("/");
+      }
+
+      // Create success message and redirect user to root
+      req.flash("success", "Rating submitted!");
+      res.redirect("/");
+    });
+  });
 });
 
 /* GET add to cart view */
