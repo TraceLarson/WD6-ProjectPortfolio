@@ -7,6 +7,9 @@ let router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  // Get first success message from flash
+  let successMsg = req.flash("success")[0];
+
   // Find all products in db
   let products = Product.find((err, products) => {
     // Use callback to ensure all records are found prior to passing data and rendering view
@@ -21,7 +24,7 @@ router.get('/', function(req, res, next) {
 
     // Render products index view
     // Pass products data to view
-    res.render('shop/index', { title: 'GameDrop', products: productChunks});
+    res.render('shop/index', { title: 'GameDrop', products: productChunks, successMsg: successMsg, noMessages: !successMsg});
   });
 });
 
@@ -72,8 +75,11 @@ router.get("/checkout", (req, res, next) => {
 
   let cart = new Cart(req.session.cart); // Create cart from session data
 
+  // Display first error message
+  let errMsg = req.flash("error")[0];
+
   // Render checkout view and pass data
-  res.render("shop/checkout", {total: cart.totalPrice});
+  res.render("shop/checkout", {total: cart.totalPrice, errMsg: errMsg, noError: !errMsg});
 });
 
 
@@ -100,7 +106,7 @@ router.post("/checkout", (req, res, next) => {
       res.redirect("/checkout");
     }
     req.flash("success", "Purchase successful!");
-    req.cart = null;
+    req.session.cart = null;
     res.redirect("/");
   });
 
