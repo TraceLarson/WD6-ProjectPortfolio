@@ -31,3 +31,7 @@ footer img:not(:first-of-type) {
 #checkout-page {
     margin-bottom: 5rem;
 }
+
+#rate-page {
+    margin-bottom: 6.6rem;
+}
