@@ -15,8 +15,8 @@
                                     Qty
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="tools">
-                                    <a class="dropdown-item" href="#">Reduce by 1</a>
-                                    <a class="dropdown-item" href="#">Remove All</a>
+                                    <a class="dropdown-item" href="/reduce/{{ this.item._id }}">Remove One</a>
+                                    <a class="dropdown-item" href="/remove/{{ this.item._id }}">Remove All</a>
                                 </div>
                             </div>
                         </div>
@@ -29,7 +29,7 @@
 
     <div class="row mt-5">
         <div class="col">
-            <strong>Total: {{ totalPrice }}</strong>
+            <strong>Total: ${{ totalPrice }}</strong>
         </div>
     </div>
 

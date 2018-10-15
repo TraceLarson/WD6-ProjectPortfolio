@@ -33,6 +33,35 @@ module.exports = function Cart(oldCart) {
 
     };
 
+    // Reduces the qty of an item in the cart by one
+    this.reduceByOne = function(id) {
+        // Decrement item qty
+        this.items[id].qty--;
+
+        // Also update the price of item group in cart
+        this.items[id].price -= this.items[id].item.price;
+
+        // Update cart qty and price
+        this.totalQty--;
+        this.totalPrice -= this.items[id].item.price;
+
+        // Check if item qty is zero (or less)
+        if (this.items[id].qty <= 0) {
+            // Remove it since it's not being purchased
+            delete this.items[id];
+        }
+    };
+
+    // Removes an item completely from the cart
+    this.removeItem = function(id) {
+        // Adjust cart totals
+        this.totalQty -= this.items[id].qty;
+        this.totalPrice -= this.items[id].price;
+
+        // Remove item from cart
+        delete this.items[id];
+    };
+
     // Outputs cart's item information as an array
     this.generateArray = function() {
         let arr = [];
