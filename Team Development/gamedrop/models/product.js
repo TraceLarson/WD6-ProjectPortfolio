@@ -17,6 +17,18 @@ let productSchema = new Schema({
     price: {
         type: Number,
         required: true
+    },
+    totalRating: {
+        type: Number,
+        required: true
+    },
+    numRatings: {
+        type: Number,
+        required: true
+    },
+    rating: {
+        type: Number,
+        required: true
     }
 });
 
