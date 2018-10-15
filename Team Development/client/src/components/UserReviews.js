@@ -3,6 +3,7 @@ import {
 	Button,
 	Modal,
 } from 'react-bootstrap'
+import axios from 'axios'
 // import PropTypes from 'prop-types';
 import Review from "./Review";
 
@@ -29,6 +30,10 @@ class UserReviews extends Component {
 				},
 
 			]
+	}
+
+	componentDidMount() {
+		// Axios call to get messages
 	}
 
 	toggle = () => {
