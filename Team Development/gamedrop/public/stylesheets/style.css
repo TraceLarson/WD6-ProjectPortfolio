@@ -9,3 +9,7 @@
 .card-img-top {
     height: 24rem;
 }
+
+.hidden {
+    display: none;
+}
