@@ -18,15 +18,15 @@ let productSchema = new Schema({
         type: Number,
         required: true
     },
-    totalRating: {
+    totalRating: { // Total cumulative rating value
         type: Number,
         required: true
     },
-    numRatings: {
+    numRatings: { // Number of ratings the product has had
         type: Number,
         required: true
     },
-    rating: {
+    rating: { // Calculated average rating
         type: Number,
         required: true
     }
