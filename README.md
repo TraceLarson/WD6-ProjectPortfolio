@@ -21,3 +21,15 @@ $ cd desktop
 ```
 $ git clone https://github.com/TraceLarson/WD6-ProjectPortfolio.git
 ```
+
+### Change Into Application Root Directory
+
+*Change into application directory*
+```
+$ cd WD6-ProjectPortfolio
+```
+
+*Change into application root*
+```
+$ cd "Team Development"/gamedrop
+```
