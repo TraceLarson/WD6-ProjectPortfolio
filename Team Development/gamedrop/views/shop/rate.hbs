@@ -1,18 +1,34 @@
 <div class="row">
     <div class="col">
-        <h1>Rate a Product</h1>
-        <p>Itemid: {{ itemId }}</p>
-        <div class="alert alert-info" role="alert">
-            Please give the product a rating out of 5 stars.
-        </div>
+        <h1>Rate <span class="font-italic font-weight-bold">{{ product.title }}</span></h1>
 
-        <form action="/rate-product/{{ itemId }}" method="POST">
-            <div class="form-group">
-                <label for="rating">Rating</label>
-                <input type="number" class="form-control" id="rating" value="3" min="1" max="5" required>
+        <div class="row">
+            <div class="col-6 text-center">
+                <div class="alert alert-info" role="alert">
+                    Please rate the product out of 5 stars
+                </div>
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <span class="badge badge-pill badge-warning">Rating: {{ product.rating }} / 5</span> | <span
+                            class="badge badge-pill badge-warning">Total Ratings: {{ product.numRatings }}</span>
+                        <p class="card-text text-muted">{{ this.description }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3 mx-auto">
+                        <form action="/rate-product/{{ product._id }}" method="POST">
+                            <div class="form-group">
+                                <label for="rating">Rating</label>
+                                <input type="number" class="form-control w-50 mx-auto" id="rating" value="3" min="1" max="5"
+                                    required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Submit Rating</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-
-            <button type="submit" class="btn btn-primary">Submit Rating</button>
-        </form>
+        </div>
     </div>
 </div>
