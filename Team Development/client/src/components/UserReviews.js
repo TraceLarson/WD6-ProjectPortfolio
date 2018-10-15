@@ -4,7 +4,7 @@ import {
 	Modal,
 } from 'react-bootstrap'
 import axios from 'axios'
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Review from "./Review";
 
 // TODO: get item _id from props, get current user email address from auth
@@ -69,11 +69,12 @@ class UserReviews extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault()
-		e.target.reset()
+		// e.target.reset()
 		console.log(e.target)
 		axios.post('/reviews',{
 			user: this.state.currentUser, //will change to props
-			message: this.state.message
+			message: this.state.message,
+			item: this.props.itemId
 		})
 			.then(response => {
 				console.log(response.data)
@@ -113,6 +114,7 @@ class UserReviews extends Component {
 					</Modal.Header>
 					<Modal.Body>
 						<form onSubmit={this.handleSubmit}>
+							<input className={'hidden'} type="text" name={'item'} id={'item'} value={this.props.itemId}/>
 							<div className={'form-group'}>
 								<label htmlFor={'user'}>User</label>
 								<input className={'form-control'} type="text" name={'user'} id={'user'}
@@ -141,8 +143,10 @@ class UserReviews extends Component {
 	}
 }
 
-// UserReviews.propTypes = {
-// 	_id: PropTypes.string.isRequired
-// };
+UserReviews.propTypes = {
+	itemId: PropTypes.string.isRequired,
+	reviews: PropTypes.array.isRequired
+//  currentUser: PropTypes.string.isRequired
+};
 
 export default UserReviews;
