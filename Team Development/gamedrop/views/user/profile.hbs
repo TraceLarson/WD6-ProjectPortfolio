@@ -1,6 +1,34 @@
-{{!-- Used to display errors --}}
-<div class="alert alert-danger {{#if noError }}hidden{{/if}}" id="profile-errors" role="alert">
-    {{ errMsg }}
-</div>
+<div class="row">
+    <div class="col">
+        {{!-- Used to display errors --}}
+        <div class="alert alert-danger {{#if noError }}hidden{{/if}}" id="profile-errors" role="alert">
+            {{ errMsg }}
+        </div>
 
-<h1>User Profile</h1>
+        <h1>User Profile</h1>
+        <hr>
+        <h2>Past Orders</h2>
+
+        {{#each orders }} {{!-- Loop through all orders passed to view --}}
+            <div class="card mb-3 border border-primary">
+                <div class="card-body">
+                    <ul class="list-group">
+                        {{#each this.items }} {{!-- Loop through all items in each order --}}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    {{ this.item.title }} <span class="badge badge-primary badge-pill">x{{ this.qty }}</span>
+                                </div>
+                                <span class="badge badge-success badge-pill">{{ this.price }}</span>
+                            </li>
+                        {{/each }}
+                    </ul>
+                    <div class="card-footer font-weight-bold">
+                        Total: ${{ this.cart.totalPrice }}
+                    </div>
+                </div>
+            </div>
+        {{/each }}
+
+
+    </div>
+</div>

@@ -3,6 +3,7 @@ const csrf = require("csurf");
 const passport = require("passport");
 
 const Order = require("../models/order");
+const Cart = require("../models/cart");
 
 let router = express.Router();
 
@@ -26,7 +27,7 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
 
         let cart;
         orders.forEach((order) => {
-            cart = new cart(order.cart);
+            cart = new Cart(order.cart);
             order.items = cart.generateArray();
         });
 
