@@ -39,3 +39,19 @@ $ cd "Team Development"/gamedrop
 ```
 $ npm install
 ```
+
+### Create .env File
+
+*Create file*
+```
+$ touch .env
+```
+
+*Edit File*  
+
+*(Replace value with your Stripe<span>.</span>com test API Key)*
+
+*.env*
+```
+APIKEY_STRIPE=uh23932rg68uib978
+```
