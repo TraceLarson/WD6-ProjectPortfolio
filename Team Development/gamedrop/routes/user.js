@@ -12,16 +12,30 @@ router.use(csrfProtection); // Protect all routes in this file with csrf protect
 /* GET profile page */
 router.get("/profile", isLoggedIn, (req, res, next) => {
     // Find all of the user's orders
-    Order.find({user: req.user}, () => { // Compare user that passport stores on request object to the user property of order documents
+    Order.find({user: req.user}, (err, orders) => { // Compare user that passport stores on request object to the user property of order documents
         if (err) {
             // Add error message to flash
             req.flash("error", "SERVER ERROR: PROBLEM FINDING ORDERS. If this issue persists, please contact the website administrator.");
-        }
-    }); 
 
-    // Store first error message
-    let errMsg = req.flash("error")[0];
-    res.render("user/profile", {errMsg: errMsg, noError: !errMsg});
+            // Store first error message
+            let errMsg = req.flash("error")[0];
+
+            // Render view with error passed
+            res.render("user/profile", {errMsg: errMsg, noError: !errMsg});
+        }
+
+        let cart;
+        orders.forEach((order) => {
+            cart = new cart(order.cart);
+            order.items = cart.generateArray();
+        });
+
+        // Store first error message
+        let errMsg = req.flash("error")[0];
+
+        // Render view with error and orders passed
+        res.render("user/profile", {errMsg: errMsg, noError: !errMsg, orders: orders});
+    });
 });
 
 /* GET logout page */
