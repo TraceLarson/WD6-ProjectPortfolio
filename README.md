@@ -73,7 +73,7 @@ $ npm start
 
 You can now connect to the app by visiting `localhost:3000` in your browser.
 
-The server is automatically started with nodemon, so you don't need to restart it on changes.
+The server is run with nodemon, so you don't need to restart it on changes.
 
 ## Devs
 
