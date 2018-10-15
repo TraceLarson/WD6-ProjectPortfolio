@@ -62,3 +62,9 @@ APIKEY_STRIPE=uh23932rg68uib978
 ```
 $ net start MongoDB
 ```
+
+### Start Server
+
+```
+$ npm start
+```
