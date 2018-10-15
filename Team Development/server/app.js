@@ -3,6 +3,7 @@ const app = express()
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+const expressValidator = require('express-validator');
 const passport = require('./passport')
 const MongoStore = require('connect-mongodb-session')(session)
 const CONNECTION_URI = process.env.MONGODB_URI || 'mongodb://localhost/gamedrop'
@@ -40,6 +41,9 @@ db.once('open', () => console.log('DATABASE CONNECTED SUCCESSFULLY'))
 //Config session
 //using connect-mongodb-session as connect-mongo has a known deprciation warning: https://github.com/jdesboeufs/connect-mongo/issues/297
 app.use(session({secret: 'wd6', store: store, saveUninitialized: false, resave: false}))
+
+//express-validator
+app.use(expressValidator());
 
 //Passport
 app.use(passport.initialize())
