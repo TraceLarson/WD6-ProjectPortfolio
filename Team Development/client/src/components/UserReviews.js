@@ -11,8 +11,9 @@ import Review from "./Review";
 
 class UserReviews extends Component {
 	state = {
-		currentUser: 'Trace@email.com',
 		show: false,
+		currentUser: 'Trace@email.com',
+		message: '',
 		reviews:
 			[
 				{
@@ -35,6 +36,10 @@ class UserReviews extends Component {
 	}
 
 	componentDidMount() {
+		this.getReviews()
+	}
+
+	getReviews = () => {
 		// Axios call to get messages
 		axios.get('/reviews')
 			.then(response => {
@@ -55,8 +60,35 @@ class UserReviews extends Component {
 		})
 	}
 
+	handleChange = e => {
+		this.setState({
+			[e.target.name]: e.target.value
+		})
+
+	}
+
 	handleSubmit = e => {
 		e.preventDefault()
+		e.target.reset()
+		console.log(e.target)
+		axios.post('/reviews',{
+			user: this.state.currentUser, //will change to props
+			message: this.state.message
+		})
+			.then(response => {
+				console.log(response.data)
+			})
+			.then(() => {
+				this.getReviews()
+				this.toggle()
+				this.setState({
+					message: ''
+				})
+			})
+			.catch(err => {
+				console.log(`Error POSTing new review: ${err.message}`)
+			})
+
 	}
 
 
@@ -83,12 +115,18 @@ class UserReviews extends Component {
 						<form onSubmit={this.handleSubmit}>
 							<div className={'form-group'}>
 								<label htmlFor={'user'}>User</label>
-								<input className={'form-control'} type="text" name={'user'} id={'user'} defaultValue={this.state.currentUser}
+								<input className={'form-control'} type="text" name={'user'} id={'user'}
+								       defaultValue={this.state.currentUser}
 								       disabled={true}/>
 							</div>
 							<div className={'form-group'}>
 								<label htmlFor={'message'}>Message</label>
-								<textarea className={'form-control'} name={"message"} id="message" cols="30" rows="10"/>
+								<textarea className={'form-control'}
+								          name={"message"}
+								          id="message"
+								          cols="30" rows="10"
+								          value={this.state.message}
+								          onChange={this.handleChange}/>
 							</div>
 							<Button type={'submit'} bsStyle={'info'} bsSize={'large'}>Submit Review!</Button>
 						</form>
