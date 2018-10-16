@@ -12,7 +12,7 @@ import Review from "./Review";
 class UserReviews extends Component {
 	state = {
 		show: false,
-		currentUser: 'Admin@GameDrop.com',
+		currentUser: 'Anonymous',
 		message: '',
 		reviews:
 			[
@@ -24,9 +24,21 @@ class UserReviews extends Component {
 			]
 	}
 
-	toggle = () => {
-		console.log('clicked toggle');
+	componentDidMount() {
+		axios.get('/user/')
+			.then(response => {
+				// console.log(`success componentDidMount: ${response.data.user.email}`)
+				this.setState({
+					currentUser: response.data.user.email
+				})
+			})
+			.catch(err => [
+				console.error(`error componentDidMount: ${err.message}`)
+			])
+	}
 
+	toggle = () => {
+		// console.log('clicked toggle');
 		this.setState({
 			show: !this.state.show
 		})
@@ -41,14 +53,14 @@ class UserReviews extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault()
-		console.log(e.target)
-		axios.post('/reviews',{
+		// console.log(e.target)
+		axios.post('/reviews', {
 			user: this.state.currentUser, //will change to props
 			message: this.state.message,
 			item: this.props.itemId
 		})
 			.then(response => {
-				console.log(response.data)
+				// console.log(response.data)
 			})
 			.then(() => {
 				this.props.updateReviews()
@@ -58,7 +70,7 @@ class UserReviews extends Component {
 				})
 			})
 			.catch(err => {
-				console.log(`Error POSTing new review: ${err.message}`)
+				console.error(`Error POSTing new review: ${err.message}`)
 			})
 
 	}
@@ -72,21 +84,26 @@ class UserReviews extends Component {
 			)
 		})
 
+		const showButton = this.state.currentUser === 'Anonymous' || !this.state.currentUser ? '' : (
+			<Button bsStyle="primary" bsSize="large" onClick={this.toggle}>
+				Write a review
+			</Button>
+		)
+
 		return (
 			<div>
 				<div>
 					{reviewList}
 				</div>
-				<Button bsStyle="primary" bsSize="large" onClick={this.toggle}>
-					Write a review
-				</Button>
+				{showButton}
 				<Modal show={this.state.show} onHide={this.toggle}>
 					<Modal.Header closeButton>
 						<Modal.Title>Leave a review!</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
 						<form onSubmit={this.handleSubmit}>
-							<input className={'hidden'} type="text" name={'item'} id={'item'} defaultValue={this.props.itemId}/>
+							<input className={'hidden'} type="text" name={'item'} id={'item'}
+							       defaultValue={this.props.itemId}/>
 							<div className={'form-group'}>
 								<label htmlFor={'user'}>User</label>
 								<input className={'form-control'} type="text" name={'user'} id={'user'}
