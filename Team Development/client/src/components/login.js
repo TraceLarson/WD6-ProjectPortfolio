@@ -32,21 +32,23 @@ class Login extends Component {
       })
       .then(response => {
         console.log(response)
-        if(response.status === 200) {
+        if(response.status === 200 && response.data.user) {
           this.props.updateUser({
             loggedIn: true,
-            email: response.data.email
+            email: response.data.user
           })
           this.setState({
             error: null,
             redirectTo: '/'
           })
         }
+        else {
+          this.setState({
+            error: <p>{response.data}</p>
+          })
+        }
       }).catch(error => {
         console.log(error)
-        this.setState({
-          error: <p>Incorrect Email or Password</p>
-        })
       })
   }
 
@@ -58,8 +60,8 @@ class Login extends Component {
       return (
         <div className='form-box'>
           <h1>Login</h1>
-          <h2>{this.state.regSuccess}</h2>
-          <div className='formErrors'>
+          <h2 className='reg-success'>{this.state.regSuccess}</h2>
+          <div className='form-errors'>
             {this.state.error}
           </div>
           <form id='login-form' onSubmit={this.handleSubmit}>
@@ -72,7 +74,7 @@ class Login extends Component {
               <input type='password' id='password' name='password' placeholder='password' value={this.state.password} onChange={this.handleChange} />
             </div>
             <div className='btn-group'>
-              <input type="submit" value="Login" />
+              <input className='form-btn' type='submit' value='Login' />
             </div>
           </form>
         </div>

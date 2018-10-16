@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema ({
   saveList: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}]
 });
 
-// Schema methods
+// Schema password methods
 UserSchema.methods = {
   checkPassword: function (password) {
     return bcrypt.compareSync(password, this.password)

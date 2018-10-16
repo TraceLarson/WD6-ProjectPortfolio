@@ -49,6 +49,11 @@ app.use(expressValidator());
 app.use(passport.initialize())
 app.use(passport.session())
 
+app.get('/', function(req, res){
+  // Get an array of flash messages by passing the key to req.flash()
+  res.render('index', { messages: req.flash('info') });
+});
+
 //Routes
 app.use('/', index)
 app.use('/user', user)

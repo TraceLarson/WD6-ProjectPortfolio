@@ -7,17 +7,17 @@ const passport = require('../passport')
 router.post('/', (req, res) => {
   const { email, password } = req.body
   req.check('email').isEmail()
-  var emailCheck = req.validationErrors()
-  if(emailCheck) {
+  var emailError = req.validationErrors()
+  if(emailError) {
     return res.json({
-        error: 'Email must be a valid email'
+        error: 'Invalid email'
     })
   }
   req.check('password').matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
-  var passCheck = req.validationErrors()
-  if(passCheck) {
+  var passError = req.validationErrors()
+  if(passError) {
     return res.json({
-        error: 'Password must be a minimum of 8 characters, at least one letter and one number'
+        error: 'Invalid password. Must be a minimum of 8 characters, at least one letter and one number.'
     })
   }
   else {
@@ -46,17 +46,20 @@ router.post('/', (req, res) => {
 
 //Login user
 router.post('/login', (req, res, next) => {
-    console.log(req.body)
-    next()
-  },
-  passport.authenticate('local', { failureFlash: 'Invalid username or password.' }), (req, res) => {
-    console.log('logged user: ', req.user)
-    var userInfo = {
-      email: req.user.email
-    };
-    res.send(userInfo)
-  }
-)
+  //Passport custom callback to pass errors with res
+  passport.authenticate('local', (err, user, info) => {
+    if (err) { return next(err) }
+    if (!user) { return res.json(info.message) }
+    req.logIn(user, err => {
+      if (err) { return next(err) }
+      var userInfo = {
+        user: req.user.email
+      }
+      console.log('logged user: ', req.user)
+      return res.send(userInfo)
+    })
+  })(req, res, next)
+})
 
 //Get logged user for session
 router.get('/', (req, res, next) => {

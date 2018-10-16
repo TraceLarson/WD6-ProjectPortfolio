@@ -30,7 +30,7 @@ class Register extends Component {
       .then(response => {
         if(!response.data.error) {
           console.log('Account Registered')
-          localStorage.setItem('regSuccess', JSON.stringify('Account Registered! Login to your account below.'))
+          localStorage.setItem('regSuccess', JSON.stringify('Account Registered! Login to start shopping.'))
           this.setState ({
             error: null,
             redirectTo: '/login',
@@ -54,8 +54,8 @@ class Register extends Component {
     else {
       return (
           <div className='form-box'>
-            <h1>Register Account</h1>
-            <div className='formErrors'>
+            <h1>Register</h1>
+            <div className='form-errors'>
               {this.state.error}
             </div>
             <form id='register-form' onSubmit={this.handleSubmit}>
@@ -68,7 +68,7 @@ class Register extends Component {
                 <input type='password' id='password' name='password' value={this.state.password} onChange={this.handleChange} />
               </div>
               <div className='btn-group'>
-                <input type="submit" value="Register Account" />
+                <input className='form-btn' type='submit' value='Register' />
               </div>
             </form>
           </div>
