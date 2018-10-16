@@ -6,6 +6,7 @@ import Header from './components/header'
 import Home from './components/home'
 import Login from './components/login'
 import Register from './components/register'
+import AccountDetails from './components/accountDetails'
 import Show from './components/show'
 import Footer from './components/footer'
 
@@ -62,6 +63,7 @@ class App extends Component {
             />}
         />
         <Route path='/register' component={Register} />
+        <Route path='/account' component={AccountDetails} />
         <Route path='/show/:id' component={Show} />
         <Footer />
       </div>

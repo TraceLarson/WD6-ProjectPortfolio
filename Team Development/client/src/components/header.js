@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 class Header extends Component {
 
   constructor() {
     super()
+    this.state = {
+      redirectTo: null
+		};
     this.logout = this.logout.bind(this)
   }
 
@@ -16,7 +20,10 @@ class Header extends Component {
       if (response.status === 200) {
         this.props.updateUser({
           loggedIn: false,
-          email: null
+          email: null,
+        })
+        this.setState ({
+          redirectTo: '/'
         })
       }
     }).catch(error => {
@@ -26,6 +33,9 @@ class Header extends Component {
 
   render(){
     const loggedIn = this.props.loggedIn
+    if (this.state.redirectTo) {
+      return <Redirect to={{ pathname: this.state.redirectTo }} />
+    }
     return (
       <nav className="navbar navbar-default">
           <div className="container-fluid">
@@ -53,7 +63,7 @@ class Header extends Component {
                 <ul className="dropdown-menu">
                   {loggedIn ? (
                       <div className='drop-tab'>
-                        <Link to="#"><li className='accnt-link'>Account Details</li></Link>
+                        <Link to="/account"><li className='accnt-link'>Account Details</li></Link>
                         <li role="separator" className="divider"></li>
                         <Link to="#" onClick={this.logout}><li className='accnt-link'>Logout</li></Link>
                       </div>

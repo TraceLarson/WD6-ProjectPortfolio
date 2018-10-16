@@ -67,6 +67,13 @@ body {
   font-weight: bold;
 }
 
+.account-details {
+  padding: 50px;
+  min-height: 600px;}
+  @media (min-width: 980px) {
+    .account-details {
+    padding: 150px;}}
+
 .container {
   margin: 0;
   padding: 0;
@@ -104,12 +111,9 @@ body {
 }
 
 .form-box h1 {
-  /* color: #a5a5a5; */
   margin-left: 25px;
   font-weight: bold;
   font-size: 42px;
-  /* text-shadow:2px .5px  #f7ab03;
-  /* opacity: .75; */
 }
 
 #register-form {
@@ -313,6 +317,7 @@ clear: both;}
 }
 
 .details {
+min height: 600px;
 padding: 50px;}
 @media (min-width: 980px) {
   .details {
