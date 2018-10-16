@@ -6,6 +6,9 @@ class Header extends Component {
 
   constructor() {
     super()
+    this.state = {
+      cartQty: null
+    }
     this.logout = this.logout.bind(this)
   }
 
@@ -40,15 +43,17 @@ class Header extends Component {
           </div>
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav navbar-right">
-              {/*
-              PLACEHOLDER BELOW: update with shopping cart
-              */}
-              <li><Link to="#" id="cart-link"><i className="fa fa-shopping-cart" aria-hidden="true"></i> Shopping Cart</Link></li>
+              <li>
+                <Link to='#' id="cart-link">
+                  <i className="fa fa-shopping-cart" aria-hidden="true"></i>Shopping Cart
+                  <span className='badge'> {this.props.getCartQty} </span>
+                </Link>
+              </li>
               <li className="dropdown">
               {loggedIn ? (
-                <Link to="#" id="accnt-toggle" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> {this.props.loggedUser} <span class="caret"></span></Link>
+                <Link to="#" id="accnt-toggle" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i className="fa fa-user" aria-hidden="true"></i> {this.props.loggedUser} <span className="caret"></span></Link>
               ) : (
-                <Link to="#" id="accnt-toggle" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> Your Account <span class="caret"></span></Link>
+                <Link to="#" id="accnt-toggle" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i className="fa fa-user" aria-hidden="true"></i> Your Account <span className="caret"></span></Link>
               )}
                 <ul className="dropdown-menu">
                   {loggedIn ? (

@@ -7,14 +7,14 @@ const passport = require('../passport')
 router.post('/', (req, res) => {
   const { email, password } = req.body
   req.check('email').isEmail()
-  var emailError = req.validationErrors()
+  let emailError = req.validationErrors()
   if(emailError) {
     return res.json({
         error: 'Invalid email'
     })
   }
   req.check('password').matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
-  var passError = req.validationErrors()
+  let passError = req.validationErrors()
   if(passError) {
     return res.json({
         error: 'Invalid password. Must be a minimum of 8 characters, at least one letter and one number.'
@@ -36,8 +36,8 @@ router.post('/', (req, res) => {
             password: password
         })
         newUser.save((err, savedUser) => {
-            if (err) return res.json(err)
-            res.json(savedUser)
+          if (err) return res.json(err)
+          res.json(savedUser)
         })
       }
     })
@@ -52,10 +52,9 @@ router.post('/login', (req, res, next) => {
     if (!user) { return res.json(info.message) }
     req.logIn(user, err => {
       if (err) { return next(err) }
-      var userInfo = {
+      let userInfo = {
         user: req.user.email
       }
-      console.log('logged user: ', req.user)
       return res.send(userInfo)
     })
   })(req, res, next)
@@ -63,6 +62,11 @@ router.post('/login', (req, res, next) => {
 
 //Get logged user for session
 router.get('/', (req, res, next) => {
+    //passport.serializeUser
+    console.log('User id saved in req.session.passport.user on login')
+    console.log(req.session.passport.user)
+    //passport.deserializeUser
+    console.log('User object available via req.user')
     console.log(req.user)
     if (req.user) {
         res.json({ user: req.user })
@@ -73,10 +77,10 @@ router.get('/', (req, res, next) => {
 
 //User account Details
 router.get('/account', (req, res, next) => {
-  console.log(req.user)
   if(req.user){
     User.findById(req.user.id).exec((err, user) => {
   		if (err) return next(err);
+      user.password = null
       res.json(user);
   	});
   }
