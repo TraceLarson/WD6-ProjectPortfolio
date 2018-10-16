@@ -37,7 +37,6 @@ class Register extends Component {
           })
         }
         else {
-          console.log('validation error ' + response.data.error)
           this.setState({
             error: <p>{response.data.error}</p>
           })

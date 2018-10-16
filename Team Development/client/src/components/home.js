@@ -8,14 +8,31 @@ class Home extends Component {
     this.state = {
       items: []
     }
+
+    this.addToCart = this.addToCart.bind(this)
   }
 
   componentDidMount() {
-    axios.get('/api/item')
+    axios.get('/item')
       .then(res => {
         this.setState({ items: res.data })
-        console.log(this.state.items)
       })
+  }
+
+  addToCart(id) {
+    console.log('TEST: ' + id)
+    axios.get('/item/addToCart/'+ id)
+			.then(response => {
+				if (!response.data.error) {
+          //Send update cart qty to header component
+          this.props.updateCartQty({
+            qty: response.data.totalQty
+          })
+        }
+        else {
+          console.log(response.data.error)
+        }
+			})
   }
 
   render() {
@@ -59,11 +76,11 @@ class Home extends Component {
               <h3>{item.title}</h3>
               <p className='description'>{item.description}</p>
               <p className="releaseDate">Release Date: {item.releaseDate}</p>
-              <div class="clearfix">
+              <div className="clearfix">
                 <div className='price pull-left'>Price: ${item.price}</div>
               </div>
             </div>
-            <div className='addBtn'><Link to={`/addToCart/${item._id}`}></Link>Add To Cart</div>
+            <Link to={'#'}><div className='addBtn' onClick={() => this.addToCart(item._id)}>Add To Cart</div></Link>
           </div>
         )}
       </div>

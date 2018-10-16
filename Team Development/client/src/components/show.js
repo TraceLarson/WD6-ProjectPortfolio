@@ -18,12 +18,27 @@ class Show extends Component {
 	}
 
 	getItem = () => {
-		axios.get('/api/item/' + this.props.match.params.id)
+		axios.get('/item/' + this.props.match.params.id)
 			.then(res => {
 				this.setState({item: res.data});
 				console.log(this.state.item);
 			});
 	}
+
+	addToCart = (id) => {
+    axios.get('/item/addToCart/'+ id)
+			.then(response => {
+				if (!response.data.error) {
+          //Send updated cart qty to header component
+					this.props.updateCartQty({
+						qty: response.data.totalQty
+					})
+        }
+        else {
+          console.log(response.data.error)
+        }
+			})
+  }
 
 	updateReviews = () => {
 		this.getItem()
@@ -41,9 +56,7 @@ class Show extends Component {
 						<p className='description-details'>{this.state.item.description}</p>
 						<p className="release-details">Release Date: {this.state.item.releaseDate}</p>
 						<div className='price-details'>Price: ${this.state.item.price}</div>
-						<div className='addBtn-details'><Link to={`/addToCart/${this.state.item._id}`}></Link>Add To
-							Cart
-						</div>
+						<Link to={'#'}><div className='addBtn-details' onClick={() => this.addToCart(this.state.item._id)}>Add To Cart</div></Link>
 					</div>
 				</div>
 				<div className={'details'}>

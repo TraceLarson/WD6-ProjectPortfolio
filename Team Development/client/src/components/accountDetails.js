@@ -17,6 +17,7 @@ class AccountDetails extends Component {
       .then(response => {
         if(!response.data.error) {
           this.setState({ user: response.data })
+          console.log('Account Details User state: ')
           console.log(this.state.user)
         }
         else {
@@ -38,6 +39,7 @@ class AccountDetails extends Component {
         <h1>Account Details</h1>
         <div>
           <h2 id='accnt-email'>{ this.state.user.email }</h2>
+
         </div>
       </div>
       )

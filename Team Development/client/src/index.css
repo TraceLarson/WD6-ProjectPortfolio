@@ -35,6 +35,11 @@ body {
   background-color: #181B1B;
 }
 
+.badge {
+  margin-left: 5px;
+  background-color: #f7ab03;
+}
+
 .dropdown-menu {
   padding: 0;
 }

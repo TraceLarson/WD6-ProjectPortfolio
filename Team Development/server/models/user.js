@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 const UserSchema = new mongoose.Schema ({
   email: {type: String, required: true},
   password: {type: String, required: true},
-  saveList: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}]
+  gameRadar: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}]
 });
 
 // Schema password methods
