@@ -31,10 +31,140 @@ body {
   border-bottom: .5px solid #f7ab03;
 }
 
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+  background-color: #181B1B;
+}
+
+.dropdown-menu {
+  padding: 0;
+}
+
+.drop-tab {
+  background-color: #181B1B;
+  border: 1px solid #f7ab03;
+  padding: 5px;
+}
+
+.drop-tab a {
+  color: #a5a5a5;
+}
+
+.drop-tab a:hover {
+  color: #f7ab03;
+}
+
+#accnt-toggle:hover, #accnt-toggle:focus {
+  color: #f7ab03;
+}
+
+#cart-link:hover, #cart-link:focus {
+  color: #f7ab03;
+}
+
+.accnt-link {
+  padding: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
 .container {
   margin: 0;
   padding: 0;
   width: 100%;
+}
+
+.form-errors {
+  color: white;
+  background-color: #f7ab03;
+  text-align: center;
+  width: 50%;
+  min-width:350px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+}
+
+.form-errors p {
+  padding: 25px;
+  color: white;
+  margin: 0;
+}
+
+.reg-success {
+  text-align: center;
+  color:  #f7ab03;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.form-box {
+  min-height: 600px;
+}
+
+.form-box h1 {
+  /* color: #a5a5a5; */
+  margin-left: 25px;
+  font-weight: bold;
+  font-size: 42px;
+  /* text-shadow:2px .5px  #f7ab03;
+  /* opacity: .75; */
+}
+
+#register-form {
+  min-width: 350px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#login-form {
+  min-width: 400px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.input-group, .btn-group {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#login-form label, #register-form label, #email, #password  {
+  width: 100%;
+  float: left;
+}
+
+#login-form label, #register-form label {
+  margin-left: 10px;
+  color: #a5a5a5;
+}
+
+#email, #password {
+  color: black;
+  background-color: #a5a5a5;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-bottom: 2px solid #f7ab03;
+}
+
+.form-btn {
+  padding: 10px;
+  color: black;
+  background-color: #a5a5a5;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  width: 25%;
+}
+
+.form-btn:hover {
+  color: white;
+  background-color: #f7ab03;
 }
 
 #carousel, .carousel{
@@ -58,10 +188,16 @@ body {
   background-color: #181B1B;}
   @media (min-width: 750px) {
     .wrapper {
-      padding: 50px;}}
+      padding: 50px;
+      padding-top: 25px;}}
       @media (min-width: 1100px) {
         .wrapper {
-          padding: 75px;}}
+          padding: 100px;
+          padding-top: 25px;}}
+          @media (min-width: 1400px) {
+            .wrapper {
+              padding: 150px;
+              padding-top: 25px;}}
 
 .wrapper:after{
 content: ".";
@@ -74,26 +210,32 @@ clear: both;}
   font-weight: bold;
   color: #f7ab03;
   border-bottom: .5px solid #a5a5a5;
+  padding-left: 25px;
 }
 
 .game img {
-    height: 300px;
-    margin: 0;
-    width: 100%;
-}
+  height: 200px;
+  margin: 0;
+  width: 100%;}
+  @media (min-width: 400px) {
+    .game img {
+      height: 300px;
+    }}
 
 .game {
-  width: calc(100% - 50px);
+  width: calc(50% - 20px);
+  float: left;
   padding: 0;
-  margin: 25px;
+  margin: 10px;
   border-radius: 0;
-  border: none;}
+  border-left: 1px solid #f7ab03;
+  border-right: 1px solid #f7ab03;}
   @media (min-width: 400px) {
     .game {
       float: left;
       width: calc(50% - 20px);
       margin: 10px;}}
-      @media (min-width: 750px) {
+      @media (min-width: 650px) {
         .game {
           float: left;
           width: calc(33.3% - 20px);}}
@@ -108,52 +250,66 @@ clear: both;}
 }
 
 .caption {
-  background-color: #a5a5a5;
-  height: 200px;
-  padding: 10px;
-}
+  /* background-color: #a5a5a5; */
+  height: 75px;
+  padding: 5px;}
+  @media (min-width: 400px) {
+    .caption {
+      height: 200px;
+      padding: 10px;}}
 
 .caption h3{
-  font-size: 16px;
+  color: white;
+  font-size: 12px;
   margin-top: 0;
-  font-weight: bold;
-}
-
-.game .description {
-    color: white;
-}
+  font-weight: bold;}
+  @media (min-width: 350px) {
+    .caption h3 {
+      font-size: 16px;}}
 
 .description {
-  font-size: 12px;
-  max-height: 75px;
-  overflow-x: hidden;
-}
+  display: none;}
+  @media (min-width: 400px) {
+    .description {
+      color: #a5a5a5;
+      display: block;
+      font-size: 12px;
+      max-height: 75px;
+      overflow-x: hidden;}}
 
 .releaseDate {
-  font-size: 10px;
-}
+  display: none;}
+  @media (min-width: 400px) {
+    .releaseDate {
+      color: #a5a5a5;
+      display: block;
+      font-size: 10px;}}
 
 .price {
-    font-weight: bold;
-    font-size: 16px;
-}
+  color: white;
+  font-weight: bold;
+  font-size: 12px;}
+  @media (min-width: 350px) {
+    .price {
+      font-size: 14px;}}
 
 .addBtn {
   width:100%;
-  height: 35px;
-  color: white;
-  background-color: #f7ab03;
+  color: black;
+  background-color: #a5a5a5;;
   text-decoration: none;
   text-align: center;
   font-size: 16px;
   font-weight: bold;
-  padding: 5px;
+  padding: 15px;
   border-radius: 0;
   clear: both;
 }
 
 .addBtn:hover {
   cursor: pointer;
+  color: white;
+  background-color: #f7ab03;
 }
 
 .details {
@@ -208,13 +364,15 @@ padding: 50px;}
   margin-top: 10px;
   text-align: center;
   font-weight: bold;
-  color: white;
-  background-color: #f7ab03;
+  color: black;
+  background-color: #a5a5a5;
   border-radius: 5px;
 }
 
 .addBtn-details:hover {
   cursor: pointer;
+  color: white;
+  background-color: #f7ab03;
 }
 
 .details:after{

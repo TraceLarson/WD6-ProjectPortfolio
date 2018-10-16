@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
 
 var ItemSchema = new mongoose.Schema ({
   imagePath: {type: String, required: true},
@@ -10,4 +10,4 @@ var ItemSchema = new mongoose.Schema ({
   reviews: [{type: mongoose.Schema.Types.ObjectId, ref: 'Review'}]
 });
 
-module.exports = mongoose.model('Item', ItemSchema);
+module.exports = mongoose.model('Item', ItemSchema)

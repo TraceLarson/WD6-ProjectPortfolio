@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class Footer extends Component {
   render(){
@@ -27,4 +27,4 @@ class Footer extends Component {
   }
 }
 
-export default Footer;
+export default Footer

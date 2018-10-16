@@ -1,75 +1,71 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import './App.css';
+import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
+import axios from 'axios'
+import './App.css'
+import Header from './components/header'
+import Home from './components/home'
+import Login from './components/login'
+import Register from './components/register'
+import Show from './components/show'
+import Footer from './components/footer'
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super()
     this.state = {
-      items: []
+      loggedIn: false,
+      email: null
     }
+
+    this.getUser = this.getUser.bind(this)
+    this.componentDidMount = this.componentDidMount.bind(this)
+    this.updateUser = this.updateUser.bind(this)
   }
 
   componentDidMount() {
-    axios.get('/api/item')
-      .then(res => {
-        this.setState({ items: res.data });
-        console.log(this.state.items)
-      })
+    this.getUser()
+  }
+
+  updateUser (userObject) {
+    this.setState(userObject)
+  }
+
+  getUser() {
+    axios.get('/user/').then(response => {
+      console.log(response.data)
+      if (response.data.user) {
+        console.log('Get User: There is a user saved in the server session: ')
+
+        this.setState({
+          loggedIn: true,
+          email: response.data.user.email
+        })
+      } else {
+        this.setState({
+          loggedIn: false,
+          email: null
+        })
+      }
+    })
   }
 
   render() {
     return (
       <div>
-        <div id="carousel">
-          <div className="carousel slide">
-            <ol className="carousel-indicators">
-              <li data-target="#carousel-example-generic" data-slide-to="0" className="active"></li>
-              <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-              <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-            </ol>
-
-          <div className="carousel-inner">
-              <div className="item active">
-                <img src="images/assassins-creed-odyssey.png" alt="Slide 1" className="carImg" />
-              </div>
-
-              <div className="item">
-                <img src="images/Shadow-of-the-tomb-raider.png" alt="Slide 2" className="carImg" />
-              </div>
-
-              <div className="item">
-                <img src="images/destiny-2.png" alt="Slide 3" className="carImg" />
-              </div>
-          </div>
-          <a className="left carousel-control" href="#carousel" data-slide="prev">
-            <span className="icon-prev"></span>
-          </a>
-          <a className="right carousel-control" href="#carousel" data-slide="next">
-            <span className="icon-next"></span>
-          </a>
-        </div>
+        <Header updateUser={this.updateUser} loggedIn={this.state.loggedIn} loggedUser={this.state.email} />
+        <Route exact path='/' component={Home} />
+        <Route
+          path="/login"
+          render={() =>
+            <Login
+              updateUser={this.updateUser}
+            />}
+        />
+        <Route path='/register' component={Register} />
+        <Route path='/show/:id' component={Show} />
+        <Footer />
       </div>
-      <div className='wrapper'>
-        <h1 className='section-header'>Best Sellers</h1>
-        {this.state.items.map(item =>
-          <div className='game' key={item._id}>
-            <Link to={`/show/${item._id}`}><img src={item.imagePath} alt='item' className='image-responsive'/></Link>
-            <div className='caption'>
-              <h3>{item.title}</h3>
-              <p className='description'>{item.description}</p>
-              <p className="releaseDate">Release Date: {item.releaseDate}</p>
-              <div class="clearfix">
-                <div className='price pull-left'>Price: ${item.price}</div>
-              </div>
-            </div>
-            <div className='addBtn'><Link to={`/addToCart/${item._id}`}></Link>Add To Cart</div>
-          </div>
-        )}
-      </div>
-    </div>
-    );
+    )
   }
 }
 

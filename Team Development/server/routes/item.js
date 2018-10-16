@@ -1,13 +1,12 @@
-const express = require('express');
-const router = express.Router();
-const mongoose = require('mongoose');
-const Item = require('../models/item.js');
+const express = require('express')
+const router = express.Router()
+const Item = require('../models/item.js')
 
 // Get all items
 router.get('/', (req, res, next) => {
   Item.find((err, items) => {
-    if (err) return next(err);
-    res.json(items);
+    if (err) return next(err)
+    res.json(items)
   })
 })
 
@@ -24,4 +23,4 @@ router.get('/:id', (req, res, next) => {
   // });
 });
 
-module.exports = router;
+module.exports = router
