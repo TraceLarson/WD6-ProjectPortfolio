@@ -16,7 +16,7 @@ class Header extends Component {
       if (response.status === 200) {
         this.props.updateUser({
           loggedIn: false,
-          email: null
+          email: null,
         })
       }
     }).catch(error => {
@@ -53,9 +53,9 @@ class Header extends Component {
                 <ul className="dropdown-menu">
                   {loggedIn ? (
                       <div className='drop-tab'>
-                        <Link to="#"><li className='accnt-link'>Account Details</li></Link>
+                        <Link to="/account"><li className='accnt-link'>Account Details</li></Link>
                         <li role="separator" className="divider"></li>
-                        <Link to="#" onClick={this.logout}><li className='accnt-link'>Logout</li></Link>
+                        <Link to="/" onClick={this.logout}><li className='accnt-link'>Logout</li></Link>
                       </div>
                     ) : (
                       <div className='drop-tab'>

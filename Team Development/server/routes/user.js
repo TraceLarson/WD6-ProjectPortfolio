@@ -71,6 +71,22 @@ router.get('/', (req, res, next) => {
     }
 })
 
+//User account Details
+router.get('/account', (req, res, next) => {
+  console.log(req.user)
+  if(req.user){
+    User.findById(req.user.id).exec((err, user) => {
+  		if (err) return next(err);
+      res.json(user);
+  	});
+  }
+  else {
+    res.json({
+      error: 'noUserLogged'
+    })
+  }
+})
+
 //Logout User
 router.post('/logout', (req, res) => {
     if (req.user) {

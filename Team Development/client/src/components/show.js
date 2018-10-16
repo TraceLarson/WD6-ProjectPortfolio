@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 import axios from 'axios';
 import UserReviews from './UserReviews'
 
@@ -45,7 +45,6 @@ class Show extends Component {
 							Cart
 						</div>
 					</div>
-
 				</div>
 				<div className={'details'}>
 					<h2>User Reviews</h2>
