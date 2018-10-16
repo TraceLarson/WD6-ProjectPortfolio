@@ -12,10 +12,15 @@ router.get('/', (req, res, next) => {
 
 // Get item by id
 router.get('/:id', (req, res, next) => {
-  Item.findById(req.params.id, (err, item) => {
-    if (err) return next(err)
-    res.json(item)
-  });
+	Item.findById(req.params.id).populate('reviews').exec((err, item) => {
+		if (err) return next(err);
+		res.json(item);
+	});
+  // updated to use .populare
+  // Item.findById(req.params.id, (err, item) => {
+  //   if (err) return next(err);
+  //   res.json(item);
+  // });
 });
 
 module.exports = router

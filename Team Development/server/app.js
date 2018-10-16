@@ -11,6 +11,7 @@ const CONNECTION_URI = process.env.MONGODB_URI || 'mongodb://localhost/gamedrop'
 const index = require('./routes/index')
 const user = require('./routes/user')
 const item = require('./routes/item')
+const reviews = require('./routes/reviews')
 
 
 // Configure Body Parser
@@ -45,6 +46,7 @@ app.use(session({secret: 'wd6', store: store, saveUninitialized: false, resave: 
 //express-validator
 app.use(expressValidator());
 
+
 //Passport
 app.use(passport.initialize())
 app.use(passport.session())
@@ -58,6 +60,7 @@ app.get('/', function(req, res){
 app.use('/', index)
 app.use('/user', user)
 app.use('/api/item', item)
+app.use('/reviews', reviews)
 
 
 
