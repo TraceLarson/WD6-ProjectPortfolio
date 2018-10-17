@@ -83,7 +83,7 @@ class UserReviews extends Component {
 				<Review key={review._id} _id={review._id} user={review.user} message={review.message}/>
 			)
 		})
-
+		
 		const showButton = this.state.currentUser === 'Anonymous' || !this.state.currentUser ? '' : (
 			<Button bsStyle="primary" bsSize="large" onClick={this.toggle}>
 				Write a review

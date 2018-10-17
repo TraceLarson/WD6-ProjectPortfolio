@@ -15,12 +15,15 @@ class Home extends Component {
   componentDidMount() {
     axios.get('/item')
       .then(res => {
-        this.setState({ items: res.data })
+        if (!res.data.err) {
+          this.setState({
+            items: res.data.items
+          })
+        }
       })
   }
 
   addToCart(id) {
-    console.log('TEST: ' + id)
     axios.get('/item/addToCart/'+ id)
 			.then(response => {
 				if (!response.data.error) {
@@ -80,7 +83,7 @@ class Home extends Component {
                 <div className='price pull-left'>Price: ${item.price}</div>
               </div>
             </div>
-            <Link to={'#'}><div className='addBtn' onClick={() => this.addToCart(item._id)}>Add To Cart</div></Link>
+            <Link to={'#'} style={{ textDecoration: 'none' }}><div className='addBtn' onClick={() => this.addToCart(item._id)}>Add To Cart</div></Link>
           </div>
         )}
       </div>

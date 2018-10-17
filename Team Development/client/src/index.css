@@ -4,6 +4,10 @@ body {
   overflow-x: hidden;
 }
 
+a, u, link {
+    text-decoration: none;
+}
+
 #logo1 {
   height: 80%;
   margin-left: 55px;
@@ -313,6 +317,11 @@ clear: both;}
   padding: 15px;
   border-radius: 0;
   clear: both;
+  text-decoration: none;
+}
+
+.addBtn a {
+  text-decoration: none;
 }
 
 .addBtn:hover {
@@ -391,6 +400,11 @@ visibility: hidden;
 display: block;
 height: 0;
 clear: both;
+}
+
+.cart-items, .no-items {
+  min-height: 550px;
+  padding-top: 50px;
 }
 
 footer {
