@@ -7,15 +7,21 @@ class Header extends Component {
   constructor() {
     super()
     this.state = {
-      cartQty: null
+      cartQty: null,
     }
     this.logout = this.logout.bind(this)
+  }
+
+  componentDidMount() {
+    console.log(this.props.loadCart) 
+    this.setState({
+      cartQty: this.props.getCartQty
+    })
   }
 
   logout(event) {
     event.preventDefault()
     axios.post('/user/logout').then(response => {
-      console.log(response.data)
       if (response.status === 200) {
         this.props.updateUser({
           loggedIn: false,
@@ -28,7 +34,6 @@ class Header extends Component {
   }
 
   render(){
-    const loggedIn = this.props.loggedIn
     return (
       <nav className="navbar navbar-default">
           <div className="container-fluid">
@@ -39,24 +44,28 @@ class Header extends Component {
                   <span className="icon-bar"></span>
                   <span className="icon-bar"></span>
               </button>
-              <a className="navbar-brand" href="/"><img id="logo1" src="images/Logo1.png" alt='logo1'/><img id="logo2" src="images/gameDROP.png" alt='logo2'/></a>
+              <a className="navbar-brand" href="/"><img id="logo1" src="/images/Logo1.png" alt='logo1'/><img id="logo2" src="/images/gameDROP.png" alt='logo2'/></a>
           </div>
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav navbar-right">
               <li>
-                <Link to='#' id="cart-link">
-                  <i className="fa fa-shopping-cart" aria-hidden="true"></i>Shopping Cart
-                  <span className='badge'> {this.props.getCartQty} </span>
+                <Link to='/cart' id="cart-link">
+                  <i className="fa fa-shopping-cart" aria-hidden="true"></i> Shopping Cart
+                  {this.props.loadCart ? (
+                      <span className='badge'> {this.props.getCartQty} </span>
+                  ) : (
+                    <span></span>
+                  )}
                 </Link>
               </li>
               <li className="dropdown">
-              {loggedIn ? (
+              {this.props.loggedIn ? (
                 <Link to="#" id="accnt-toggle" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i className="fa fa-user" aria-hidden="true"></i> {this.props.loggedUser} <span className="caret"></span></Link>
               ) : (
                 <Link to="#" id="accnt-toggle" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i className="fa fa-user" aria-hidden="true"></i> Your Account <span className="caret"></span></Link>
               )}
                 <ul className="dropdown-menu">
-                  {loggedIn ? (
+                  {this.props.loggedIn ? (
                       <div className='drop-tab'>
                         <Link to="/account"><li className='accnt-link'>Account Details</li></Link>
                         <li role="separator" className="divider"></li>

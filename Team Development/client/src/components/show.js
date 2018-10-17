@@ -29,7 +29,6 @@ class Show extends Component {
     axios.get('/item/addToCart/'+ id)
 			.then(response => {
 				if (!response.data.error) {
-          //Send updated cart qty to header component
 					this.props.updateCartQty({
 						qty: response.data.totalQty
 					})
@@ -56,7 +55,7 @@ class Show extends Component {
 						<p className='description-details'>{this.state.item.description}</p>
 						<p className="release-details">Release Date: {this.state.item.releaseDate}</p>
 						<div className='price-details'>Price: ${this.state.item.price}</div>
-						<Link to={'#'}><div className='addBtn-details' onClick={() => this.addToCart(this.state.item._id)}>Add To Cart</div></Link>
+						<Link to={'#'} style={{ textDecoration: 'none' }}><div className='addBtn-details' onClick={() => this.addToCart(this.state.item._id)}>Add To Cart</div></Link>
 					</div>
 				</div>
 				<div className={'details'}>

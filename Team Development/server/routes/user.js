@@ -62,12 +62,6 @@ router.post('/login', (req, res, next) => {
 
 //Get logged user for session
 router.get('/', (req, res, next) => {
-    //passport.serializeUser
-    console.log('User id saved in req.session.passport.user on login')
-    console.log(req.session.passport.user)
-    //passport.deserializeUser
-    console.log('User object available via req.user')
-    console.log(req.user)
     if (req.user) {
         res.json({ user: req.user })
     } else {

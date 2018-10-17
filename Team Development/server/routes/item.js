@@ -1,13 +1,19 @@
 const express = require('express')
 const router = express.Router()
+const mongoose = require('mongoose')
 const Item = require('../models/item.js')
 const Cart = require('../models/cart.js')
 
-// Get all items
+// Get all items and shopping cart qty
 router.get('/', (req, res, next) => {
   Item.find((err, items) => {
     if (err) return next(err)
-    res.json(items)
+    else if (!req.session.cart) {
+      res.json({items: items})
+    }
+    else {
+      res.json({items: items, totalQty: req.session.cart.totalQty})
+    }
   })
 })
 
@@ -26,22 +32,55 @@ router.get('/:id', (req, res, next) => {
 
 //Add item to shopping cart
 router.get('/addToCart/:id', (req, res, next) => {
+  let itemId = req.params.id
   let cart = new Cart(req.session.cart ? req.session.cart : {})
 
-  Item.findById(req.params.id, (err, item) => {
+  Item.findOne({ _id: itemId }).exec((err, item) => {
     if (err) {
       return res.json(
         { error: 'Sorry, There was an error adding your item to the shopping cart.' }
       )
     }
     else {
-      cart.add(item, item.id)
+      console.log('***********************')
+      console.log('Item GOING IN CART: ')
+      console.log(item)
+      console.log('***********************')
+      console.log('Item id being passed: ')
+      console.log(item.id)
+      console.log('***********************')
+      cart.add(item, mongoose.Types.ObjectId(item.id))
       req.session.cart = cart
-      console.log('Shopping Cart Items: ')
-      console.log(req.session.cart)
+      // console.log('Shopping Cart Item: ')
       return res.json(req.session.cart)
     }
   })
+})
+
+//Get shopping cart
+router.get('/cart/items', (req, res, next) => {
+
+  console.log('***********************')
+  console.log('GET /CART ')
+  console.log('***********************')
+
+  if (!req.session.cart) {
+    return res.json({ items: null })
+  }
+  console.log('***********************')
+
+  console.log('CART SESSION TO BUILD NEW CART: ')
+  console.log(req.session.cart)
+  console.log('***********************')
+
+  let cart = new Cart(req.session.cart)
+
+  console.log('***********************')
+  console.log('CART TO GENERATE ARRAY: ')
+  console.log(req.session.cart)
+  console.log('***********************')
+
+  return res.json({ items: cart.generateArray(), totalPrice: cart.totalPrice })
 })
 
 module.exports = router
