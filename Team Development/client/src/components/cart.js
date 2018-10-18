@@ -6,6 +6,7 @@ class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
+        totalPrice: 0,
       cartItems: [],
       noItems: false,
       message: ''
@@ -22,7 +23,9 @@ class Cart extends Component {
           })
         }
         else {
+
           this.setState({
+              totalPrice: res.data.totalPrice,
             cartItems: res.data.items
           })
         }
@@ -78,12 +81,12 @@ class Cart extends Component {
           </div>
         <div className='row'>
           <div className='col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3'>
-            <strong>Total: {this.state.cartItems.totalPrice} </strong>
+            <strong>Total: {this.state.totalPrice} </strong>
           </div>
         </div>
         <div className='row'>
           <div className='col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3'>
-            <a type='button' className='btn btn-success' href={'/Checkout'}>Checkout</a>
+            <Link to={`/checkout/${this.state.totalPrice}`} type='button' className='btn btn-success'>Checkout</Link>
           </div>
         </div>
       </div>

@@ -3,11 +3,15 @@ import PropTypes from 'prop-types';
 
 class Checkout extends Component {
 	render() {
+		const {cartTotal} = this.props.match.params
+		let cartArray = []
+
+
 		return (
 			<div className={'row'}>
 				<div className={'col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3'}>
 					<h1>Checkout</h1>
-					<h4>Your Total: $</h4>
+					<h4>Your Total: $ {this.props.match.params.cartTotal}</h4>
 					<form action="/" action={'POST'} id={'checkout-form'} className={'ml-5'}>
 						<div className={'row'}>
 
