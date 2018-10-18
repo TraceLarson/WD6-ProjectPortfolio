@@ -7,24 +7,77 @@ class Cart extends Component {
     super(props);
     this.state = {
       cartItems: [],
-      noItems: false,
-      message: ''
+      totalPrice: null,
+      noItems: true,
+      message: 'The Shopping Cart is Empty'
     }
   }
 
   componentDidMount() {
     axios.get('/item/cart/items')
       .then(res => {
-        if (res.data.items === null) {
+        if (res.data.items.length <= 0) {
           this.setState({
             noItems: true,
-            message: 'The Shopping Cart is Empty'
           })
         }
         else {
           this.setState({
-            cartItems: res.data.items
+            noItems: false,
+            cartItems: res.data.items,
+            totalPrice: res.data.totalPrice
           })
+        }
+      })
+  }
+
+  reduceItem = (id) => {
+    axios.get('/item/reduce/'+id)
+      .then(res => {
+        if (res.data.items === null) {
+          this.setState({
+            noItems: true,
+          })
+        }
+        else {
+          this.setState({
+            cartItems: res.data.items,
+            totalPrice: res.data.totalPrice
+          })
+          this.props.updateCartQty({
+            qty: res.data.items.length
+          })
+          if (res.data.items.length <= 0) {
+            this.setState({
+              noItems: true
+            })
+          }
+        }
+      })
+  }
+
+  removeItem = (id) => {
+    axios.get('/item/removeItem/'+id)
+      .then(res => {
+        console.log(res.data.items)
+        if (res.data.items === null) {
+          this.setState({
+            noItems: true,
+          })
+        }
+        else {
+          this.setState({
+            cartItems: res.data.items,
+            totalPrice: res.data.totalPrice
+          })
+          this.props.updateCartQty({
+            qty: res.data.items.length
+          })
+          if (res.data.items.length <= 0) {
+            this.setState({
+              noItems: true
+            })
+          }
         }
       })
   }
@@ -44,46 +97,37 @@ class Cart extends Component {
   renderCartItems() {
     return (
       <div className='cart-items'>
+        <h1>Shopping Cart</h1>
         <div className='row'>
           <div className='col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3'>
             <ul className='list-group'>
               {this.state.cartItems.map (item =>
-                <li className='list-group-item'>
+                <li id='cart-item' className='list-group-item'>
                   <span className='badge'>{item.qty}</span>
-                  <strong>{item.item.title}</strong>
-                  <span className='label label-success'>{item.price}</span>
-                  {
-                  // <div className='btn-group'>
-                  //   <button className='btn btn-primary btn-xs dropdown-toggle' type='button'>Action<span className='caret'></span></button>
-                  //   <ul className='dropdown'>
-                  //     <li className='dropdown-toggle'><a href='#'>'- 1'</a></li>
-                  //     <li className='dropdown-toggle'><a href='#'>'Remove All'</a></li>
-                  //   </ul>
-                  // </div>
-                  }
-                  <li className="dropdown">
-                    <Link to="#"  className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i aria-hidden="true"></i>Edit Qty <span className="caret"></span></Link>
+                  <img src={item.item.imagePath} alt='item' id='cart-image'/>
+                  <strong id='cart-title'>{item.item.title} </strong>
+                  <span id='cart-price' className='label label-success'>${item.price}</span>
+                  <li id='cart-dropdown' className='dropdown'>
+                    <Link to="#" id='cart-update' className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i aria-hidden="true"></i>Update Qty <span className="caret"></span></Link>
                     <ul className="dropdown-menu">
                           <div className='drop-tab'>
-                            <Link to="/subtract"><li className='accnt-link'>- 1</li></Link>
+                            <li className='reduce' onClick={() => this.reduceItem(item.item._id)}>- 1</li>
                             <li role="separator" className="divider"></li>
-                            <Link to="/removeAll"><li className='accnt-link'>Remove All</li></Link>
+                            <li className='remove' onClick={() => this.removeItem(item.item._id)}>Remove All</li>
                           </div>
                     </ul>
                   </li>
                 </li>
               )}
            </ul>
-          </div>
-          </div>
-        <div className='row'>
-          <div className='col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3'>
-            <strong>Total: {this.state.cartItems.totalPrice} </strong>
+           <div id='cart-total'>
+             <strong>Total: ${this.state.totalPrice} </strong>
+           </div>
           </div>
         </div>
         <div className='row'>
-          <div className='col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3'>
-            <button type='button' className='btn btn-success'>Checkout</button>
+          <div id='checkout' className='col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3'>
+            <button id='checkOut-btn' type='button' className='btn btn-success'>Checkout</button>
           </div>
         </div>
       </div>

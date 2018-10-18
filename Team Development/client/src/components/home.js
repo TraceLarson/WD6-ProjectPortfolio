@@ -74,15 +74,17 @@ class Home extends Component {
         <h1 className='section-header'>Best Sellers</h1>
         {this.state.items.map(item =>
           <div className='game' key={item._id}>
-            <Link to={`/show/${item._id}`}><img src={item.imagePath} alt='item' className='image-responsive'/></Link>
-            <div className='caption'>
-              <h3>{item.title}</h3>
-              <p className='description'>{item.description}</p>
-              <p className="releaseDate">Release Date: {item.releaseDate}</p>
-              <div className="clearfix">
-                <div className='price pull-left'>Price: ${item.price}</div>
+            <Link id='game-link' to={`/show/${item._id}`} style={{ textDecoration: 'none' }}>
+              <img src={item.imagePath} alt='item' className='image-responsive'/>
+              <div className='caption'>
+                <h3>{item.title}</h3>
+                <p className='description'>{item.description}</p>
+                <p className="releaseDate">Release Date: {item.releaseDate}</p>
+                <div className="clearfix">
+                  <div className='price pull-left'>Price: ${item.price}</div>
+                </div>
               </div>
-            </div>
+            </Link>
             <Link to={'#'} style={{ textDecoration: 'none' }}><div className='addBtn' onClick={() => this.addToCart(item._id)}>Add To Cart</div></Link>
           </div>
         )}

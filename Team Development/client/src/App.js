@@ -90,7 +90,7 @@ class App extends Component {
             />
         )}/>
         <Route
-          path="/login"
+          path='/login'
           render={() =>
             <Login
               updateUser={this.updateUser}
@@ -99,7 +99,14 @@ class App extends Component {
         />
         <Route path='/register' component={Register} />
         <Route path='/account' component={AccountDetails} />
-        <Route path='/cart' component={Cart} />
+        <Route
+          path='/cart'
+          render={() =>
+            <Cart
+              updateCartQty={this.updateCartQty}
+            />
+          }
+        />
         <Route
           path='/show/:id'
           render={({ match }) =>
