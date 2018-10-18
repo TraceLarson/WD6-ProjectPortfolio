@@ -42,44 +42,45 @@ router.get('/addToCart/:id', (req, res, next) => {
       )
     }
     else {
-      console.log('***********************')
-      console.log('Item GOING IN CART: ')
-      console.log(item)
-      console.log('***********************')
-      console.log('Item id being passed: ')
-      console.log(item.id)
-      console.log('***********************')
-      cart.add(item, mongoose.Types.ObjectId(item.id))
+      cart.add(item, item.id)
       req.session.cart = cart
-      // console.log('Shopping Cart Item: ')
       return res.json(req.session.cart)
     }
   })
 })
 
-//Get shopping cart
-router.get('/cart/items', (req, res, next) => {
-
-  console.log('***********************')
-  console.log('GET /CART ')
-  console.log('***********************')
-
+//Reduce item qty in cart
+router.get('/reduce/:id', (req, res, next) => {
   if (!req.session.cart) {
     return res.json({ items: null })
   }
-  console.log('***********************')
+  let itemId = req.params.id
+  let cart = new Cart(req.session.cart ? req.session.cart : {})
 
-  console.log('CART SESSION TO BUILD NEW CART: ')
-  console.log(req.session.cart)
-  console.log('***********************')
+  cart.reduce(itemId)
+  req.session.cart = cart;
+  return res.json({ items: cart.generateArray(), totalPrice: cart.totalPrice })
+})
 
+//Remove item qty in cart
+router.get('/removeItem/:id', (req, res, next) => {
+  if (!req.session.cart) {
+    return res.json({ items: null })
+  }
+  let itemId = req.params.id
+  let cart = new Cart(req.session.cart ? req.session.cart : {})
+
+  cart.removeItem(itemId)
+  req.session.cart = cart;
+  return res.json({ items: cart.generateArray(), totalPrice: cart.totalPrice })
+})
+
+//Get shopping cart
+router.get('/cart/items', (req, res, next) => {
+  if (!req.session.cart) {
+    return res.json({ items: null })
+  }
   let cart = new Cart(req.session.cart)
-
-  console.log('***********************')
-  console.log('CART TO GENERATE ARRAY: ')
-  console.log(req.session.cart)
-  console.log('***********************')
-
   return res.json({ items: cart.generateArray(), totalPrice: cart.totalPrice })
 })
 
