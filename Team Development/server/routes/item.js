@@ -59,7 +59,7 @@ router.get('/reduce/:id', (req, res, next) => {
 
   cart.reduce(itemId)
   req.session.cart = cart;
-  return res.json({ items: cart.generateArray(), totalPrice: cart.totalPrice })
+  return res.json({ items: cart.generateArray(), totalPrice: cart.totalPrice, totalQty: cart.totalQty })
 })
 
 //Remove item qty in cart
@@ -72,7 +72,7 @@ router.get('/removeItem/:id', (req, res, next) => {
 
   cart.removeItem(itemId)
   req.session.cart = cart;
-  return res.json({ items: cart.generateArray(), totalPrice: cart.totalPrice })
+  return res.json({ items: cart.generateArray(), totalPrice: cart.totalPrice, totalQty: cart.totalQty })
 })
 
 //Get shopping cart
