@@ -12,6 +12,7 @@ const index = require('./routes/index')
 const user = require('./routes/user')
 const item = require('./routes/item')
 const reviews = require('./routes/reviews')
+const checkout = require('./routes/checkout')
 
 
 // Configure Body Parser
@@ -56,6 +57,7 @@ app.use('/', index)
 app.use('/user', user)
 app.use('/item', item)
 app.use('/reviews', reviews)
+app.use('/checkout', checkout)
 
 
 
