@@ -4,14 +4,13 @@ import PropTypes from 'prop-types';
 class Checkout extends Component {
 	render() {
 		const {cartTotal} = this.props.match.params
-		let cartArray = []
 
 
 		return (
 			<div className={'row'}>
 				<div className={'col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3'}>
 					<h1>Checkout</h1>
-					<h4>Your Total: $ {this.props.match.params.cartTotal}</h4>
+					<h4>Your Total: $ {cartTotal}</h4>
 					<form action="/" action={'POST'} id={'checkout-form'} className={'ml-5'}>
 						<div className={'row'}>
 
@@ -72,7 +71,7 @@ class Checkout extends Component {
 								</div>
 							</div>
 
-							<div className={'col-xs-12'}>
+							<div className={'col-xs-4'}>
 								<div className="form-group">
 									<label className={'badge'} htmlFor="card-expiry-month">Expiration Month</label>
 									<input type="text"
@@ -86,7 +85,7 @@ class Checkout extends Component {
 								</div>
 							</div>
 
-							<div className={'col-xs-12'}>
+							<div className={'col-xs-4'}>
 								<div className="form-group">
 									<label className={'badge'} htmlFor="card-expiry-year">Expiration Year</label>
 									<input type="text"
@@ -100,7 +99,7 @@ class Checkout extends Component {
 								</div>
 							</div>
 
-							<div className={'col-xs-12'}>
+							<div className={'col-xs-4'}>
 								<div className="form-group">
 									<label className={'badge'} htmlFor="card-cvc">CVC</label>
 									<input type="text"
@@ -114,6 +113,10 @@ class Checkout extends Component {
 								</div>
 							</div>
 
+							<div className="col-xs-4">
+								<button type={'submit'} className="btn btn-success">Buy Now</button>
+							</div>
+
 						</div>
 					</form>
 				</div>
@@ -122,6 +125,8 @@ class Checkout extends Component {
 	}
 }
 
-Checkout.propTypes = {};
+Checkout.propTypes = {
+	cartTotal: PropTypes.string
+};
 
 export default Checkout;
