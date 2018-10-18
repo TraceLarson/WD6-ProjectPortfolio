@@ -9,7 +9,7 @@ class Home extends Component {
       items: []
     }
 
-    this.addToCart = this.addToCart.bind(this)
+    // this.addToCart = this.addToCart.bind(this)
   }
 
   componentDidMount() {

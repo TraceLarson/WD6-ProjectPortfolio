@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/user.js')
+const Item = require('../models/item.js')
 const passport = require('../passport')
 
 //Register user
@@ -82,6 +83,52 @@ router.get('/account', (req, res, next) => {
     res.json({
       error: 'noUserLogged'
     })
+  }
+})
+
+//Add item to game radar list
+router.get('/addToRadar/:id', (req, res, next) => {
+  let itemId = req.params.id
+  if (req.user){
+    Item.findOne({ _id: itemId }).exec((err, item) => {
+      if (err) {
+        return res.json(err)
+      }
+      else {
+        User.findByIdAndUpdate(req.user.id, { $push: { gameRadar: item}}, { new: true }, (err, user) => {
+          if (err) {
+            console.log(err);
+            res.json(err)
+          }
+          else{
+            req.user = user;
+            res.json({user: user})
+          }
+        })
+      }
+    })
+  }
+  else {
+    res.json({error: 'no user logged in'})
+  }
+})
+
+//
+router.get('/gameRadar', (req, res, next) => {
+  if (req.user) {
+    Item.find({ _id: {$in: req.user.gameRadar }}).exec((err, items) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        console.log('server items')
+        console.log(items)
+        res.json({items: items})
+      }
+    })
+  }
+  else {
+    res.json({error: 'no user logged in'})
   }
 })
 

@@ -34,7 +34,7 @@ router.get('/:id', (req, res, next) => {
 router.get('/addToCart/:id', (req, res, next) => {
   let itemId = req.params.id
   let cart = new Cart(req.session.cart ? req.session.cart : {})
-
+  console.log(req.user)
   Item.findOne({ _id: itemId }).exec((err, item) => {
     if (err) {
       return res.json(
@@ -59,7 +59,7 @@ router.get('/reduce/:id', (req, res, next) => {
 
   cart.reduce(itemId)
   req.session.cart = cart;
-  return res.json({ items: cart.generateArray(), totalPrice: cart.totalPrice })
+  return res.json({ items: cart.generateArray(), totalPrice: cart.totalPrice, totalQty: cart.totalQty })
 })
 
 //Remove item qty in cart
@@ -72,7 +72,7 @@ router.get('/removeItem/:id', (req, res, next) => {
 
   cart.removeItem(itemId)
   req.session.cart = cart;
-  return res.json({ items: cart.generateArray(), totalPrice: cart.totalPrice })
+  return res.json({ items: cart.generateArray(), totalPrice: cart.totalPrice, totalQty: cart.totalQty })
 })
 
 //Get shopping cart

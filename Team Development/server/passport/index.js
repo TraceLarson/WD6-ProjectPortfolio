@@ -10,7 +10,9 @@ passport.serializeUser((user, done) => {
 //Attach user object to request
 passport.deserializeUser((id, done) => {
 	User.findOne({ _id: id }, (err, user) => {
-		user.password = null
+		if(user){
+			user.password = null
+		}
 		done(null, user)
 	})
 })

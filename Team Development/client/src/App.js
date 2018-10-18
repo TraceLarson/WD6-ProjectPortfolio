@@ -10,6 +10,7 @@ import AccountDetails from './components/accountDetails'
 import Cart from './components/cart'
 import Show from './components/show'
 import UserReviews from './components/UserReviews'
+import GameRadar from './components/gameRadar'
 import Footer from './components/footer'
 
 class App extends Component {
@@ -19,11 +20,11 @@ class App extends Component {
       loggedIn: false,
       email: null,
       loadCart: false,
+      cartItems: [],
       cartQty: null
     }
 
     this.getUser = this.getUser.bind(this)
-    this.componentDidMount = this.componentDidMount.bind(this)
     this.updateUser = this.updateUser.bind(this)
     this.updateCartQty = this.updateCartQty.bind(this)
   }
@@ -104,6 +105,7 @@ class App extends Component {
           render={() =>
             <Cart
               updateCartQty={this.updateCartQty}
+              loggedIn={this.state.loggedIn}
             />
           }
         />
@@ -112,6 +114,16 @@ class App extends Component {
           render={({ match }) =>
             <Show
               match={match}
+              {...this.props}
+              updateCartQty={this.updateCartQty}
+              loggedIn={this.state.loggedIn}
+            />
+          }
+        />
+        <Route
+          path='/gameRadar'
+          render={() =>
+            <GameRadar
               {...this.props}
               updateCartQty={this.updateCartQty}
             />

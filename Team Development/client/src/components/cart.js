@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import axios from 'axios';
+import axios from 'axios'
+import GameRadar from './gameRadar'
 
 class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
       cartItems: [],
+      gameRadar: [],
       totalPrice: null,
       noItems: true,
       message: 'The Shopping Cart is Empty'
@@ -45,7 +47,7 @@ class Cart extends Component {
             totalPrice: res.data.totalPrice
           })
           this.props.updateCartQty({
-            qty: res.data.items.length
+            qty: res.data.totalQty
           })
           if (res.data.items.length <= 0) {
             this.setState({
@@ -60,6 +62,31 @@ class Cart extends Component {
     axios.get('/item/removeItem/'+id)
       .then(res => {
         console.log(res.data.items)
+        if (res.data.items === null) {
+          this.setState({
+            noItems: true,
+          })
+        }
+        else {
+          this.setState({
+            cartItems: res.data.items,
+            totalPrice: res.data.totalPrice
+          })
+          this.props.updateCartQty({
+            qty: res.data.totalQty
+          })
+          if (res.data.items.length <= 0) {
+            this.setState({
+              noItems: true
+            })
+          }
+        }
+      })
+  }
+
+  moveToRadar = (id) => {
+    axios.get('/user/moveToRadar/'+id)
+      .then(res => {
         if (res.data.items === null) {
           this.setState({
             noItems: true,
@@ -90,6 +117,7 @@ class Cart extends Component {
             <h2> {this.state.message} </h2>
           </div>
         </div>
+        <GameRadar />
       </div>
     )
   }
@@ -117,6 +145,13 @@ class Cart extends Component {
                           </div>
                     </ul>
                   </li>
+                  {this.props.loggedIn ? (
+                    <Link to={'#'} style={{ textDecoration: 'none' }}>
+                      <div className='addToRadar' onClick={() => this.moveToRadar(this.state.item._id)}>Add To Radar</div>
+                    </Link>
+                  ):(
+                    <span></span>
+                  )}
                 </li>
               )}
            </ul>
@@ -130,6 +165,7 @@ class Cart extends Component {
             <button id='checkOut-btn' type='button' className='btn btn-success'>Checkout</button>
           </div>
         </div>
+        <GameRadar />
       </div>
     )
   }

@@ -29,7 +29,7 @@ var db = mongoose.connection
 
 // Instantiate MongoStore
 var store = new MongoStore ({
-  mongooseConnection: db,
+  uri: CONNECTION_URI,
   collection: 'mySession'
 })
 
@@ -40,7 +40,6 @@ db.on('error', console.error.bind(console, 'MongoDB connection error'))
 db.once('open', () => console.log('DATABASE CONNECTED SUCCESSFULLY'))
 
 //Config session
-//using connect-mongodb-session as connect-mongo has a known deprciation warning: https://github.com/jdesboeufs/connect-mongo/issues/297
 app.use(session({secret: 'wd6', store: store, saveUninitialized: false, resave: false}))
 
 //express-validator
