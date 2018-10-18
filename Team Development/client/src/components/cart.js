@@ -83,7 +83,7 @@ class Cart extends Component {
         </div>
         <div className='row'>
           <div className='col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3'>
-            <button type='button' className='btn btn-success'>Checkout</button>
+            <a type='button' className='btn btn-success' href={'/Checkout'}>Checkout</a>
           </div>
         </div>
       </div>
