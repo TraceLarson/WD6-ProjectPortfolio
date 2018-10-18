@@ -45,7 +45,7 @@ class Cart extends Component {
             totalPrice: res.data.totalPrice
           })
           this.props.updateCartQty({
-            qty: res.data.items.length
+            qty: res.data.totalQty
           })
           if (res.data.items.length <= 0) {
             this.setState({
@@ -71,7 +71,7 @@ class Cart extends Component {
             totalPrice: res.data.totalPrice
           })
           this.props.updateCartQty({
-            qty: res.data.items.length
+            qty: res.data.totalQty
           })
           if (res.data.items.length <= 0) {
             this.setState({
