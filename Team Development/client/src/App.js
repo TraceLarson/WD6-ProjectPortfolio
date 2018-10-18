@@ -9,8 +9,9 @@ import Register from './components/register'
 import AccountDetails from './components/accountDetails'
 import Cart from './components/cart'
 import Show from './components/show'
-import UserReviews from './components/UserReviews'
+// import UserReviews from './components/UserReviews'
 import Footer from './components/footer'
+import Checkout from './components/Checkout'
 
 class App extends Component {
   constructor() {
@@ -110,7 +111,7 @@ class App extends Component {
             />
           }
         />
-        <Route path={'/reviews'} component={UserReviews}/>
+        <Route path={'/checkout'} component={Checkout}/>
         <Footer />
       </div>
     )
