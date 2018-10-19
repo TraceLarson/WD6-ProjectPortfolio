@@ -13,7 +13,7 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.loadCart) 
+    console.log(this.props.loadCart)
     this.setState({
       cartQty: this.props.getCartQty
     })
@@ -68,6 +68,8 @@ class Header extends Component {
                   {this.props.loggedIn ? (
                       <div className='drop-tab'>
                         <Link to="/account"><li className='accnt-link'>Account Details</li></Link>
+                        <li role="separator" className="divider"></li>
+                        <Link to="/gameRadar"><li className='accnt-link'>Game Radar</li></Link>
                         <li role="separator" className="divider"></li>
                         <Link to="/" onClick={this.logout}><li className='accnt-link'>Logout</li></Link>
                       </div>

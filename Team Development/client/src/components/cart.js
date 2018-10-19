@@ -16,6 +16,11 @@ class Cart extends Component {
   }
 
   componentDidMount() {
+    this.getCartItems()
+  }
+
+  getCartItems = () => {
+    console.log('GETTING CART ITEMS')
     axios.get('/item/cart/items')
       .then(res => {
         if (res.data.items.length <= 0) {
@@ -27,8 +32,33 @@ class Cart extends Component {
           this.setState({
             noItems: false,
             cartItems: res.data.items,
-            totalPrice: res.data.totalPrice
+            totalPrice: res.data.totalPrice,
           })
+        }
+      })
+  }
+
+  increaseItem = (id) => {
+    axios.get('/item/increase/'+id)
+      .then(res => {
+        if (res.data.items === null) {
+          this.setState({
+            noItems: true,
+          })
+        }
+        else {
+          this.setState({
+            cartItems: res.data.items,
+            totalPrice: res.data.totalPrice,
+          })
+          this.props.updateCartQty({
+            qty: res.data.totalQty
+          })
+          if (res.data.items.length <= 0) {
+            this.setState({
+              noItems: true
+            })
+          }
         }
       })
   }
@@ -44,7 +74,7 @@ class Cart extends Component {
         else {
           this.setState({
             cartItems: res.data.items,
-            totalPrice: res.data.totalPrice
+            totalPrice: res.data.totalPrice,
           })
           this.props.updateCartQty({
             qty: res.data.totalQty
@@ -61,7 +91,6 @@ class Cart extends Component {
   removeItem = (id) => {
     axios.get('/item/removeItem/'+id)
       .then(res => {
-        console.log(res.data.items)
         if (res.data.items === null) {
           this.setState({
             noItems: true,
@@ -70,7 +99,7 @@ class Cart extends Component {
         else {
           this.setState({
             cartItems: res.data.items,
-            totalPrice: res.data.totalPrice
+            totalPrice: res.data.totalPrice,
           })
           this.props.updateCartQty({
             qty: res.data.totalQty
@@ -84,8 +113,8 @@ class Cart extends Component {
       })
   }
 
-  moveToRadar = (id) => {
-    axios.get('/user/moveToRadar/'+id)
+  dropToRadar = (id) => {
+    axios.get('/user/dropToRadar/'+id)
       .then(res => {
         if (res.data.items === null) {
           this.setState({
@@ -95,11 +124,14 @@ class Cart extends Component {
         else {
           this.setState({
             cartItems: res.data.items,
-            totalPrice: res.data.totalPrice
+            totalPrice: res.data.totalPrice,
           })
           this.props.updateCartQty({
-            qty: res.data.items.length
+            qty: res.data.totalQty
           })
+          //
+          this.props.updateGameRadar()
+          //
           if (res.data.items.length <= 0) {
             this.setState({
               noItems: true
@@ -111,13 +143,23 @@ class Cart extends Component {
 
   renderEmptyCart() {
     return (
-      <div className='no-items'>
-        <div className='row'>
-          <div className='col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3'>
-            <h2> {this.state.message} </h2>
+      <div>
+        <div className='no-items'>
+          <div className='row'>
+            <div className='col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3'>
+              <h2> {this.state.message} </h2>
+              <p>Find Some Games To</p>
+            </div>
           </div>
         </div>
-        <GameRadar />
+        {this.props.loggedIn ? (
+          <GameRadar
+            {...this.props}
+            getCartItems={this.getCartItems}
+          />
+        ):(
+          <span></span>
+        )}
       </div>
     )
   }
@@ -139,6 +181,8 @@ class Cart extends Component {
                     <Link to="#" id='cart-update' className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i aria-hidden="true"></i>Update Qty <span className="caret"></span></Link>
                     <ul className="dropdown-menu">
                           <div className='drop-tab'>
+                            <li className='increase' onClick={() => this.increaseItem(item.item._id)}>+ 1</li>
+                            <li role="separator" className="divider"></li>
                             <li className='reduce' onClick={() => this.reduceItem(item.item._id)}>- 1</li>
                             <li role="separator" className="divider"></li>
                             <li className='remove' onClick={() => this.removeItem(item.item._id)}>Remove All</li>
@@ -147,7 +191,7 @@ class Cart extends Component {
                   </li>
                   {this.props.loggedIn ? (
                     <Link to={'#'} style={{ textDecoration: 'none' }}>
-                      <div className='addToRadar' onClick={() => this.moveToRadar(this.state.item._id)}>Add To Radar</div>
+                      <div className='dropToRadar' onClick={() => this.dropToRadar(item.item._id)}>Drop To Radar</div>
                     </Link>
                   ):(
                     <span></span>
@@ -165,7 +209,14 @@ class Cart extends Component {
             <button id='checkOut-btn' type='button' className='btn btn-success'>Checkout</button>
           </div>
         </div>
-        <GameRadar />
+        {this.props.loggedIn ? (
+          <GameRadar
+            {...this.props}
+            getCartItems={this.getCartItems}
+          />
+        ):(
+          <span></span>
+        )}
       </div>
     )
   }

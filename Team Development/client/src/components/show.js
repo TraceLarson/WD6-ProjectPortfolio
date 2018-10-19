@@ -15,6 +15,7 @@ class Show extends Component {
 
 	componentDidMount() {
 		this.getItem()
+		this.props.checkGameRadar(this.props.match.params.id)
 	}
 
 	getItem = () => {
@@ -44,6 +45,7 @@ class Show extends Component {
 			.then(response => {
 				if (!response.data.err) {
 					console.log(response.data.user)
+					this.props.checkGameRadar(this.props.match.params.id)
         }
         else {
           console.log(response.data.err)
@@ -70,12 +72,14 @@ class Show extends Component {
 						<Link to={'#'} style={{ textDecoration: 'none' }}>
 							<div className='addBtn-details' onClick={() => this.addToCart(this.state.item._id)}>Add To Cart</div>
 						</Link>
-						{this.props.loggedIn ? (
-							<Link to={'#'} style={{ textDecoration: 'none' }}>
-								<div className='addToRadar' onClick={() => this.addToRadar(this.state.item._id)}>Add To Radar</div>
-							</Link>
-						):(
-							<span></span>
+						{this.props.loggedIn && !this.props.onRadar ?
+								<Link to={'#'} style={{ textDecoration: 'none' }}>
+									<div className='addToRadar' onClick={() => this.addToRadar(this.state.item._id)}>Add To Radar</div>
+								</Link>
+						: ( this.props.loggedIn ?
+								<div className='radar-icon'></div>
+						:
+								<span></span>
 						)}
 					</div>
 				</div>

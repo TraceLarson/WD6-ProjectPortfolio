@@ -6,35 +6,23 @@ class GameRadar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: this.props.gameRadar || []
     }
-
-    this.addToCart = this.addToCart.bind(this)
   }
 
   componentDidMount() {
-    axios.get('/user/gameRadar')
-      .then(res => {
-        if (!res.data.error) {
-          this.setState({
-            items: res.data.items
-          })
-        }
-        else {
-          console.log(res.data.error)
-        }
-      })
+    this.props.updateGameRadar()
   }
 
-  addToCart(id) {
-    axios.get('/item/addToCart/'+id)
+  addFromRadar(id) {
+    axios.get('/user/addFromRadar/'+id)
 			.then(response => {
-        console.log(response.data.totalQty)
 				if (!response.data.error) {
-          //Send update cart qty to header component
           this.props.updateCartQty({
-            qty: response.data.totalQty
+            qty: response.data.cart.totalQty
           })
+          this.props.updateGameRadar()
+          this.props.getCartItems()
         }
         else {
           console.log(response.data.error)
@@ -42,32 +30,54 @@ class GameRadar extends Component {
 			})
   }
 
-  dropItem(id) {
-    axios.get('/user/dropItem/'+ id)
+  dropFromRadar(id) {
+    axios.get('/user/dropFromRadar/'+id)
 			.then(response => {
 				if (!response.data.error) {
-
+          this.props.updateGameRadar()
         }
         else {
-
+          console.log(response.data.error)
         }
 			})
   }
 
-  render() {
+  renderEmptyRadar = () => {
+    return (
+      <div className='empty-radar'>
+        <h1>Game Radar</h1>
+        <h2>Add Games To Keep Them On Your Radar</h2>
+        <div className='radar-empty-icon'></div>
+      </div>
+    )
+  }
+
+  renderGameRadar = () => {
     return (
       <div className='game-radar'>
         <h1>Game Radar</h1>
-        {this.state.items.map(item =>
-        <div className='radar'>
+        {this.props.gameRadar.map(item =>
+        <div className='radar-row'>
           <img  src={item.imagePath} alt='item' className='radar-img'/>
-          <p className='radar-title'>{item.title}</p>
-          <p className='radar-title'>{item.price}</p>
-          <Link to={'#'} style={{ textDecoration: 'none' }}><div className='radar-addbtn' onClick={() => this.addToCart(item._id)}>Add To Cart</div></Link>
+          <div className='radar-info'>
+            <p className='radar-title'>{item.title}</p>
+            <p className='radar-price'>Price: ${item.price}</p>
+          </div>
+          <Link to={'#'} style={{ textDecoration: 'none' }}><div className='radar-addBtn' onClick={() => this.addFromRadar(item._id)}>Add To Cart</div></Link>
+          <Link to={'#'} style={{ textDecoration: 'none' }}><div className='radar-dropBtn' onClick={() => this.dropFromRadar(item._id)}>Drop Off Radar</div></Link>
         </div>
       )}
       </div>
     )
+  }
+
+  render() {
+    if (this.props.gameRadar.length <= 0) {
+      return this.renderEmptyRadar()
+    }
+    else{
+      return this.renderGameRadar()
+    }
   }
 }
 

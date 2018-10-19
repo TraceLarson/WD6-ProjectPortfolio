@@ -1,8 +1,10 @@
 const express = require('express')
 const router = express.Router()
+const mongoose = require('mongoose')
 const User = require('../models/user.js')
 const Item = require('../models/item.js')
 const passport = require('../passport')
+const Cart = require('../models/cart.js')
 
 //Register user
 router.post('/', (req, res) => {
@@ -113,7 +115,136 @@ router.get('/addToRadar/:id', (req, res, next) => {
   }
 })
 
-//
+//Add item to cart from gameRadar list
+router.get('/addFromRadar/:id', (req, res, next) => {
+  let itemId = req.params.id
+  let cart = new Cart(req.session.cart ? req.session.cart : {})
+
+  if (req.user) {
+    Item.findOne({ _id: itemId }).exec((err, item) => {
+      if (err) {
+        return res.json({ error: 'Sorry, There was an error adding your item to the shopping cart.' })
+      }
+      else {
+        radar = req.user.gameRadar
+
+        let i = radar.indexOf(itemId);
+        if (i > -1) {
+          radar.splice(i, 1);
+        }
+
+        User.findByIdAndUpdate(req.user.id, { $set: { gameRadar: radar}}, { new: true }, (err, user) => {
+          if (err) {
+            console.log(err);
+          }
+          else {
+            req.user = user;
+            cart.add(item, item.id)
+            req.session.cart = cart
+            return res.json({ user: user, cart: cart })
+          }
+        })
+      }
+    })
+  }
+  else {
+    return res.json({error: 'no user logged in'})
+  }
+})
+
+//Drop item to game radar from shopping cart
+router.get('/dropToRadar/:id', (req, res, next) => {
+  let itemId = req.params.id
+  if (req.user){
+    Item.findOne({ _id: itemId }).exec((err, item) => {
+      if (err) {
+        return res.json(err)
+      }
+      else {
+        User.findByIdAndUpdate(req.user.id, { $push: { gameRadar: item}}, { new: true }, (err, user) => {
+          if (err) {
+            console.log(err);
+            res.json(err)
+          }
+          else{
+            if (!req.session.cart) {
+              return res.json({ items: null })
+            }
+            let itemId = req.params.id
+            let cart = new Cart(req.session.cart ? req.session.cart : {})
+
+            cart.removeItem(itemId)
+            req.session.cart = cart;
+            req.user = user;
+            return res.json({user: user, items: cart.generateArray(), totalPrice: cart.totalPrice, totalQty: cart.totalQty })
+          }
+        })
+      }
+    })
+  }
+  else {
+    res.json({error: 'no user logged in'})
+  }
+})
+
+router.get('/dropFromRadar/:id', (req, res, next) => {
+  let itemId = req.params.id
+  if (req.user) {
+    radar = req.user.gameRadar
+
+    let i = radar.indexOf(itemId);
+    if (i > -1) {
+      radar.splice(i, 1);
+    }
+
+    User.findByIdAndUpdate(req.user.id, { $set: { gameRadar: radar}}, { new: true }, (err, user) => {
+      if (err) {
+        console.log(err);
+        res.json({error: 'There was an error removing the item'})
+      }
+      else {
+        req.user = user;
+        return res.json({ user: user })
+      }
+    })
+  }
+  else {
+    res.json({error: 'no user logged in'})
+  }
+})
+
+//Check if item is on user gameRadar list
+router.get('/checkGameRadar/:id', (req, res, next) => {
+  console.log('SERVER-SIDE CHECKING')
+  console.log(req.user.gameRadar)
+  if (req.user) {
+    if (!req.user.gameRadar.length <= 0){
+
+      radar = req.user.gameRadar
+
+      let i = radar.indexOf(req.params.id);
+      if (i > -1) {
+        console.log('GAME ID FOUND!')
+        return res.json({ onRadar: true })
+      }
+      else {
+        console.log('GAME ID NOT ON RADAR!')
+        return res.json({ onRadar: false })
+      }
+    }
+    else {
+      console.log('NO GAMES ON USER RADAR')
+      return res.json({ onRadar: false })
+    }
+  }
+  else {
+    console.log('NO USER FOUND')
+    res.json({error: 'no user logged in'})
+  }
+})
+
+
+//get gameRadar
 router.get('/gameRadar', (req, res, next) => {
   if (req.user) {
     Item.find({ _id: {$in: req.user.gameRadar }}).exec((err, items) => {
@@ -121,8 +252,6 @@ router.get('/gameRadar', (req, res, next) => {
         console.log(err)
       }
       else {
-        console.log('server items')
-        console.log(items)
         res.json({items: items})
       }
     })
