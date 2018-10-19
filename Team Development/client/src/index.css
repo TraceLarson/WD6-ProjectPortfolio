@@ -605,7 +605,17 @@ clear: both;
 }
 
 /* Cart */
-.cart-items, .no-items {
+.cart-items {
+  min-height: 550px;
+  max-width: 1250px;
+  padding: 5px;
+  margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;}
+
+
+
+.no-items {
   min-height: 200px;
   max-width: 1250px;
   padding: 5px;
@@ -614,17 +624,14 @@ clear: both;
   margin-right: auto;
   margin-bottom: 25px;
   border: 1px solid #a5a5a5;
-  border-radius: 10px;}
-
-
-
-.no-items {
+  border-radius: 10px;
   background-image: url('/images/gameDROP3.png');
   background-position: center bottom;
   background-repeat: no-repeat;
-  background-size: 300px;}
+  background-size: 300px;
+  margin-bottom: 100px;}
   @media (min-width: 700px) {
-    .cart-items, .no-items {
+    .no-items {
       background-size: 500px;
       min-height: 250px;}}
 

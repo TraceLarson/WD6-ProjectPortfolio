@@ -143,7 +143,7 @@ class Cart extends Component {
 
   renderEmptyCart() {
     return (
-      <div>
+      <div className='cart-items'>
         <div className='no-items'>
           <div className='row'>
             <div className='col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3'>
