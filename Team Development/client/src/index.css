@@ -646,7 +646,9 @@ clear: both;
 
 #cart-item {
   background-color: #181B1B;
-  border: 2px double #f7ab03;
+  border: 4px double #f7ab03;
+  border-radius: 5px;
+  margin-bottom: 5px;
 }
 
 #cart-image {
