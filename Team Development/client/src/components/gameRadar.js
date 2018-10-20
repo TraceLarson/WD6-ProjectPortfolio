@@ -29,7 +29,7 @@ class GameRadar extends Component {
         }
 			})
   }
-
+  
   dropFromRadar(id) {
     axios.get('/user/dropFromRadar/'+id)
 			.then(response => {
@@ -41,7 +41,7 @@ class GameRadar extends Component {
         }
 			})
   }
-
+  
   renderEmptyRadar = () => {
     return (
       <div className='empty-radar'>
@@ -82,3 +82,6 @@ class GameRadar extends Component {
 }
 
 export default GameRadar
+
+
+
