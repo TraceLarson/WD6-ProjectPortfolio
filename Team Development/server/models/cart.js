@@ -16,6 +16,13 @@ module.exports = function Cart(oldCart) {
     this.totalPrice += storedItem.item.price
   }
 
+  this.increase = (id) => {
+    this.items[id].qty++;
+    this.items[id].price += this.items[id].item.price
+    this.totalQty++
+    this.totalPrice += this.items[id].item.price
+  }
+
   this.reduce = (id) => {
     this.items[id].qty--;
     this.items[id].price -= this.items[id].item.price

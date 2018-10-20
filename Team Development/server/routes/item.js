@@ -34,7 +34,7 @@ router.get('/:id', (req, res, next) => {
 router.get('/addToCart/:id', (req, res, next) => {
   let itemId = req.params.id
   let cart = new Cart(req.session.cart ? req.session.cart : {})
-
+  console.log(req.user)
   Item.findOne({ _id: itemId }).exec((err, item) => {
     if (err) {
       return res.json(
@@ -48,6 +48,20 @@ router.get('/addToCart/:id', (req, res, next) => {
     }
   })
 })
+
+//Increase item qty in cart
+router.get('/increase/:id', (req, res, next) => {
+  if (!req.session.cart) {
+    return res.json({ items: null })
+  }
+  let itemId = req.params.id
+  let cart = new Cart(req.session.cart ? req.session.cart : {})
+
+  cart.increase(itemId)
+  req.session.cart = cart;
+  return res.json({ items: cart.generateArray(), totalPrice: cart.totalPrice, totalQty: cart.totalQty })
+})
+
 
 //Reduce item qty in cart
 router.get('/reduce/:id', (req, res, next) => {
@@ -81,7 +95,7 @@ router.get('/cart/items', (req, res, next) => {
     return res.json({ items: null })
   }
   let cart = new Cart(req.session.cart)
-  return res.json({ items: cart.generateArray(), totalPrice: cart.totalPrice })
+  return res.json({ items: cart.generateArray(), totalPrice: cart.totalPrice, totalQty: cart.totalQty  })
 })
 
 module.exports = router

@@ -9,7 +9,7 @@ class Home extends Component {
       items: []
     }
 
-    this.addToCart = this.addToCart.bind(this)
+    // this.addToCart = this.addToCart.bind(this)
   }
 
   componentDidMount() {
@@ -24,13 +24,13 @@ class Home extends Component {
   }
 
   addToCart(id) {
-    axios.get('/item/addToCart/'+ id)
+    axios.get('/item/addToCart/'+id)
 			.then(response => {
 				if (!response.data.error) {
-          //Send update cart qty to header component
           this.props.updateCartQty({
             qty: response.data.totalQty
           })
+          window.scrollTo(0, 0)
         }
         else {
           console.log(response.data.error)
@@ -41,33 +41,23 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <div id="carousel">
-          <div className="carousel slide">
-            <ol className="carousel-indicators">
-              <li data-target="#carousel-example-generic" data-slide-to="0" className="active"></li>
-              <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-              <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-            </ol>
+      <div className='carousel-container'>
+          <div id="carousel">
+            <div className="carousel slide">
+            <div className="carousel-inner">
+                <div className="item active">
+                  <img src="images/assassins-creed-odyssey.png" alt="Slide 1" className="carImg" />
+                </div>
 
-          <div className="carousel-inner">
-              <div className="item active">
-                <img src="images/assassins-creed-odyssey.png" alt="Slide 1" className="carImg" />
-              </div>
+                <div className="item">
+                  <img src="images/Shadow-of-the-tomb-raider.png" alt="Slide 2" className="carImg" />
+                </div>
 
-              <div className="item">
-                <img src="images/Shadow-of-the-tomb-raider.png" alt="Slide 2" className="carImg" />
-              </div>
-
-              <div className="item">
-                <img src="images/destiny-2.png" alt="Slide 3" className="carImg" />
-              </div>
+                <div className="item">
+                  <img src="images/destiny-2.png" alt="Slide 3" className="carImg" />
+                </div>
+            </div>
           </div>
-          <a className="left carousel-control" href="#carousel" data-slide="prev">
-            <span className="icon-prev"></span>
-          </a>
-          <a className="right carousel-control" href="#carousel" data-slide="next">
-            <span className="icon-next"></span>
-          </a>
         </div>
       </div>
       <div className='wrapper'>
@@ -75,10 +65,11 @@ class Home extends Component {
         {this.state.items.map(item =>
           <div className='game' key={item._id}>
             <Link id='game-link' to={`/show/${item._id}`} style={{ textDecoration: 'none' }}>
-              <img src={item.imagePath} alt='item' className='image-responsive'/>
+              <div className='img-frame'>
+                <img src={item.imagePath} alt='game cover' />
+              </div>
               <div className='caption'>
                 <h3>{item.title}</h3>
-                <p className='description'>{item.description}</p>
                 <p className="releaseDate">Release Date: {item.releaseDate}</p>
                 <div className="clearfix">
                   <div className='price pull-left'>Price: ${item.price}</div>
