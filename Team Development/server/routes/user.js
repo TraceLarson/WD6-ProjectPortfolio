@@ -215,8 +215,6 @@ router.get('/dropFromRadar/:id', (req, res, next) => {
 
 //Check if item is on user gameRadar list
 router.get('/checkGameRadar/:id', (req, res, next) => {
-  console.log('SERVER-SIDE CHECKING')
-  console.log(req.user.gameRadar)
   if (req.user) {
     if (!req.user.gameRadar.length <= 0){
 

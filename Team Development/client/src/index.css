@@ -218,12 +218,8 @@ height: 0;
 clear: both;}
 
 .carousel-container {
-  height: 200px;
   overflow-y: hidden;
   overflow-x: hidden;}
-  @media (min-width: 1100px) {
-    .carousel-container {
-      height: 250px;}}
 
 #carousel, .carousel{
   position: relative;
